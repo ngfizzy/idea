@@ -1,0 +1,30 @@
+<div class ="auth">
+  <header class="headings">
+  <h1 class="heading">PS Notes</h1>
+  <h3 class= "subheading">You don't have to forget anything anymore</h3>
+  </header>
+
+  <ng-template #calltoaction>
+    <div  class="buttons-container">
+      <button class="btn-signup" (click)="showSignup()">Sign Up</button>
+      <button class="btn-login" type="button" (click)="showLogin()">Login</button>
+    </div>
+  </ng-template>
+
+  <ng-template #login>
+    <app-login (showSignup)="showSignup()"></app-login>
+  </ng-template>
+
+  <ng-template #signup>
+    <app-signup (showLogin)="showLogin()"></app-signup>
+  </ng-template>
+
+  <ng-container *ngIf="!loginClicked && !signupClicked; then calltoaction">
+  </ng-container>
+  <ng-container *ngIf="loginClicked; then login"></ng-container>
+  <ng-container *ngIf="signupClicked; then signup"></ng-container>
+    
+  <footer>
+    <h5 class="copyright">&copy; 2018</h5>
+  </footer>
+</div>
