@@ -1,0 +1,147 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.dashboard > .main-header {
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+  padding: 5px 20px;
+  margin-bottom: 5%;
+  text-align: center;
+  background-color: #54426B;
+  color: #E9F1F7;
+}
+
+.dashboard > .main-header > h4 {
+  align-self: center;
+  min-width: 20em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-header > span {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+
+.main-header > span > img {
+  width: 3em;
+  height: 3em;
+  border-radius: 100%;
+}
+
+.main-header > span > h5 {
+  margin-top: auto;
+  margin-bottom: auto;
+  height: fit-content;
+}
+
+
+.main {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.add {
+  display: flex;
+  flex-direction:column;
+  justify-content: space-around;  
+  width: 2.5em;
+  height:2.5em;
+  margin: 20px;
+  border-radius: 100%;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: white;
+  background-color: #54426B;
+  opacity: 0.7;
+  box-shadow: 0 0 10px #847E89;
+  cursor: pointer;
+}
+
+input[type="search"] {
+  -webkit-appearance: none;
+  align-self: right;
+  border: 0;
+  border: 1px solid rgba(0,0,0, .6);
+  border-radius: 5em;
+  padding: 5px 10px;
+  display: inline-block;  
+  width: 40%;
+  height: 3em;
+
+  font-size: 1.2em;
+  margin: auto 20px;
+  color: rgba(84, 66, 107, .9);
+}
+
+input[type="search"]:focus {
+  outline: 0;
+}
+
+.add:hover {
+  box-shadow: 0 0 20px #847E89;
+  opacity: 0.9;
+}
+
+.notes-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 20px;
+  flex-wrap: wrap;
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 10em;
+  margin-bottom: 2em;
+  padding: 1em;
+  background-color: #9FA4A9;
+  color: #FFF;
+  box-shadow: 0 0 15px #9FA4A9;
+  cursor: pointer;
+  border-radius: .5em;
+}
+
+.note:hover {
+  box-shadow: 0 0 40px #9FA4A9;
+}
+
+.note > .note-title {
+  border-bottom: 1px solid #54426B;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.note > .body {
+  overflow: hidden;
+}
+
+.note  > footer {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.note > footer > .options {
+  color: #54426B;
+  font-weight: bold;
+  font-size: 2em;
+}
+
