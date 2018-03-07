@@ -1,0 +1,47 @@
+:host{
+  width: 30%;
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 10em;
+  margin-bottom: 2em;
+  padding: 1em 1em 0 1em;
+  background-color: #9FA4A9;
+  color: #FFF;
+  box-shadow: 0 0 15px #9FA4A9;
+  cursor: pointer;
+  border-radius: .5em;
+}
+
+.note:hover {
+  box-shadow: 0 0 40px #9FA4A9;
+}
+
+.note > .note-title {
+  border-bottom: 1px solid #54426B;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.note > .body {
+  overflow: hidden;
+}
+
+.note  > footer {
+  height: 6em;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.note > footer > .options {
+  display: inline-block;
+  line-height: .4;
+  box-sizing: border-box;
+  color: #54426B;
+  font-weight: bold;
+  font-size: 2em;
+}
