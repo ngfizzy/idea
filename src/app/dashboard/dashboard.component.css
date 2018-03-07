@@ -1,3 +1,4 @@
+
 .dashboard {
   display: flex;
   flex-direction: column;
@@ -105,43 +106,3 @@ input[type="search"]:focus {
   padding: 0 20px;
   flex-wrap: wrap;
 }
-
-.note {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  height: 10em;
-  margin-bottom: 2em;
-  padding: 1em;
-  background-color: #9FA4A9;
-  color: #FFF;
-  box-shadow: 0 0 15px #9FA4A9;
-  cursor: pointer;
-  border-radius: .5em;
-}
-
-.note:hover {
-  box-shadow: 0 0 40px #9FA4A9;
-}
-
-.note > .note-title {
-  border-bottom: 1px solid #54426B;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.note > .body {
-  overflow: hidden;
-}
-
-.note  > footer {
-  display: flex;
-  flex-direction: row-reverse;
-}
-
-.note > footer > .options {
-  color: #54426B;
-  font-weight: bold;
-  font-size: 2em;
-}
-
