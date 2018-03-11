@@ -51,4 +51,39 @@ export class UserService {
 
     return Observable.throw(firstError.pop());
   }
+
+  /**
+   *
+   * @param {string} email user's email
+   * @param {string} password someone's email
+   *
+   * @returns {Promise} promise of token
+   */
+  login(email: string, password: string) {
+    const url = `${apiBaseUrl}/auth/login`;
+
+    return this.http.post(url, { email, password })
+      .map((response: Response) => {
+
+        localStorage.setItem('authToken', response.json().token);
+
+        return 'Welcome';
+      })
+      .catch(this.handleLoginError);
+  }
+
+  /**
+   * Handles login error
+   *
+   * @param {Response} response http response
+   *
+   * @returns {Observable} observable of error message
+   */
+  handleLoginError(response: Response): Observable<string> {
+    if (response.status === 500) {
+      return Observable.throw('An error occured while trying to log you in. Please try again');
+    }
+
+    return Observable.throw('wrong username or password');
+  }
 }
