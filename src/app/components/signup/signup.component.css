@@ -24,10 +24,12 @@ form {
 
 input { 
   background-color: rgba(255, 255,255, 0.8);
+  border-bottom: 1px solid black !important;
   padding: 5px;
   height: 12%;
   border: 0;
 }
+
 button {
   height: 10%;
   background-color: #544267;
@@ -41,4 +43,10 @@ span {
   font-size: 80%;
   color: #FFFFFF;
   margin-bottom:  10px;
+}
+
+.error {
+  background-color: #DBD5B2;
+  text-decoration: none;
+  color: red;
 }
