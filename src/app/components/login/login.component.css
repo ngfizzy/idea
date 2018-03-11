@@ -49,3 +49,9 @@ span.signup {
 span.password-reset {
   margin-top: 10px
 }
+
+.error {
+  background-color: #DBD5B2;
+  text-decoration: none;
+  color: red;
+}
