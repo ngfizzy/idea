@@ -1,4 +1,11 @@
 
+.user-icon-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
 .dashboard {
   display: flex;
   flex-direction: column;
@@ -13,6 +20,7 @@
   padding: 5px 20px;
   margin-bottom: 5%;
   text-align: center;
+  height: 3em;
   background-color: #54426B;
   color: #E9F1F7;
 }
@@ -24,25 +32,49 @@
   margin-right: auto;
 }
 
-.main-header > span {
+.main-header > .profile {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   text-align: center;
+  width: fit-content;
+  height: fit-content;
 }
 
+.main-header .user-icon {
+  display: flex;
+  flex-direction: row;
+}
 
-.main-header > span > img {
+.main-header  .user-icon > img {
   width: 3em;
   height: 3em;
   border-radius: 100%;
 }
 
-.main-header > span > h5 {
+.main-header .user-icon > h5 {
   margin-top: auto;
   margin-bottom: auto;
   height: fit-content;
 }
 
+.user-options {
+  background-color: #E9F1F7;
+  color: rgba(0,0,0, 0.8);
+  border: 1px solid rgb(84,66,107)
+}
+
+.user-options > li {
+  cursor: pointer;
+  border-style: solid;
+  border-color:rgba(84,66,107, 0.3);
+  border-width: 1px 0;
+  list-style-type: none;
+  height: 2em;
+}
+.user-options > li:hover {
+  background-color: rgba(84,66,107, 0.2);
+
+}
 
 .main {
   display: flex;

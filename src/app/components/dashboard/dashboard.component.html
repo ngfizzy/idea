@@ -1,15 +1,21 @@
 <div class="dashboard">
   <header class="main-header">
     <h4>What am I looking at</h4>
-    <span>
-      <img src="../assets/profile_default.png" />
-      <h5>John</h5>
+    <span class="profile" (mouseenter)="showUserOptions()" (mouseleave)="hideUserOptions()">
+      <div class="user-icon">
+        <img src="../assets/profile_default.png" />
+        <h5>John</h5>
+      </div>
+      <ul class="user-options" [hidden]="!isUserOptionsVisible">
+        <li class="option">Settings</li>
+        <li class="option" (click)="logout()">Logout</li>
+      </ul>
     </span>
   </header>
   <div class="main">
-    <div class="controls"> 
-        <div class="add">+</div>
-        <input type="search" placeholder="search for  a note" />
+    <div class="controls">
+      <div class="add">+</div>
+      <input type="search" placeholder="search for  a note" />
     </div>
 
     <section class="notes-container">

@@ -9,10 +9,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { User } from '../models/user.interface';
 import { apiBaseUrl } from '../../env';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserService {
-  constructor(private http: Http) { }
+  constructor(private http: Http, private route: Router) { }
   /**
    * User information from user information
    *
@@ -83,5 +84,15 @@ export class UserService {
     }
 
     return Observable.throw('wrong username or password');
+  }
+
+  /**
+   * It user out
+   *
+   * @returns {void}
+   */
+  logout(): void {
+    localStorage.removeItem('authToken');
+    location.reload();
   }
 }
