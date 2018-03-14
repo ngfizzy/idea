@@ -43,7 +43,7 @@ export class AlertService {
    * Closes an alert
    *
    * @param afterClose It is called after alert closes
-   * 
+   *
    * @returns {void}
    */
   close(afterClose?: () => any): void {

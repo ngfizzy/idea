@@ -15,6 +15,9 @@ import NoteComponent from './components/note/note.component';
 import { UserService } from './services/user.service';
 import { AlertService } from './services/alert.service';
 
+import { AuthGuard } from './guards/auth.guard';
+import { NoteService } from './services/note.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,13 +33,17 @@ import { AlertService } from './services/alert.service';
     HttpModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: AuthenticationComponent },
-      { path: 'dashboard', component: DashboardComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'auth', component: AuthenticationComponent },
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     ])
   ],
+
   providers: [
+    AuthGuard,
     AlertService,
     UserService,
+    NoteService
   ],
   bootstrap: [AppComponent]
 })
