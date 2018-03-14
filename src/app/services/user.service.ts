@@ -3,9 +3,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { Observable } from 'rxjs/Rx';
-
 import { Injectable } from '@angular/core';
-import { Http, Request, Response, Headers } from '@angular/http';
+import { Http, Response } from '@angular/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { User } from '../models/user.interface';
 import { apiBaseUrl } from '../../env';
@@ -13,7 +13,6 @@ import { apiBaseUrl } from '../../env';
 @Injectable()
 export class UserService {
   constructor(private http: Http) { }
-
   /**
    * User information from user information
    *
@@ -64,8 +63,7 @@ export class UserService {
 
     return this.http.post(url, { email, password })
       .map((response: Response) => {
-
-        localStorage.setItem('authToken', response.json().token);
+        localStorage.setItem('authToken', `Bearer ${response.json().token}`);
 
         return 'Welcome';
       })
