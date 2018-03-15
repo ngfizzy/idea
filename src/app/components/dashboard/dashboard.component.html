@@ -14,7 +14,8 @@
   </header>
   <div class="main">
     <div class="controls">
-      <div class="add">+</div>
+      <div class="add" (click)="addNewNote()">+</div>
+      <app-note-editor (close)="closeNoteEditor()" [note]="note" [isClose]="!isEditorOpen"></app-note-editor>
       <input type="search" placeholder="search for  a note" />
     </div>
 
