@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { Note } from '../../models';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,11 +8,19 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  isEditorOpen = false;
+  note: Note = {
+    title: '',
+    content: ''
+  };
+
   isUserOptionsVisible = false;
-  constructor (private userService: UserService) {
+
+  constructor(private userService: UserService) {
   }
 
-  ngOnInit() {}
+
+  ngOnInit() { }
 
   /**
    * Shows users options whenever you hover over user icon
@@ -40,4 +49,11 @@ export class DashboardComponent implements OnInit {
     this.userService.logout();
   }
 
+  addNewNote() {
+    this.isEditorOpen = true;
+  }
+
+  closeNoteEditor() {
+    this.isEditorOpen = false;
+  }
 }

@@ -17,6 +17,7 @@ import { AlertService } from './services/alert.service';
 
 import { AuthGuard } from './guards/auth.guard';
 import { NoteService } from './services/note.service';
+import { NoteEditorComponent } from './components/note-editor/note-editor.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NoteService } from './services/note.service';
     LoginComponent,
     SignupComponent,
     NoteComponent,
+    NoteEditorComponent
   ],
   imports: [
     BrowserModule,
