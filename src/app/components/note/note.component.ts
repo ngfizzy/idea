@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-note',
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.css'],
 })
-export default class NoteComponent implements OnInit {
+export default class NoteComponent  {
 
-  ngOnInit() { }
+  @Input() note;
 }
