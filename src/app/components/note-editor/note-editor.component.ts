@@ -25,7 +25,7 @@ export class NoteEditorComponent {
   submitNote(): void {
     this.noteService.createNote(this.note)
       .subscribe(
-        (message) => this.alert.open(message, 'Ok'),
+        (message) => this.alert.open(message, 'Ok', () => this.close.emit()),
         (errorMessage) => this.alert.open(errorMessage, 'Close'),
     );
   }
