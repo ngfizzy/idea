@@ -89,7 +89,7 @@ export class NoteService {
    * @returns {Observable<any>} Observable of error  messsage
    */
   handleCreateError(response: Response): Observable<any> {
-    if (response.status === 500) {
+    if (response.status === 500 || !response.status) {
       return Observable.throw('We are sorry. An error occurred while trying to create this note');
     }
 
@@ -108,5 +108,38 @@ export class NoteService {
   private getCreateMessage(errors) {
     const fields = Object.keys(errors);
     return errors[fields.shift()].pop();
+  }
+
+  /**
+   * Edits a note
+   *
+   * @param note Note to be edited
+   */
+  editNote(note: Note): Observable<any> {
+    const headers = new Headers({ authorization: localStorage.getItem('authToken') });
+
+    const { id, title, content } = note;
+    const url = `${apiBaseUrl}/notes/${id}`;
+
+    return this.http.put(url, {title, content}, { headers })
+      .map(this.updateEditedNote.bind(this))
+      .catch(this.handleCreateError.bind(this));
+  }
+
+  /**
+   * It updates the in memory notes. This is important so that user won't have to reload the page to update the dom
+   *
+   * @param {Response} response http response
+   *
+   * @returns string
+   */
+  private updateEditedNote(response: Response) {
+    const editedNote = response.json().note;
+    const indexOfNote = this.notes
+      .findIndex((currentNote) => currentNote.id === editedNote.id);
+    this.notes.splice(indexOfNote, 1);
+    this.notes.unshift(editedNote);
+
+    return 'Your note has been successfully updated';
   }
 }

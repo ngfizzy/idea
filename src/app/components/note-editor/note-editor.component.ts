@@ -12,6 +12,7 @@ export class NoteEditorComponent {
 
   @Input() isClose = true;
   @Input() note: Note;
+  @Input() isEditing;
 
   @Output() close = new EventEmitter<null>();
 
@@ -23,11 +24,38 @@ export class NoteEditorComponent {
    * @returns {void}
    */
   submitNote(): void {
+    if (this.isEditing) {
+      this.submitEditedNote();
+    } else {
+      this.createNewNote();
+    }
+  }
+
+  /**
+   * Creates a new note
+   *
+   * @returns {void}
+   */
+  createNewNote(): void {
     this.noteService.createNote(this.note)
       .subscribe(
         (message) => this.alert.open(message, 'Ok', () => this.close.emit()),
         (errorMessage) => this.alert.open(errorMessage, 'Close'),
     );
+  }
+
+  /**
+   * Submit edited note.
+   *
+   * @returns {void}
+   */
+  submitEditedNote(): void {
+    this.noteService.editNote(this.note)
+      .subscribe(
+        (message) => this.alert.open(message, 'Okay', () => this.close.emit()),
+        (message) => this.alert.open(message, 'Close'),
+    );
+
   }
 
   /**
