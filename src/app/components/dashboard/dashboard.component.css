@@ -40,6 +40,17 @@
   height: fit-content;
 }
 
+/* The style below would be removed later once we have the ability to fetch user data from the api and display username and user profile pic */
+.profile > button {
+  display: inline-block;
+  height: 3em;
+  padding: 2px 5px;
+  background-color:  #E9F1F7;
+  color: #54426B;
+  margin-top: .5em;
+  position: relative;
+}
+
 .main-header .user-icon {
   display: flex;
   flex-direction: row;
@@ -129,6 +140,7 @@ input[type="search"] {
   font-size: 3em;
   color: rgba(84, 66, 107, .7); 
 }
+
 input[type="search"]:focus {
   outline: 0;
 }
