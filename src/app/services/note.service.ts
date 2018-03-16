@@ -12,10 +12,10 @@ import { Note } from '../models';
 export class NoteService {
   private status: number;
 
-  private posts: Array<any>;
+  private notes: Array<any>;
 
   constructor(private http: Http) {
-    this.posts = [];
+    this.notes = [];
   }
 
   /**
@@ -31,15 +31,9 @@ export class NoteService {
     return this.http.get(url, { headers })
       .map((response: Response) => {
         this.status = response.status;
-        this.posts = Array
-          .from(response.json().notes)
-          .reverse();
-        const result = {
-          posts: this.posts,
-          status: this.status,
-        };
 
-        return result;
+        this.notes = Object.values(response.json().notes).reverse();
+        return this.notes;
       })
       .catch((response: Response) => {
         this.status = response.status;
@@ -54,7 +48,7 @@ export class NoteService {
    * @returns {object}
    */
   getFetchedNotes() {
-    return this.posts;
+    return this.notes;
   }
 
   /**
@@ -80,7 +74,7 @@ export class NoteService {
 
     return this.http.post(url, note, { headers })
       .map((response: Response) => {
-        this.posts.unshift(response.json().note);
+        this.notes.unshift(response.json().note);
         return 'Note Saved';
       })
       .catch(this.handleCreateError.bind(this));

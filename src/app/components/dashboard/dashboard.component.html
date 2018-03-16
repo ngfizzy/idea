@@ -20,12 +20,7 @@
     </div>
 
     <section class="notes-container">
-      <app-note></app-note>
-      <app-note></app-note>
-      <app-note></app-note>
-      <app-note></app-note>
-      <app-note></app-note>
-      <app-note></app-note>
+      <app-note *ngFor="let fetchedNote of notes" [note]="fetchedNote"></app-note>
     </section>
   </div>
 </div>
