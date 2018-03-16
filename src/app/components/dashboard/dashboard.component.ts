@@ -11,6 +11,7 @@ import { AlertService } from '../../services/alert.service';
 })
 export class DashboardComponent implements OnInit {
   isEditorOpen = false;
+  isEditorCreating = true;
 
   note: Note = {
     title: '',
@@ -95,6 +96,20 @@ export class DashboardComponent implements OnInit {
    */
   addNewNote(): void {
     this.isEditorOpen = true;
+    this.note.title = '';
+    this.note.content = '';
+    this.note.id = 0;
+  }
+
+  /**
+   * It opens the note editor
+   *
+   * @param note
+   */
+  editNote(note) {
+    this.isEditorOpen = true;
+    this.note = note;
+    this.isEditorCreating = false;
   }
 
   /**

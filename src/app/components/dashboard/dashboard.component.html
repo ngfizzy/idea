@@ -15,12 +15,12 @@
   <div class="main">
     <div class="controls">
       <div class="add" (click)="addNewNote()">+</div>
-      <app-note-editor (close)="closeNoteEditor()" [note]="note" [isClose]="!isEditorOpen"></app-note-editor>
       <input type="search" placeholder="search for  a note" />
     </div>
-
     <section class="notes-container">
-      <app-note *ngFor="let fetchedNote of notes" [note]="fetchedNote"></app-note>
+      <app-note (editNote)="editNote($event)" *ngFor="let fetchedNote of notes" [note]="fetchedNote"></app-note>
     </section>
   </div>
 </div>
+
+<app-note-editor (close)="closeNoteEditor()" [isEditing]="!isNoteCreating" [note]="note" [isClose]="!isEditorOpen"></app-note-editor>
