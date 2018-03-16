@@ -45,7 +45,6 @@ export class DashboardComponent implements OnInit {
     if (!this.searchTerms) {
         this.pageContentDescription = 'all your notes';
     } else {
-      console.log('search terms', this.searchTerms);
       this.pageContentDescription =
       `all notes that best match your search terms: ${this.searchTerms}`;
     }
