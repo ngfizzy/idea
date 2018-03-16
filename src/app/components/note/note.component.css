@@ -42,11 +42,21 @@
   flex-direction: row-reverse;
 }
 
-.note > footer > .options {
+.note > footer > .delete {
+
   display: inline-block;
-  line-height: .4;
   box-sizing: border-box;
-  color: #54426B;
-  font-weight: bold;
-  font-size: 2em;
+  background-color: #54426B;
+  opacity: 0.7;
+  border-radius: .3em;
+  color: white;
+  font-size: .5em;
+  min-width: 10%;
+  border: 0;
+  cursor: pointer;
+}
+
+.note > footer > .delete:hover {
+  box-shadow: 0 0 10px #fff;
+  opacity: 1;
 }
