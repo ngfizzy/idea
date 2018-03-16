@@ -1,6 +1,6 @@
-<div class="dashboard">
+<div class="dashboard" >
   <header class="main-header">
-    <h4>What am I looking at</h4>
+    <h4>You're viewing {{pageContentDescription}}</h4>
     <span class="profile" (mouseenter)="showUserOptions()" (mouseleave)="hideUserOptions()">
       <div class="user-icon">
         <img src="../assets/profile_default.png" />
@@ -16,7 +16,7 @@
     <div class="controls">
       <div class="add" (click)="addNewNote()">+</div>
 
-      <input name="searchTerms" (ngModelChange)="searchNotes()" [(ngModel)]="searchTerms" type="search" placeholder="search for  a note"
+      <input maxLength="100" name="searchTerms" (ngModelChange)="searchNotes()" [(ngModel)]="searchTerms" type="search" placeholder="search for  a note"
       />
 
     </div>
