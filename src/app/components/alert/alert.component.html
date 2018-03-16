@@ -1,0 +1,6 @@
+<div [hidden]="!isOpen" class="wrapper" (click)="close($event)">
+  <div class="alert">
+    <p>{{message}}</p>
+    <button (click)="close($event)">{{dismissText}}</button>
+  </div>
+</div>

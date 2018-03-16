@@ -1,0 +1,11 @@
+<div class="note">
+  <div class="note-title"  (click)="edit()">
+    <h4 class="class" >{{note.title}}</h4>
+  </div>
+  <div class="body"  (click)="edit()">
+    {{note.content}}
+  </div>
+  <footer>
+    <button class="delete" (click)="removeNote()">Delete</button>
+  </footer>
+</div>
