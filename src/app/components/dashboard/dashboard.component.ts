@@ -12,6 +12,7 @@ import { AlertService } from '../../services/alert.service';
 export class DashboardComponent implements OnInit {
   isEditorOpen = false;
   isEditorCreating = true;
+  searchTerms = '';
 
   note: Note = {
     title: '',
@@ -34,6 +35,10 @@ export class DashboardComponent implements OnInit {
    * @returns {void}
    */
   ngOnInit(): void {
+    this.fetchNotes();
+  }
+
+  fetchNotes(): void {
     this.notes = this.noteService.getFetchedNotes();
     if (!this.notes.length) {
       this.noteService.fetchNotes()
@@ -119,5 +124,20 @@ export class DashboardComponent implements OnInit {
    */
   closeNoteEditor(): void {
     this.isEditorOpen = false;
+  }
+
+  /**
+   * Searches for notes by their titles.
+   *
+   * @returns {void}
+   */
+  searchNotes() {
+    // Note: method is called by ngModelChange which does not fire
+    // when  the length of an input is less than 1; hence the logic below.
+    if (this.searchTerms.length <= 1) {
+      this.fetchNotes();
+    } else {
+      this.notes = this.noteService.searchNotesByTitle(this.searchTerms);
+    }
   }
 }
