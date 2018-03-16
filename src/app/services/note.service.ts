@@ -154,7 +154,7 @@ export class NoteService {
     return this.notes
       .filter((note) => {
         const similarities = stringSimilarity.compareTwoStrings
-        (note.title, searchTerms);
+          (note.title, searchTerms);
         console.log(similarities, searchTerms);
         if (similarities > 0.3) {
           return true;
@@ -164,4 +164,26 @@ export class NoteService {
       });
   }
 
+  /**
+   * This deletes a note from
+   *
+   * @param {number} id the id of the note to be deleted
+   *
+   * @returns {Observable<any>} Observable of success or error message
+   */
+  removeNote(id: number): Observable<any> {
+    const headers = new Headers({ authorization: localStorage.getItem('authToken') });
+    const url = `${apiBaseUrl}/notes/${id}`;
+
+    return this.http.delete(url, { headers })
+      .map(() => {
+        const noteIndex = this.notes.findIndex(note => note.id === id);
+        this.notes.splice(noteIndex, 1);
+
+        return 'Note Deleted Successfully';
+      })
+      .catch(() =>
+        Observable.
+          throw('An Error Occured while trying to delete this note. You may reload and try again'));
+  }
 }

@@ -64,7 +64,7 @@ export class NoteEditorComponent {
    *
    * @param {Event} event angular events
    *
-   * @returns {void} Error
+   * @returns {void}
    */
   cancel(event): void {
     const { className } = event.target;
