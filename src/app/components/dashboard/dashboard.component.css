@@ -122,6 +122,13 @@ input[type="search"] {
   color: rgba(84, 66, 107, .9);
 }
 
+.not-found {
+  position: fixed;
+  bottom: 50%;
+  left: 35%;
+  font-size: 3em;
+  color: rgba(84, 66, 107, .7); 
+}
 input[type="search"]:focus {
   outline: 0;
 }

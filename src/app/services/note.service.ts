@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import stringSimilarity from 'string-similarity';
 
 import { Observable } from 'rxjs/Rx';
 import { Http, Response, Headers } from '@angular/http';
@@ -121,7 +122,7 @@ export class NoteService {
     const { id, title, content } = note;
     const url = `${apiBaseUrl}/notes/${id}`;
 
-    return this.http.put(url, {title, content}, { headers })
+    return this.http.put(url, { title, content }, { headers })
       .map(this.updateEditedNote.bind(this))
       .catch(this.handleCreateError.bind(this));
   }
@@ -142,4 +143,25 @@ export class NoteService {
 
     return 'Your note has been successfully updated';
   }
+
+  /**
+   * Compare titles of note with user's search and becomes
+   * returns all best matched notes
+   *
+   * @param {string} searchTerms string typed in by user
+   */
+  searchNotesByTitle(searchTerms: string): Note[] {
+    return this.notes
+      .filter((note) => {
+        const similarities = stringSimilarity.compareTwoStrings
+        (note.title, searchTerms);
+        console.log(similarities, searchTerms);
+        if (similarities > 0.3) {
+          return true;
+        }
+
+        return false;
+      });
+  }
+
 }
