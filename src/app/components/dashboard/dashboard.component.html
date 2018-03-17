@@ -1,4 +1,4 @@
-<div class="dashboard" >
+<div class="dashboard">
   <header class="main-header">
     <h4>You're viewing {{pageContentDescription}}</h4>
     <span class="profile" (mouseenter)="showUserOptions()" (mouseleave)="hideUserOptions()">
@@ -30,4 +30,4 @@
   </div>
 </div>
 
-<app-note-editor (close)="closeNoteEditor()" [isEditing]="!isNoteCreating" [note]="note" [isClose]="!isEditorOpen"></app-note-editor>
+<app-note-editor (close)="closeNoteEditor()" [isEditing]="!isEditorCreating" [note]="note" [isClose]="!isEditorOpen"></app-note-editor>

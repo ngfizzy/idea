@@ -115,7 +115,7 @@ export class DashboardComponent implements OnInit {
     this.isEditorOpen = true;
     this.note.title = '';
     this.note.content = '';
-    this.note.id = 0;
+    this.isEditorCreating = true;
   }
 
   /**
