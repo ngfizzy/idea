@@ -1,22 +1,55 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { AuthenticationComponent } from './authentication/authentication.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+import { AlertComponent } from './components/alert/alert.component';
+import { AuthenticationComponent } from './components/authentication/authentication.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { NoteComponent } from './components/note/note.component';
+
+import { UserService } from './services/user.service';
+import { AlertService } from './services/alert.service';
+
+import { AuthGuard } from './guards/auth.guard';
+import { NoteService } from './services/note.service';
+import { NoteEditorComponent } from './components/note-editor/note-editor.component';
+
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AlertComponent,
     AuthenticationComponent,
+    DashboardComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    NoteComponent,
+    NoteEditorComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpModule,
+    FormsModule,
+    RouterModule.forRoot([
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'auth', component: AuthenticationComponent },
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+    ])
   ],
-  providers: [],
+
+  providers: [
+    AuthGuard,
+    AlertService,
+    UserService,
+    NoteService,
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

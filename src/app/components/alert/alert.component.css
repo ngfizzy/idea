@@ -1,0 +1,39 @@
+.wrapper {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color:  rgba(0, 0, 0, 0.7);
+}
+
+.alert {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15%;
+  min-width: 30%;
+  max-width: 40%;
+  min-height: 25%;
+  max-height: 30%;
+  background-color: rgba(255,255,245, 1);
+  padding: .5em;
+  font-size: 120%;
+  border-radius: .2em;
+
+}
+
+.alert > button {
+  display: inline-block;
+  background-color: #54426B;
+  color: white;
+  border-radius: .5em;
+  padding:  10px;
+  min-width: 10%;
+  max-width: 30%;
+  border: 1px solid black;
+  align-self: flex-end;
+}
