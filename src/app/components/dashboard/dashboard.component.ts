@@ -41,7 +41,12 @@ export class DashboardComponent implements OnInit {
     this.setPageContentDescritpion();
   }
 
-  setPageContentDescritpion() {
+  /**
+   * This method sets page headeer to search terms
+   *
+   * @returns {void}
+   */
+  setPageContentDescritpion(): void {
     if (!this.searchTerms) {
         this.pageContentDescription = 'all your notes';
     } else {
@@ -50,6 +55,11 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  /**
+   * Fetches all notes using user service
+   *
+   * @returns {void}
+   */
   fetchNotes(): void {
     this.notes = this.noteService.getFetchedNotes();
     if (!this.notes.length) {
@@ -72,10 +82,10 @@ export class DashboardComponent implements OnInit {
     this.notes = notes;
   }
 
-  handleNotesFetchingError(message: string) {
-    const errorMessage = `${message}
-    It might be that you have  not created any note.
-    f you have, please reload your page`;
+  handleNotesFetchingError() {
+    const errorMessage =
+    `It might be that you have not created any note.
+    if you have, please reload your page`;
     this.alert.open(errorMessage);
   }
 
