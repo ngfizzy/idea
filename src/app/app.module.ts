@@ -19,6 +19,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { NoteService } from './services/note.service';
 import { NoteEditorComponent } from './components/note-editor/note-editor.component';
 
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +47,8 @@ import { NoteEditorComponent } from './components/note-editor/note-editor.compon
     AuthGuard,
     AlertService,
     UserService,
-    NoteService
+    NoteService,
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })
