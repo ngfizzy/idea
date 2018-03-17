@@ -3,7 +3,6 @@
     <form (ngSubmit)="submitNote()">
       <input type="text" class="title" [(ngModel)]="note.title" name="note.title" placeholder="title" required />
       <textarea name="note.content" [(ngModel)]="note.content" rows="70" cols="60" class="content" required></textarea>
-      <input type="hidden" [(ngModel)]="note.id" name="note.id" />
       <div class="footer">
         <button type="button" (click)="cancel($event)" class="cancel">Cancel</button>
         <button type="submit" class="submit">Submit</button>
