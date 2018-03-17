@@ -7,7 +7,7 @@ import { AlertService } from '../../services/alert.service';
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.css'],
 })
-export default class NoteComponent {
+export class NoteComponent {
   @Input() note;
   @Output() editNote = new EventEmitter<object>();
 

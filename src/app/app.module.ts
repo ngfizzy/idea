@@ -10,7 +10,7 @@ import { AuthenticationComponent } from './components/authentication/authenticat
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
-import NoteComponent from './components/note/note.component';
+import { NoteComponent } from './components/note/note.component';
 
 import { UserService } from './services/user.service';
 import { AlertService } from './services/alert.service';
