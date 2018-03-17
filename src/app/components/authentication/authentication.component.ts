@@ -21,7 +21,6 @@ export class AuthenticationComponent implements OnInit {
      * @returns {void}
      */
     showLogin(): void {
-        console.log('called');
         this.signupClicked = false;
         this.loginClicked = true;
     }

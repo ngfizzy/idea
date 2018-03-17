@@ -1,0 +1,79 @@
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.wrapper {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.note-editor {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  width: fit-content;
+  height: 60%;
+  background-color: rgba(255, 255, 245, 1);
+  padding: 0;
+  font-size: 120%;
+  border-radius: .2em;
+}
+
+.note-editor>form {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  padding: 0;
+}
+
+.note-editor>form>.title {
+  height: 3.5em;
+  font-size: 120%;
+  outline: none;
+  border-bottom: 1px solid lightgray;
+  padding: 1px 5px;
+}
+
+.note-editor form textarea {
+  resize: none;
+  outline: none;
+  border: none, 1px solid #54426B;
+  padding: .5em .5em 0;
+}
+
+.note-editor form button {
+  cursor: pointer;
+  display: inline-block;
+  background-color: #54426B;
+  color: white;
+  padding: 0 10px;
+  max-width: 25%;
+  align-self: flex-end;
+  height: 100%;
+  margin: 0 .2em;
+  outline: none;
+}
+
+.note-editor form button.cancel {
+  background-color: #fff;
+  color: #54426B;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  height: 3.8em;
+  box-sizing: content-box;
+  z-index: 1;
+}
