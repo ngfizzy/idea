@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
    */
   ngOnInit(): void {
     this.fetchNotes();
-    this.setPageContentDescritpion();
+    this.setPageContentDescription();
   }
 
   /**
@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
    *
    * @returns {void}
    */
-  setPageContentDescritpion(): void {
+  setPageContentDescription(): void {
     if (!this.searchTerms) {
         this.pageContentDescription = 'all your notes';
     } else {
@@ -156,7 +156,7 @@ export class DashboardComponent implements OnInit {
   searchNotes() {
     // Note: method is called by ngModelChange which does not fire
     // when  the length of an input is less than 1; hence the logic below.
-    this.setPageContentDescritpion();
+    this.setPageContentDescription();
     if (this.searchTerms.length <= 1) {
       this.fetchNotes();
     } else {

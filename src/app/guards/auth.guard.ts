@@ -8,19 +8,19 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 
-import { NoteService } from '../services/note.service';
+import { UserService } from '../services/user.service';
 import { apiBaseUrl } from '../../env';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   requestStatus: number;
-  constructor(public router: Router, public noteService: NoteService) {
+  constructor(public router: Router, public userService: UserService) {
     this.handleFailure = this.handleFailure.bind(this);
     this.handleSuccess = this.handleSuccess.bind(this);
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.noteService.fetchNotes()
+    return this.userService.getCurrentUser()
       .map(this.handleSuccess)
       .catch(this.handleFailure);
 
@@ -33,7 +33,7 @@ export class AuthGuard implements CanActivate {
    * @returns {boolean}
    */
   handleSuccess() {
-   return true;
+    return true;
   }
 
   /**
@@ -42,14 +42,9 @@ export class AuthGuard implements CanActivate {
    *
    * @returns {Observable<boolean>}
    */
-  handleFailure(status) {
-    const currentUrl = `${apiBaseUrl}/${this.router.url}`;
+  handleFailure() {
+    this.router.navigateByUrl('/auth');
 
-    if (status === 401 ) {
-      this.router.navigateByUrl('/auth');
-      return Observable.of(false);
-    }
-
-    return Observable.of(true);
+    return Observable.of(false);
   }
 }

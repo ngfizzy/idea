@@ -4,7 +4,7 @@ import 'rxjs/add/operator/catch';
 
 import { Observable } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { User } from '../models/user.interface';
@@ -13,7 +13,13 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class UserService {
-  constructor(private http: Http, private route: Router) { }
+  protected headers;
+
+  constructor(private http: Http, private route: Router) {
+    const authToken = localStorage.getItem('authToken');
+    this.headers = new Headers({'authorization': authToken});
+  }
+
   /**
    * User information from user information
    *
@@ -25,11 +31,7 @@ export class UserService {
     const url = `${apiBaseUrl}/users`;
 
     return this.http.post(url, userInfo)
-      .map((response: Response) => {
-        const post = response.json();
-
-        return post;
-      })
+      .map((response: Response) => response.json())
       .catch(this.handleSignupError);
   }
 
@@ -53,6 +55,52 @@ export class UserService {
   }
 
   /**
+   * Fetches current user from database, saves it to localstorage
+   * as 'user'
+   *
+   * @returns {Observable<string| object>} observable of error message or user
+   * object.
+   */
+  getCurrentUser(): Observable<string|object> {
+    const url = `${apiBaseUrl}/users/current`;
+    return this.http.get(url, { headers: this.headers })
+      .map(this.saveCurrentUser.bind(this))
+      .catch(this.handleAuthenticationError.bind(this));
+  }
+
+  /**
+   * Get logged in user from database
+   *
+   * @return {object} user object
+   */
+  getCurrentUserFromLocalStorage(): object {
+    return JSON.parse(localStorage.getItem('user'));
+  }
+
+  /**
+   * It saves user object to local storage
+   *
+   * @param {Response} response http response
+   *
+   * @returns {object} user object
+   */
+  private saveCurrentUser(response: Response) {
+    const currentUser = response.json().user;
+    localStorage.setItem('user', JSON.stringify(currentUser));
+
+    return currentUser;
+  }
+
+  /**
+   * It returns an authentication error message
+   *
+   * @returns {string} error message
+   */
+  private handleAuthenticationError() {
+    return Observable.throw('Your session has expired, please login again.');
+  }
+
+  /**
    *
    * @param {string} email user's email
    * @param {string} password someone's email
@@ -64,13 +112,30 @@ export class UserService {
 
     return this.http.post(url, { email, password })
       .map((response: Response) => {
-        localStorage.setItem('authToken', `Bearer ${response.json().token}`);
+        const token = response.json().token;
+
+        localStorage.setItem('authToken', `Bearer ${token}`);
+        this.appendToHeaders('authorization', `Bearer ${token}`);
 
         return 'Welcome';
       })
       .catch(this.handleLoginError);
   }
 
+
+  /**
+   * This appends new header to request headers.
+   *
+   * @param name Name of the header to be added
+   * @param value Value of the header to be added
+   *
+   * @returns {Headers} http headers
+   */
+  private appendToHeaders(name: string, value: any): Headers {
+    this.headers.set(name, value);
+
+    return this.headers;
+  }
   /**
    * Handles login error
    *
