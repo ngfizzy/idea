@@ -155,7 +155,6 @@ export class NoteService {
       .filter((note) => {
         const similarities = stringSimilarity.compareTwoStrings
           (note.title, searchTerms);
-        console.log(similarities, searchTerms);
         if (similarities > 0.3) {
           return true;
         }
