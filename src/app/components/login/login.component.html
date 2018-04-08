@@ -2,9 +2,20 @@
   <span class="error">{{loginError}}</span>
   <span class="signup" (click)="signup()">Don't have an account? sign up here.</span>
   <form (ngSubmit)="login()">
-    <input type="email" name="email" [(ngModel)]="email" placeholder="you@domain.com" required/>
-    <input type="password"  name="password" [(ngModel)]="password" placeholder="your password" required />
+    <input
+    type="email"
+    name="email"
+    [(ngModel)]="email"
+    placeholder="you@domain.com" required/>
+    <input
+    type="password"
+    name="password"
+    [(ngModel)]="password" 
+    placeholder="your password"
+    required />
     <button type="submit">Login</button>
   </form>
-  <a routerLink="/passwords/reset"><span class="password-reset">Forgot password?</span></a>
+  <a routerLink="/passwords/reset">
+    <span class="password-reset">Forgot password?</span>
+  </a>
 </div>
