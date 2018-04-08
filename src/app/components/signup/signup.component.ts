@@ -3,6 +3,7 @@ import { Component, Output, OnInit, EventEmitter } from '@angular/core';
 import { User } from '../../models';
 import { UserService } from '../../services/user.service';
 import { AlertService } from '../../services/alert.service';
+import { slide } from '../authentication/animation';
 
 @Component({
   selector: 'app-signup',
@@ -21,6 +22,7 @@ export class SignupComponent implements OnInit {
     username: '',
     password: '',
   };
+
 
   constructor(
     private userService: UserService,

@@ -7,7 +7,7 @@
   align-self: center;
   width: 20%;
   height: 20em;
-  background-color:  rgba(255,255,255, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
   padding: 1em;
 }
 
@@ -22,12 +22,41 @@ form {
   height: 100%;
 }
 
-input { 
-  background-color: rgba(255, 255,255, 0.8);
+@keyframes inputFocus {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.12)
+  }
+}
+
+@keyframes inputFocusOut {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+input {
+  background-color: rgba(255, 255, 255, 0.8);
   border-bottom: 1px solid black !important;
   padding: 5px;
   height: 12%;
   border: 0;
+}
+
+input:focus {
+  transform: scale(1.12);
+  animation-name: inputFocus;
+  animation-duration: .3s;
+}
+
+input:not(:focus) {
+  animation-name: inputFocusOut;
+  animation-duration: .3s;
 }
 
 button {
@@ -42,7 +71,7 @@ span {
   text-decoration: underline;
   font-size: 80%;
   color: #FFFFFF;
-  margin-bottom:  10px;
+  margin-bottom: 10px;
 }
 
 .error {

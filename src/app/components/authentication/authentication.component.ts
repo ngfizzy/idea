@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
+import { slide } from './animation';
 
 @Component({
     selector: 'app-authentication',
     templateUrl: './authentication.component.html',
     styleUrls: ['./authentication.component.css'],
+    animations: [slide]
 })
 export class AuthenticationComponent implements OnInit {
     loginClicked: boolean;
