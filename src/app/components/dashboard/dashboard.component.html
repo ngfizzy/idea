@@ -2,8 +2,6 @@
   <header class="main-header">
     <h4>You're viewing {{pageContentDescription}}</h4>
     <span class="profile" (mouseenter)="showUserOptions()" (mouseleave)="hideUserOptions()">
-      <!-- this button is to be removed later when we are
-      finally able to easily fetch current user and user profile picture from the API. All hidden fields in  the nav bar ten would be visible-->
       <div class="user-icon">
         <img [src]="profilePictureUrl" />
         <h5>{{currentUser.username}}</h5>
@@ -17,10 +15,10 @@
   <div class="main">
     <div class="controls">
       <div class="add" (click)="addNewNote()">+</div>
-
+  
       <input maxLength="100" name="searchTerms" (ngModelChange)="searchNotes()" [(ngModel)]="searchTerms" type="search" placeholder="search for  a note"
       />
-
+  
     </div>
     <section class="notes-container">
       <app-note (editNote)="editNote($event)" *ngFor="let fetchedNote of notes" [note]="fetchedNote"></app-note>

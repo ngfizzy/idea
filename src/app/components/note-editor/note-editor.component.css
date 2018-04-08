@@ -9,7 +9,7 @@
   z-index: 1000;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: scroll;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -22,11 +22,13 @@
   margin-right: auto;
   margin-top: 10%;
   width: fit-content;
-  height: 60%;
+  height: 30em;
   background-color: rgba(255, 255, 245, 1);
   padding: 0;
   font-size: 120%;
-  border-radius: .2em;
+  border-top-right-radius: 2em;
+  border-bottom-left-radius: 2em;
+  box-shadow: 0px 0 5px 1px rgba(0, 0, 0, 0.7);
 }
 
 .note-editor>form {
@@ -34,21 +36,29 @@
   flex-direction: column;
   width: fit-content;
   padding: 0;
+  border-top-right-radius: inherit;
+  border-bottom-left-radius: inherit;
 }
 
 .note-editor>form>.title {
   height: 3.5em;
   font-size: 120%;
   outline: none;
-  border-bottom: 1px solid lightgray;
+  border: none;
   padding: 1px 5px;
+  background-color: #54426B;
+  text-align: center;
+  color: #fff;
+  border-top-right-radius: inherit;
 }
 
 .note-editor form textarea {
   resize: none;
   outline: none;
-  border: none, 1px solid #54426B;
   padding: .5em .5em 0;
+  background-color: #E9F1F7;
+  font-size: 105%;
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .note-editor form button {
@@ -62,6 +72,11 @@
   height: 100%;
   margin: 0 .2em;
   outline: none;
+  border: 1px solid black;
+}
+
+.note-editor form  button:hover {
+  box-shadow: 0 0 5px 2px #fff;
 }
 
 .note-editor form button.cancel {
@@ -73,7 +88,9 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  height: 3.8em;
+  height: 5em;
   box-sizing: content-box;
   z-index: 1;
+  background-color: #54426B;
+  border-bottom-left-radius: inherit;
 }
