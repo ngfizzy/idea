@@ -39,7 +39,7 @@ export class NoteEditorComponent {
   createNewNote(): void {
     this.noteService.createNote(this.note)
       .subscribe(
-        (message) => this.alert.open(message, 'Ok', () => this.close.emit()),
+        (message) => this.close.emit(),
         (errorMessage) => this.alert.open(errorMessage, 'Close'),
     );
   }

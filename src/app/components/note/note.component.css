@@ -1,62 +1,96 @@
-:host{
+:host {
   width: 30%;
 }
 
 .note {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 10em;
+  min-width: 85%;
+  height: 25em;
   justify-content: space-between;
   margin-bottom: 2em;
-  padding: 1em 1em 0 1em;
-  background-color: #9FA4A9;
-  color: #FFF;
+  background-color: #fff;
+  color: #9FA4A9;
   box-shadow: 0 0 15px #9FA4A9;
   cursor: pointer;
   border-radius: .5em;
 }
 
-.note:hover {
-  box-shadow: 0 0 40px #9FA4A9;
+@keyframes hoverNote {
+  from {
+    box-shadow: 0 0 15px #9FA4A9;
+  }
+  to {
+    box-shadow: 0 0 50px #9FA4A9;
+  }
 }
 
-.note > .note-title {
+@keyframes hoverNoteOut {
+  from {
+    box-shadow: 0 0 50 #9FA4A9;
+  }
+  to {
+    box-shadow: 0 0 15px #9FA4A9;
+  }
+}
+
+.note:hover {
+  box-shadow: 0 0 50px  #9FA4A9;
+  animation-name: hoverNote;
+  animation-duration: 500ms;
+}
+
+.note:not(:hover) {
+  box-shadow: 0 0 15px #9FA4A9;
+  animation-name: hoverNoteOut;
+  animation-duration: 200ms;
+}
+
+.note>.note-title {
   border-bottom: 1px solid #54426B;
   margin-bottom: 10px;
+  padding-top: 4px;
+  height: 10%;
   text-align: center;
-  
+  background-color: #54426B;
+  color: #fff;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
 }
 
-.note > .body {
+.note>.body {
   height: 80%;
   overflow: hidden;
 }
 
-.note  > footer {
+.note>footer {
   position: relative;
   bottom: 0;
-  height: 20%;
+  height: 10%;
+  width: 100%;
   margin-bottom: 0;
   display: flex;
   flex-direction: row-reverse;
+  background-color: #54426B;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
 }
 
-.note > footer > .delete {
-
+.note>footer>.delete {
   display: inline-block;
   box-sizing: border-box;
   background-color: #54426B;
-  opacity: 0.7;
   border-radius: .3em;
   color: white;
   font-size: .5em;
-  min-width: 10%;
+  min-width: 15%;
+  margin-right: 1em;
   border: 0;
+  border: 1px solid black;
   cursor: pointer;
 }
 
-.note > footer > .delete:hover {
+.note>footer>.delete:hover {
   box-shadow: 0 0 10px #fff;
   opacity: 1;
 }

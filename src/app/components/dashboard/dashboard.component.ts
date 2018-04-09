@@ -1,30 +1,33 @@
 import { Component, OnInit } from '@angular/core';
+import md5 from 'md5';
+
 import { UserService } from '../../services/user.service';
-import { Note } from '../../models';
+import { Note, User } from '../../models';
 import { NoteService } from '../../services/note.service';
 import { AlertService } from '../../services/alert.service';
+import { noteInOut } from './animations';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  animations: [noteInOut],
 })
 export class DashboardComponent implements OnInit {
+  currentUser: any;
   isEditorOpen = false;
   isEditorCreating = true;
   searchTerms = '';
-
+  // email needs to be hashed for gravatar
+  profilePictureUrl: string;
   pageContentDescription = '';
-
   note: Note = {
     title: '',
     content: ''
   };
-
   notes: Array<any>;
-
-
   isUserOptionsVisible = false;
+  noNotes = false;
 
   constructor(private userService: UserService,
     private noteService: NoteService,
@@ -38,7 +41,11 @@ export class DashboardComponent implements OnInit {
    */
   ngOnInit(): void {
     this.fetchNotes();
-    this.setPageContentDescritpion();
+    this.setPageContentDescription();
+    this.currentUser = this.userService.getCurrentUserFromLocalStorage();
+    const hashedEmail = this.currentUser ? this
+      .hashUserEmail(this.currentUser.email) : '';
+    this.profilePictureUrl = `https://gravatar.com/avatar/${hashedEmail}`;
   }
 
   /**
@@ -46,12 +53,12 @@ export class DashboardComponent implements OnInit {
    *
    * @returns {void}
    */
-  setPageContentDescritpion(): void {
+  setPageContentDescription(): void {
     if (!this.searchTerms) {
-        this.pageContentDescription = 'all your notes';
+      this.pageContentDescription = 'all your notes';
     } else {
       this.pageContentDescription =
-      `all notes that best match your search terms: ${this.searchTerms}`;
+        `all notes that best match your search terms: ${this.searchTerms}`;
     }
   }
 
@@ -66,8 +73,8 @@ export class DashboardComponent implements OnInit {
       this.noteService.fetchNotes()
         .subscribe(
           this.renderNotes.bind(this),
-          this.handleNotesFetchingError.bind(this)
-        );
+          this.handleNotesFetchingError.bind(this),
+      );
     }
   }
 
@@ -79,12 +86,14 @@ export class DashboardComponent implements OnInit {
    * @returns {void}
    */
   renderNotes(notes: any): void {
+    this.noNotes = this.notes.length > 0 ? true : false;
     this.notes = notes;
   }
 
   handleNotesFetchingError() {
+    this.noNotes = this.notes.length > 0 ? true : false;
     const errorMessage =
-    `It might be that you have not created any note.
+      `It might be that you have not created any note.
     if you have, please reload your page`;
     this.alert.open(errorMessage);
   }
@@ -156,11 +165,39 @@ export class DashboardComponent implements OnInit {
   searchNotes() {
     // Note: method is called by ngModelChange which does not fire
     // when  the length of an input is less than 1; hence the logic below.
-    this.setPageContentDescritpion();
+    this.setPageContentDescription();
     if (this.searchTerms.length <= 1) {
       this.fetchNotes();
     } else {
       this.notes = this.noteService.searchNotesByTitle(this.searchTerms);
     }
+  }
+
+
+  showProfile() {
+    const profile = this.collateUserInfo(this.currentUser);
+    this.alert.open(profile, 'Close');
+  }
+
+  /**
+   * Hash user email. This is necessary for getting user profil picture via gravatar
+   *
+   * @param email
+   *
+   * @returns {string} get user email
+   */
+  private hashUserEmail(email: string): string {
+    return md5(email);
+  }
+
+  private collateUserInfo(user: User): string {
+    const { firstname, lastname, username, email } = user;
+
+    return `
+      Firstname: ${firstname} <br />
+      Lastname:  ${lastname} <br />
+      Username:  ${username} <br />
+      Email:     ${email} <br />
+    `;
   }
 }

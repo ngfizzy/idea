@@ -2,15 +2,12 @@
   <header class="main-header">
     <h4>You're viewing {{pageContentDescription}}</h4>
     <span class="profile" (mouseenter)="showUserOptions()" (mouseleave)="hideUserOptions()">
-      <!-- this button is to be removed later when we are
-      finally able to easily fetch current user and user profile picture from the API. All hidden fields in  the nav bar ten would be visible-->
-      <button>Options</button>
-      <div class="user-icon" [hidden]="true">
-        <img src="../assets/profile_default.png" [hidden]="true" />
-        <h5 [hidden]="true">John</h5>
+      <div class="user-icon">
+        <img [src]="profilePictureUrl" />
+        <h5>{{currentUser.username}}</h5>
       </div>
       <ul class="user-options" [hidden]="!isUserOptionsVisible">
-        <li class="option" [hidden]="true">Settings</li>
+        <li class="option" (click)="showProfile()">Profile</li>
         <li class="option" (click)="logout()">Logout</li>
       </ul>
     </span>
@@ -23,11 +20,10 @@
       />
 
     </div>
-    <section class="notes-container">
-      <app-note (editNote)="editNote($event)" *ngFor="let fetchedNote of notes" [note]="fetchedNote"></app-note>
-      <div class="not-found" *ngIf="!notes.length">No Note Was Found</div>
+    <section class="notes-container" [@noteInOut]="notes.length">
+      <app-note  (editNote)="editNote($event)" *ngFor="let fetchedNote of notes" [note]="fetchedNote"></app-note>
+      <div class="not-found" *ngIf="noNotes">No Note Was Found</div>
     </section>
   </div>
 </div>
-
 <app-note-editor (close)="closeNoteEditor()" [isEditing]="!isEditorCreating" [note]="note" [isClose]="!isEditorOpen"></app-note-editor>
