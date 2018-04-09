@@ -46,21 +46,12 @@ This is because _we believe that strict adherence to style guild in certain scen
 ### What Next After This Version
 
 We want to add the following in the next set of releases according to priority
-#### Version 0.1.1
-**Start:** 22nd of march 2017
-**Proposed End:** 26th of March
-
-* Order note by the time they were last updated
-* Provide an easy way to fetch currently signed in user(from the backend)
-* Add password reset functionality
-* Extend auth token expiry to one week.
-* Add some fancy animations to component.
-* Basic UI/Ux improvement
-
 #### Version 0.1.3
 
-***No Schedule Yet**
+**Start:** 11 of march 2017
+**Proposed End:** 14th of March
 
+* Bulk Delete Note
 * Facebook and Google authentication
 * Add tags to notes
 * Add markdown editor to note editor
