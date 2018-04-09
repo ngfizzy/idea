@@ -12,11 +12,11 @@
   </ng-template>
 
   <ng-template #login>
-    <app-login (showSignup)="showSignup()"></app-login>
+    <app-login [@slide] (showSignup)="showSignup()"></app-login>
   </ng-template>
 
   <ng-template #signup>
-    <app-signup (showLogin)="showLogin()"></app-signup>
+    <app-signup [@slide] (showLogin)="showLogin()"></app-signup>
   </ng-template>
 
   <ng-container *ngIf="!loginClicked && !signupClicked; then calltoaction">

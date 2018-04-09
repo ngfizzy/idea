@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
@@ -20,6 +21,9 @@ import { NoteService } from './services/note.service';
 import { NoteEditorComponent } from './components/note-editor/note-editor.component';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { PasswordResetFormComponent } from './components/password-reset-form/password-reset-form.component';
+import { PasswordResetRequestFormComponent } from './components/password-reset-request-form/password-reset-request-form.component';
+import { PasswordResetService } from './services/password-reset.service';
 
 @NgModule({
   declarations: [
@@ -30,15 +34,20 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     LoginComponent,
     SignupComponent,
     NoteComponent,
-    NoteEditorComponent
+    NoteEditorComponent,
+    PasswordResetFormComponent,
+    PasswordResetRequestFormComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     HttpModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'auth', component: AuthenticationComponent },
+      { path: 'passwords/reset', component: PasswordResetRequestFormComponent },
+      { path: 'passwords/reset/:token', component: PasswordResetFormComponent },
       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     ])
   ],
@@ -46,6 +55,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
   providers: [
     AuthGuard,
     AlertService,
+    PasswordResetService,
     UserService,
     NoteService,
     { provide: LocationStrategy, useClass: HashLocationStrategy }

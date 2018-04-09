@@ -14,15 +14,19 @@
 }
 
 .dashboard > .main-header {
+  position: fixed;
+  top: 0;
   display: flex;
   flex-direction:row;
   justify-content: space-between;
-  padding: 5px 20px;
+  padding: 5px 0;
   margin-bottom: 5%;
   text-align: center;
   height: 3em;
+  width: 100%;
   background-color: #54426B;
   color: #E9F1F7;
+  z-index: 1000;
 }
 
 .dashboard > .main-header > h4 {
@@ -34,21 +38,11 @@
 
 .main-header > .profile {
   display: flex;
+  margin-right: 10px;
   flex-direction: column;
   text-align: center;
   width: fit-content;
   height: fit-content;
-}
-
-/* The style below would be removed later once we have the ability to fetch user data from the api and display username and user profile pic */
-.profile > button {
-  display: inline-block;
-  height: 3em;
-  padding: 2px 5px;
-  background-color:  #E9F1F7;
-  color: #54426B;
-  margin-top: .5em;
-  position: relative;
 }
 
 .main-header .user-icon {
@@ -90,10 +84,12 @@
 .main {
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  margin: 10em 20px;
 }
 
 .controls {
+  position: sticky;
+  top: 2.5em;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -127,7 +123,7 @@ input[type="search"] {
   display: inline-block;  
   width: 40%;
   height: 3em;
-
+  z-index: 1000;
   font-size: 1.2em;
   margin: auto 20px;
   color: rgba(84, 66, 107, .9);
@@ -153,7 +149,6 @@ input[type="search"]:focus {
 .notes-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  padding: 0 20px;
+  justify-content: space-around;
   flex-wrap: wrap;
 }

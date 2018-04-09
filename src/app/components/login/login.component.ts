@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
+
 
   /**
    * Logs in user. Redirects user to dashboard if login is successful
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         this.gotoDashboard.bind(this),
         this.handleError.bind(this),
-      );
+    );
   }
 
   /**
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
    *
    * @param {string} errorMessage error message
    */
-  handleError(errorMessage) {
+  handleError(errorMessage: string) {
     this.loginError = errorMessage;
   }
 
@@ -58,8 +58,7 @@ export class LoginComponent implements OnInit {
    *
    * @return {void}
    */
-  signup() {
+  signup(): void {
     this.showSignup.emit();
   }
-
 }

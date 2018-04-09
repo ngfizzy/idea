@@ -32,8 +32,8 @@ export class NoteService {
     return this.http.get(url, { headers })
       .map((response: Response) => {
         this.status = response.status;
+        this.notes = Object.values(response.json().notes);
 
-        this.notes = Object.values(response.json().notes).reverse();
         return this.notes;
       })
       .catch((response: Response) => {
@@ -128,7 +128,7 @@ export class NoteService {
   }
 
   /**
-   * It updates the in memory notes. This is important so that user won't have to reload the page to update the dom
+   * It updates the in-memory notes. This is important so that user won't have to reload the page to update the dom
    *
    * @param {Response} response http response
    *
@@ -155,7 +155,6 @@ export class NoteService {
       .filter((note) => {
         const similarities = stringSimilarity.compareTwoStrings
           (note.title, searchTerms);
-        console.log(similarities, searchTerms);
         if (similarities > 0.3) {
           return true;
         }
