@@ -15,16 +15,15 @@
   <div class="main">
     <div class="controls">
       <div class="add" (click)="addNewNote()">+</div>
-  
+
       <input maxLength="100" name="searchTerms" (ngModelChange)="searchNotes()" [(ngModel)]="searchTerms" type="search" placeholder="search for  a note"
       />
-  
+
     </div>
-    <section class="notes-container">
-      <app-note (editNote)="editNote($event)" *ngFor="let fetchedNote of notes" [note]="fetchedNote"></app-note>
-      <div class="not-found" *ngIf="!notes.length">No Note Was Found</div>
+    <section class="notes-container" [@noteInOut]="notes.length">
+      <app-note  (editNote)="editNote($event)" *ngFor="let fetchedNote of notes" [note]="fetchedNote"></app-note>
+      <div class="not-found" *ngIf="noNotes">No Note Was Found</div>
     </section>
   </div>
 </div>
-
 <app-note-editor (close)="closeNoteEditor()" [isEditing]="!isEditorCreating" [note]="note" [isClose]="!isEditorOpen"></app-note-editor>

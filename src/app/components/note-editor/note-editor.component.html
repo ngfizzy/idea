@@ -1,5 +1,5 @@
 <div [hidden]="isClose" class="wrapper" (click)="cancel($event)">
-  <div class="note-editor">
+  <div  class="note-editor">
     <form (ngSubmit)="submitNote()">
       <input type="text" class="title" [(ngModel)]="note.title" name="note.title" placeholder="title" required />
       <textarea name="note.content" [(ngModel)]="note.content" rows="80" cols="45" class="content" required></textarea>

@@ -16,8 +16,34 @@
   border-radius: .5em;
 }
 
+@keyframes hoverNote {
+  from {
+    box-shadow: 0 0 15px #9FA4A9;
+  }
+  to {
+    box-shadow: 0 0 50px #9FA4A9;
+  }
+}
+
+@keyframes hoverNoteOut {
+  from {
+    box-shadow: 0 0 50 #9FA4A9;
+  }
+  to {
+    box-shadow: 0 0 15px #9FA4A9;
+  }
+}
+
 .note:hover {
-  box-shadow: 0 0 40px #9FA4A9;
+  box-shadow: 0 0 50px  #9FA4A9;
+  animation-name: hoverNote;
+  animation-duration: 500ms;
+}
+
+.note:not(:hover) {
+  box-shadow: 0 0 15px #9FA4A9;
+  animation-name: hoverNoteOut;
+  animation-duration: 200ms;
 }
 
 .note>.note-title {

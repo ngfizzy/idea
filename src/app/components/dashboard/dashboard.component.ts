@@ -5,11 +5,13 @@ import { UserService } from '../../services/user.service';
 import { Note, User } from '../../models';
 import { NoteService } from '../../services/note.service';
 import { AlertService } from '../../services/alert.service';
+import { noteInOut } from './animations';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  animations: [noteInOut],
 })
 export class DashboardComponent implements OnInit {
   currentUser: any;
@@ -25,8 +27,7 @@ export class DashboardComponent implements OnInit {
   };
   notes: Array<any>;
   isUserOptionsVisible = false;
-
-
+  noNotes = false;
 
   constructor(private userService: UserService,
     private noteService: NoteService,
@@ -72,8 +73,8 @@ export class DashboardComponent implements OnInit {
       this.noteService.fetchNotes()
         .subscribe(
           this.renderNotes.bind(this),
-          this.handleNotesFetchingError.bind(this)
-        );
+          this.handleNotesFetchingError.bind(this),
+      );
     }
   }
 
@@ -85,10 +86,12 @@ export class DashboardComponent implements OnInit {
    * @returns {void}
    */
   renderNotes(notes: any): void {
+    this.noNotes = this.notes.length > 0 ? true : false;
     this.notes = notes;
   }
 
   handleNotesFetchingError() {
+    this.noNotes = this.notes.length > 0 ? true : false;
     const errorMessage =
       `It might be that you have not created any note.
     if you have, please reload your page`;
@@ -188,7 +191,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private collateUserInfo(user: User): string {
-    const {firstname, lastname, username, email} = user;
+    const { firstname, lastname, username, email } = user;
 
     return `
       Firstname: ${firstname} <br />
