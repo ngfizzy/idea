@@ -8,6 +8,7 @@ import { Http, Response, Headers } from '@angular/http';
 
 import { apiBaseUrl } from '../../env';
 import { Note } from '../models';
+import { IfObservable } from 'rxjs/observable/IfObservable';
 
 @Injectable()
 export class NoteService {
@@ -150,7 +151,7 @@ export class NoteService {
    *
    * @param {string} searchTerms string typed in by user
    */
-  searchNotesByTitle(searchTerms: string): Note[] {
+  searchByTitleNotesInMemory(searchTerms: string): Note[] {
     return this.notes
       .filter((note) => {
         const similarities = stringSimilarity.compareTwoStrings
@@ -160,6 +161,38 @@ export class NoteService {
         }
 
         return false;
+      });
+  }
+
+  /**
+   * It searches notes by their titles
+   *
+   * @param {string} searchTerms Words to search for in the title
+   *
+   * @returns {Observable<any>} observable of notes array
+   */
+  searchNotesByTitle(searchTerms: string): Observable<any> {
+    const headers = new Headers({ authorization: localStorage.getItem('authToken') });
+    const url = `${apiBaseUrl}/notes/search?query=${searchTerms}`;
+    if (!searchTerms) {
+      return this.fetchNotes();
+    }
+    return this.http.get(url, { headers })
+      .map((response: Response) => {
+        this.notes = response.json().notes;
+
+        return this.notes;
+      })
+      .catch((response) => {
+        switch (response.status) {
+          case 404:
+            return Observable.throw(response.json().message);
+          case 401:
+            return Observable.throw('your session has expired. Please login again');
+          default:
+            return Observable
+              .throw('Oops :( . Something went wrong. Please try again later');
+        }
       });
   }
 

@@ -16,7 +16,7 @@
     <div class="controls">
       <div class="add" (click)="addNewNote()">+</div>
 
-      <input maxLength="100" name="searchTerms" (ngModelChange)="searchNotes()" [(ngModel)]="searchTerms" type="search" placeholder="search for  a note"
+      <input maxLength="100" name="searchTerms" (keydown)="searchNotes()" [(ngModel)]="searchTerms" type="search" placeholder="search for  a note"
       />
 
     </div>
