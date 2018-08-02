@@ -163,16 +163,19 @@ export class DashboardComponent implements OnInit {
    * @returns {void}
    */
   searchNotes() {
-    // Note: method is called by ngModelChange which does not fire
-    // when  the length of an input is less than 1; hence the logic below.
     this.setPageContentDescription();
-    if (this.searchTerms.length <= 1) {
-      this.fetchNotes();
-    } else {
-      this.notes = this.noteService.searchNotesByTitle(this.searchTerms);
-    }
+    this.noteService.searchNotesByTitle(this.searchTerms)
+      .subscribe(
+        (notes) => {
+          this.noNotes = false;
+          this.notes = notes;
+        },
+        (errorMessage) => {
+          this.noNotes = true;
+          this.notes = [];
+        }
+      );
   }
-
 
   showProfile() {
     const profile = this.collateUserInfo(this.currentUser);
