@@ -21,7 +21,7 @@
 
     </div>
     <section class="notes-container" [@noteInOut]="notes.length">
-      <app-note  (editNote)="editNote($event)" *ngFor="let fetchedNote of notes" [note]="fetchedNote"></app-note>
+      <app-note (editNote)="editNote($event)" *ngFor="let fetchedNote of notes" [note]="fetchedNote"></app-note>
       <div class="not-found" *ngIf="noNotes">No Note Was Found</div>
     </section>
   </div>

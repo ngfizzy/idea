@@ -9,7 +9,6 @@ import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from
 
 
 import { UserService } from '../services/user.service';
-import { apiBaseUrl } from '../../env';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

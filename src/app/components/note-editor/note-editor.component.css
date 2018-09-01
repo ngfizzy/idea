@@ -5,11 +5,12 @@
 }
 
 .wrapper {
+  box-sizing: content-box;
   position: fixed;
   z-index: 1000;
   width: 100%;
   height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -20,7 +21,7 @@
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10%;
+  margin-top: 5%;
   width: fit-content;
   height: 30em;
   background-color: rgba(255, 255, 245, 1);
@@ -57,7 +58,7 @@
   outline: none;
   padding: .5em .5em 0;
   background-color: #E9F1F7;
-  font-size: 105%;
+  font-size: 1em;
   color: rgba(0, 0, 0, 0.8);
 }
 
@@ -82,6 +83,99 @@
 .note-editor form button.cancel {
   background-color: #fff;
   color: #54426B;
+}
+
+.tags-container {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  flex-direction: row;
+  align-content: center;
+  height: 3.5em;
+  padding-bottom: .2em;
+}
+
+.tags-container .add-tag {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  max-width: 40%;
+  margin-left: auto;
+  background-color: rgba()
+}
+
+.add-tag input[type="text"] {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-style: none;
+}
+
+.add-tag ul {
+  list-style: none;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.add-tag li {
+  width: 100%;
+  background-color: #54426B;
+}
+
+.add-tag li:nth-child(odd) {
+  background-color: rgba(196, 147, 176, 0.2)
+}
+
+.add-tag li:nth-child(odd):hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.tags-container .tag {
+  font-size: .7em;
+  font-style: italic;
+  font-weight: 90%;
+  margin-left: 10px;
+  border-radius: 10%;
+  background-color: #EEF0F2;
+}
+
+.tag button {
+  display: inline-flex;
+  padding: 1px;
+  width: 1.2em !important;
+  height: 1.2em !important;
+  padding: 0 !important;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+
+  border-radius: 100%;
+  font-family: fixed;
+  font-size: 1em;
+  font-style: bold;
+  background-color: rgba(0, 0, 0, 0.2) !important ;
+  border: none !important;
+}
+
+.add-tag li:nth-child(even):hover {
+  background-color: rgba(196, 147, 176, 1);
+}
+.add-tag li button {
+  display: block;
+  background-color: rgba(255, 255, 255, 0);
+  color: black;
+  border: none;
+}
+
+.add-tag  input.add {
+  display: inline-flex;
+  width: 1.5em;
+  height: 1.5em !important;
+  border: none;
+  margin-right: 2px;
+  border-radius: 100%;
+  text-align: center;
+  font-size: .8em;
+  justify-content: center !important;
+  -webkit-appearance: none;
+  font-weight: bold;
 }
 
 .footer {

@@ -1,9 +1,26 @@
 <div [hidden]="isClose" class="wrapper" (click)="cancel($event)">
-  <div  class="note-editor">
-    <form (ngSubmit)="submitNote()">
+  <div class="note-editor">
+    <form autocomplete="off" (ngSubmit)="submitNote()">
       <input type="text" class="title" [(ngModel)]="note.title" name="note.title" placeholder="title" required />
-      <textarea name="note.content" [(ngModel)]="note.content" rows="80" cols="45" class="content" required></textarea>
+      <textarea #noteBody name="note.content" [(ngModel)]="note.content" rows="80" cols="100" class="content" required></textarea>
+      <div class="tags-container">
+        <div>
+          <span class="tag" *ngFor="let tag of note.tags; trackBy: trackTagsById">{{tag.name}}
+            <button>x</button>
+          </span>
+        </div>
+        <span class="add-tag">
+          <ul class="dropup-items" *ngIf="foundTags?.length > 0">
+            <li *ngFor="let tag of foundTags">{{tag}}</li>
+          </ul>
+          <form (ngSubmit)="addTag()">
+            <input #tagInput (focusin)="createTagSearchListener($event)" *ngIf="isTagInputOpen" type="text" maxlength="70" [(ngModel)]="tag" name="tag" autofocus />
+            <input type="button" [value]="this.tagging ? 'x' : '+'" class="add" (click)="toggleTagInput()">
+          </form>
+        </span>
+      </div>
       <div class="footer">
+        <span>{{status}}</span>
         <button type="button" (click)="cancel($event)" class="cancel">Cancel</button>
         <button type="submit" class="submit">Submit</button>
       </div>
