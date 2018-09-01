@@ -8,7 +8,6 @@ import { Http, Response, Headers } from '@angular/http';
 
 import { apiBaseUrl } from '../../env';
 import { Note } from '../models';
-import { IfObservable } from 'rxjs/observable/IfObservable';
 
 @Injectable()
 export class NoteService {
@@ -77,7 +76,8 @@ export class NoteService {
     return this.http.post(url, note, { headers })
       .map((response: Response) => {
         this.notes.unshift(response.json().note);
-        return 'Note Saved';
+
+        return this.notes[0].id;
       })
       .catch(this.handleCreateError.bind(this));
   }
@@ -129,13 +129,13 @@ export class NoteService {
   }
 
   /**
-   * It updates the in-memory notes. This is important so that user won't have to reload the page to update the dom
+   * It updates the in-memory notesearchs. This is important so that user won't have to reload the page to update the dom
    *
    * @param {Response} response http response
    *
    * @returns string
    */
-  private updateEditedNote(response: Response) {
+  updateEditedNote(response: Response) {
     const editedNote = response.json().note;
     const indexOfNote = this.notes
       .findIndex((currentNote) => currentNote.id === editedNote.id);

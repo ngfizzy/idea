@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
@@ -17,6 +17,7 @@ import { UserService } from './services/user.service';
 import { AlertService } from './services/alert.service';
 
 import { AuthGuard } from './guards/auth.guard';
+import { TokenInterceptor } from './guards/token.interceptor';
 import { NoteService } from './services/note.service';
 import { NoteEditorComponent } from './components/note-editor/note-editor.component';
 
@@ -24,6 +25,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { PasswordResetFormComponent } from './components/password-reset-form/password-reset-form.component';
 import { PasswordResetRequestFormComponent } from './components/password-reset-request-form/password-reset-request-form.component';
 import { PasswordResetService } from './services/password-reset.service';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { TagService } from './services/tag.service';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,7 @@ import { PasswordResetService } from './services/password-reset.service';
     BrowserAnimationsModule,
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -55,9 +59,15 @@ import { PasswordResetService } from './services/password-reset.service';
   providers: [
     AuthGuard,
     AlertService,
+    TagService,
     PasswordResetService,
     UserService,
     NoteService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]

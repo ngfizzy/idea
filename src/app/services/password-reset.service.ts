@@ -34,7 +34,6 @@ export class PasswordResetService {
    * @return {Observable<string>}
    */
   private passwordResetErrorHandler(response: Response): Observable<string> {
-    console.log('response', response);
     if (response.status === 500) {
       return Observable
         .throw('Something went wrong. Please try again after a while');

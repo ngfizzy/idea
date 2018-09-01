@@ -137,6 +137,10 @@ export class DashboardComponent implements OnInit {
     this.isEditorCreating = true;
   }
 
+  handleTagsUpdate(event) {
+    this.note.tags = event;
+  }
+
   /**
    * It opens the note editor
    *
