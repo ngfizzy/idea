@@ -146,12 +146,12 @@ export class NoteEditorComponent implements OnChanges {
   createTagSearchListener(event: FocusEvent) {
     event.preventDefault();
 
-     this.tagSearchListener =  fromEvent(this.tagInput.nativeElement, 'keyup')
-        .debounceTime(500)
-        .distinctUntilChanged()
-        .subscribe(
-          (evt: KeyboardEvent) => this.performTagSearch(evt, this.tag)
-        );
+    this.tagSearchListener = fromEvent(this.tagInput.nativeElement, 'keyup')
+      .debounceTime(500)
+      .distinctUntilChanged()
+      .subscribe(
+        (evt: KeyboardEvent) => this.performTagSearch(evt, this.tag)
+      );
   }
 
   /**
@@ -176,6 +176,26 @@ export class NoteEditorComponent implements OnChanges {
         );
     }
   }
+
+  /**
+   * It removes a tag from note's tags list0
+   *
+   * @param {MouseEvent} event click event
+   */
+  removeTag(event: { target: HTMLElement }) {
+    const tag = event.target
+      .parentElement
+      .childNodes[0]
+      .nodeValue;
+    const foundTag = this.tagService.findTagByName(this.note.tags, tag);
+
+    this.tagService.removeTagFromNote(this.note.id, foundTag.id)
+      .subscribe(
+        (updatedTags) => { this.note.tags = updatedTags; },
+        message => this.status = message
+      );
+  }
+
 
   /**
    * Submit edited note.

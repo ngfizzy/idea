@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Rx';
 
 
 import { apiBaseUrl } from '../../env';
+import { Tag } from '../models';
 
 @Injectable()
 export class TagService {
@@ -34,6 +35,20 @@ export class TagService {
     tagNote(tag: string, noteId: number): Observable<string[] | string> {
         return this.http
             .put(`${apiBaseUrl}/notes/tags/${noteId}`, { tag })
+            .map((response: any) => response.tags)
+            .catch(this.handleError.bind(this));
+    }
+
+    /**
+     * It removes a tag from a note
+     *
+     * @param noteId Id of the note to be deleted
+     * @param tagId  Id of the tag to be deleted
+     *
+     * @return {Observable<any>}
+     */
+    removeTagFromNote(noteId: number, tagId: number): Observable<any> {
+        return this.http.delete(`${apiBaseUrl}/notes/${noteId}/tags/${tagId}`)
             .map((response: any) => response.tags)
             .catch(this.handleError.bind(this));
     }
@@ -73,6 +88,18 @@ export class TagService {
         }
 
         return Observable.throw(response.json().message);
+    }
+
+    /**
+     * It finds a tag by it's name from an array of tags
+     *
+     * @param {Tag[]} tags an array of tags to search from
+     * @param {string} tagToFind tag name to find
+     *
+     * @return {Tag}
+     */
+    findTagByName(tags: Tag[], tagToFind: string): Tag {
+        return tags.find(tag => tag.name.trim() === tagToFind.trim());
     }
 
     /**
