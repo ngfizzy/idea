@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Subscription, Subject } from 'rxjs/Rx';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 
@@ -12,7 +12,7 @@ import { TagService } from '../../services/tag.service';
   templateUrl: './note-editor.component.html',
   styleUrls: ['./note-editor.component.css'],
 })
-export class NoteEditorComponent implements OnChanges {
+export class NoteEditorComponent implements OnInit, OnChanges {
 
   @Input() isClose = true;
   @Input() note: Note;
@@ -33,6 +33,11 @@ export class NoteEditorComponent implements OnChanges {
   constructor(private noteService: NoteService,
     private tagService: TagService) { }
 
+  ngOnInit(): void {
+    if (this.note.tags) {
+      this.note.tags = this.note.tags.reverse()
+    }
+  }
   ngOnChanges() {
     const body = document.querySelector('body');
 
@@ -101,6 +106,7 @@ export class NoteEditorComponent implements OnChanges {
         .add(this.tagNote.bind(this));
     }
 
+    this.foundTags = [];
     return this.tagNote();
   }
 
@@ -126,8 +132,7 @@ export class NoteEditorComponent implements OnChanges {
       .subscribe(
         (tags: any[]) => {
           if (tags && tags.length > this.note.tags.length) {
-
-            this.note.tags = tags;
+            this.note.tags = tags.reverse();
           }
         },
         this.updateNoteErrorStatus.bind(this)
@@ -178,6 +183,20 @@ export class NoteEditorComponent implements OnChanges {
   }
 
   /**
+   * Select a suggested tag and add
+   *
+   * @param {string} tag The tag suggestion selected by user
+   *
+   * @return void
+   */
+  selectSuggestedTag(tag: string): void {
+    this.tag = tag;
+    this.addTag();
+
+    this.tagInput.nativeElement.focus();
+  }
+
+  /**
    * It removes a tag from note's tags list0
    *
    * @param {MouseEvent} event click event
@@ -191,7 +210,7 @@ export class NoteEditorComponent implements OnChanges {
 
     this.tagService.removeTagFromNote(this.note.id, foundTag.id)
       .subscribe(
-        (updatedTags) => { this.note.tags = updatedTags; },
+        (updatedTags) => { this.note.tags = updatedTags.reverse(); },
         message => this.status = message
       );
   }
