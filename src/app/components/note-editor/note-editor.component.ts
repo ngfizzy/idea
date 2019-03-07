@@ -1,8 +1,9 @@
-import { Component, Input, Output, EventEmitter, OnChanges, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { Subscription, Subject } from 'rxjs/Rx';
-import { fromEvent } from 'rxjs/observable/fromEvent';
 
-import { Note } from '../../models';
+import {distinctUntilChanged, debounceTime} from 'rxjs/operators';
+import { Component, Input, Output, EventEmitter, OnChanges, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Subscription, Subject ,  fromEvent } from 'rxjs';
+
+import { Note, Tag } from '../../models';
 import { NoteService } from '../../services/note.service';
 import { TagService } from '../../services/tag.service';
 
@@ -27,7 +28,7 @@ export class NoteEditorComponent implements OnInit, OnChanges {
   isTagInputOpen = false;
   tag = ''; // new tag to add
   tags = [];
-  foundTags: string[] = []; // results while/ searching for tags
+  foundTags: Tag[] = []; // results while/ searching for tags
   tagActionText = '+';
   tagSearchListener: Subscription;
   constructor(private noteService: NoteService,
@@ -130,7 +131,7 @@ export class NoteEditorComponent implements OnInit, OnChanges {
     return this.tagService
       .tagNote(this.tag, this.note.id)
       .subscribe(
-        (tags: any[]) => {
+        (tags: Tag[]) => {
           if (tags && tags.length > this.note.tags.length) {
             this.note.tags = tags.reverse();
           }
@@ -151,9 +152,9 @@ export class NoteEditorComponent implements OnInit, OnChanges {
   createTagSearchListener(event: FocusEvent) {
     event.preventDefault();
 
-    this.tagSearchListener = fromEvent(this.tagInput.nativeElement, 'keyup')
-      .debounceTime(500)
-      .distinctUntilChanged()
+    this.tagSearchListener = fromEvent(this.tagInput.nativeElement, 'keyup').pipe(
+      debounceTime(500),
+      distinctUntilChanged(),)
       .subscribe(
         (evt: KeyboardEvent) => this.performTagSearch(evt, this.tag)
       );
@@ -173,7 +174,7 @@ export class NoteEditorComponent implements OnInit, OnChanges {
       return this.tagService.search(this.tag)
         .subscribe(
           (found) => {
-            this.foundTags = found;
+            this.foundTags = found as Tag[];
           },
           () => {
             this.foundTags = [];

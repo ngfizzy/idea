@@ -1,23 +1,22 @@
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 
-import { Observable } from 'rxjs/Rx';
+import {map, catchError} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { HttpClient, HttpResponse,HttpHeaders } from '@angular/common/http';
 
 import { User } from '../models/user.interface';
 import { apiBaseUrl } from '../../env';
 import { Router } from '@angular/router';
+import { UserResponse } from '../models/server-responses/user-response.interface';
 
 @Injectable()
 export class UserService {
   protected headers;
 
-  constructor(private http: Http, private route: Router) {
+  constructor(private http: HttpClient, private route: Router) {
     const authToken = localStorage.getItem('authToken');
-    this.headers = new Headers({'authorization': authToken});
+    this.headers = new HttpHeaders({'authorization': authToken});
   }
 
   /**
@@ -25,14 +24,14 @@ export class UserService {
    *
    * @param {User} userInfo object containing user information
    *
-   * @returns {Observable} Observable of user
+   * @returns {Observable<UserResponse | string} Observable of user
    */
-  signUp(userInfo: User) {
+  signUp(userInfo: User): Observable<UserResponse | string> {
     const url = `${apiBaseUrl}/users`;
 
-    return this.http.post(url, userInfo)
-      .map((response: Response) => response.json())
-      .catch(this.handleSignupError);
+    return this.http.post(url, userInfo, {observe: 'response'}).pipe(
+      map((response: HttpResponse<UserResponse>) => response.body),
+      catchError(this.handleSignupError),);
   }
 
   /**
@@ -42,30 +41,30 @@ export class UserService {
    *
    * @returns {Observable} observable of errors
    */
-  handleSignupError(response: Response | any) {
+  handleSignupError(response: HttpResponse<any>) {
     if (response.status === 500) {
-      return Observable.throw('An error occurred while trying to sign up. Please try again.');
+      return observableThrowError('An error occurred while trying to sign up. Please try again.');
     }
 
-    const errors = response.json();
+    const errors = response;
     const errorFields = Object.keys(errors);
     const firstError = errors[errorFields[0]];
 
-    return Observable.throw(firstError.pop());
+    return observableThrowError(firstError.pop());
   }
 
   /**
    * Fetches current user from database, saves it to localstorage
    * as 'user'
    *
-   * @returns {Observable<string| object>} observable of error message or user
+   * @returns {Observable<string| User>} observable of error message or user
    * object.
    */
-  getCurrentUser(): Observable<string|object> {
+  getCurrentUser(): Observable<string | User | {}> {
     const url = `${apiBaseUrl}/users/current`;
-    return this.http.get(url, { headers: this.headers })
-      .map(this.saveCurrentUser.bind(this))
-      .catch(this.handleAuthenticationError.bind(this));
+    return this.http.get<UserResponse>(url, { headers: this.headers, observe: 'response' }).pipe(
+      map(this.saveCurrentUser.bind(this)),
+      catchError(this.handleAuthenticationError.bind(this)),);
   }
 
   /**
@@ -73,7 +72,7 @@ export class UserService {
    *
    * @return {object} user object
    */
-  getCurrentUserFromLocalStorage(): object {
+  getCurrentUserFromLocalStorage(): User {
     return JSON.parse(localStorage.getItem('user'));
   }
 
@@ -84,8 +83,8 @@ export class UserService {
    *
    * @returns {object} user object
    */
-  private saveCurrentUser(response: Response) {
-    const currentUser = response.json().user;
+  private saveCurrentUser(response: HttpResponse<UserResponse>): User {
+    const currentUser = response.body.user;
     localStorage.setItem('user', JSON.stringify(currentUser));
 
     return currentUser;
@@ -94,10 +93,10 @@ export class UserService {
   /**
    * It returns an authentication error message
    *
-   * @returns {string} error message
+   * @returns {Observable<string>} error message
    */
-  private handleAuthenticationError() {
-    return Observable.throw('Your session has expired, please login again.');
+  private handleAuthenticationError(): Observable<string> {
+    return observableThrowError('Your session has expired, please login again.');
   }
 
   /**
@@ -105,21 +104,23 @@ export class UserService {
    * @param {string} email user's email
    * @param {string} password someone's email
    *
-   * @returns {Promise} promise of token
+   * @returns {Observable<<string>} promise of token
    */
-  login(email: string, password: string) {
+  login(email: string, password: string): Observable<string> {
     const url = `${apiBaseUrl}/auth/login`;
+    const options: any = {observe: 'response'};
+    const loginInfo = {email, password};
 
-    return this.http.post(url, { email, password })
-      .map((response: Response) => {
-        const token = response.json().token;
+    return this.http.post(url, loginInfo, {observe: 'response'}).pipe(
+      map((response: HttpResponse<{token: string}>) => {
+        const token = response.body.token;
 
         localStorage.setItem('authToken', `Bearer ${token}`);
         this.appendToHeaders('authorization', `Bearer ${token}`);
 
         return 'Welcome';
-      })
-      .catch(this.handleLoginError);
+      }),
+      catchError(this.handleLoginError),);
   }
 
 
@@ -143,12 +144,12 @@ export class UserService {
    *
    * @returns {Observable} observable of error message
    */
-  handleLoginError(response: Response): Observable<string> {
+  handleLoginError(response: any): Observable<string> {
     if (response.status === 500) {
-      return Observable.throw('An error occured while trying to log you in. Please try again');
+      return observableThrowError('An error occured while trying to log you in. Please try again');
     }
 
-    return Observable.throw('wrong username or password');
+    return observableThrowError('wrong username or password');
   }
 
   /**
