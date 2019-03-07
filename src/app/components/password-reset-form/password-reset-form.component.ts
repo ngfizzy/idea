@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import 'rxjs/add/operator/map';
+
 
 import { AlertService } from '../../services/alert.service';
 import { PasswordResetService } from '../../services/password-reset.service';

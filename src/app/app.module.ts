@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -25,7 +24,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { PasswordResetFormComponent } from './components/password-reset-form/password-reset-form.component';
 import { PasswordResetRequestFormComponent } from './components/password-reset-request-form/password-reset-request-form.component';
 import { PasswordResetService } from './services/password-reset.service';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { TagService } from './services/tag.service';
 
 @NgModule({
@@ -46,6 +46,7 @@ import { TagService } from './services/tag.service';
     BrowserModule,
     HttpModule,
     HttpClientModule,
+    // still needed because some third party library still relies on it.
     FormsModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

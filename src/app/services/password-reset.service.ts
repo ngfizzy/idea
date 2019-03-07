@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import { Observable } from 'rxjs/Rx';
+import {throwError as observableThrowError,  Observable } from 'rxjs';
+
+import {map, catchError} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpResponse, HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { apiBaseUrl } from '../../env';
 
 @Injectable()
 export class PasswordResetService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   /**
    *This sends a password reset link to user's email
@@ -22,30 +22,29 @@ export class PasswordResetService {
   requestPasswordResetLink(email: string): Observable<string> {
     const url = `${apiBaseUrl}/passwords/reset?email=${email}`;
 
-    return this.http.get(url)
-      .map((response: Response) => response.json().message)
-      .catch(this.passwordResetErrorHandler.bind(this));
+    return this.http.get(url).pipe(
+      map((response: any) => response.message),
+      catchError(this.passwordResetErrorHandler.bind(this)),);
   }
 
   /**
    * This converts password reset error to a readable error message
-   * @param {Response} response http response observable
+   * @param {HttpResponse} response http response observable
    *
    * @return {Observable<string>}
    */
-  private passwordResetErrorHandler(response: Response): Observable<string> {
+  private passwordResetErrorHandler(response: any): Observable<string> {
     if (response.status === 500) {
-      return Observable
-        .throw('Something went wrong. Please try again after a while');
+      return observableThrowError('Something went wrong. Please try again after a while');
     }
 
     if (response.status === 401) {
-      return Observable.throw('your link has expired');
+      return observableThrowError('your link has expired');
     }
 
-    const message: string = response.json().message;
+    const message: string = response.message;
 
-    return Observable.throw(message);
+    return observableThrowError(message);
   }
 
   /**
@@ -59,11 +58,11 @@ export class PasswordResetService {
     */
   resetPassword(password: string, confirm: string, authToken: string) {
     const url = `${apiBaseUrl}/passwords/reset`;
-    const headers = new Headers({ authorization: `Bearer ${authToken}` });
+    const headers = new HttpHeaders({ authorization: `Bearer ${authToken}` });
 
     return this.http
-      .put(url, { password, confirm }, { headers })
-      .map((request: Response) => request.json().message)
-      .catch(this.passwordResetErrorHandler.bind(this));
+      .put(url, { password, confirm }, { headers }).pipe(
+      map((request: any) => request.message),
+      catchError(this.passwordResetErrorHandler.bind(this)),);
   }
 }

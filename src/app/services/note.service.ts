@@ -1,54 +1,56 @@
-import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import stringSimilarity from 'string-similarity';
 
-import { Observable } from 'rxjs/Rx';
-import { Http, Response, Headers } from '@angular/http';
+import {throwError as observableThrowError,  Observable } from 'rxjs';
+
+import {map, catchError} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+
+
+import stringSimilarity from 'string-similarity';
+import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 
 import { apiBaseUrl } from '../../env';
-import { Note } from '../models';
+import { Note, NoteResponse, NotesResponse } from '../models';
 
 @Injectable()
 export class NoteService {
   private status: number;
 
-  private notes: Array<any>;
+  private notes: Note[];
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
     this.notes = [];
   }
 
   /**
    * Fetches user's notes
    *
-   * @returns {Observable<any>}
+   * @returns {Observable<Note[]>}
    */
-  fetchNotes(): Observable<any> {
+  fetchNotes(): Observable<Note[]> {
     const url = `${apiBaseUrl}/notes`;
     const token = localStorage.getItem('authToken');
-    const headers = new Headers({ authorization: token });
+    const headers = new HttpHeaders({ authorization: token });
 
-    return this.http.get(url, { headers })
-      .map((response: Response) => {
-        this.status = response.status;
-        this.notes = Object.values(response.json().notes);
+    return this.http.get<NotesResponse>(url, { headers, observe: 'response' }).pipe(
+      map((response: HttpResponse<NotesResponse>) => {
+        // this.status = response.status;
+        this.notes = Object.values(response.body.notes);
 
         return this.notes;
-      })
-      .catch((response: Response) => {
+      }),
+      catchError((response: HttpResponse<NoteResponse>) => {
         this.status = response.status;
 
-        return Observable.throw(this.status);
-      });
+        return observableThrowError(this.status);
+      }),);
   }
 
   /**
    * Fetched notes are stored in memory: This is a temporary mechasm
    *
-   * @returns {object}
+   * @returns {Note[]}
    */
-  getFetchedNotes() {
+  getFetchedNotes(): Note[] {
     return this.notes;
   }
 
@@ -57,7 +59,7 @@ export class NoteService {
    *
    * @returns {number}
    */
-  getRequestStatus() {
+  getRequestStatus(): number {
     return this.status;
   }
 
@@ -66,20 +68,23 @@ export class NoteService {
    *
    * @param {Note} note a note
    *
-   * @returns {Observable<any>} It returns an observable of created notes
+   * @returns {Observable<any>} It returns an observable of created note's id
    */
   createNote(note: Note): Observable<any> {
     const url = `${apiBaseUrl}/notes`;
-    const headers =
-      new Headers({ authorization: localStorage.getItem('authToken') });
+    const headers = new HttpHeaders({ authorization: localStorage.
+      getItem('authToken') });
 
-    return this.http.post(url, note, { headers })
-      .map((response: Response) => {
-        this.notes.unshift(response.json().note);
+    return this.http.post<NoteResponse>(url, note, {
+        headers,
+        observe: 'response'
+      }).pipe(
+      map((response: HttpResponse<NoteResponse>) => {
+        this.notes.unshift(response.body.note);
 
         return this.notes[0].id;
-      })
-      .catch(this.handleCreateError.bind(this));
+      }),
+      catchError(this.handleCreateError.bind(this)),);
   }
 
 
@@ -90,14 +95,14 @@ export class NoteService {
    *
    * @returns {Observable<any>} Observable of error  messsage
    */
-  handleCreateError(response: Response): Observable<any> {
+  handleCreateError(response: HttpResponse<any>): Observable<string> {
     if (response.status === 500 || !response.status) {
-      return Observable.throw('We are sorry. An error occurred while trying to create this note');
+      return observableThrowError('We are sorry. An error occurred while trying to create this note');
     }
 
-    const errorMessage = this.getCreateMessage(response.json());
+    const errorMessage = this.getCreateMessage(response.body);
 
-    return Observable.throw(errorMessage);
+    return observableThrowError(errorMessage);
   }
 
   /**
@@ -117,15 +122,18 @@ export class NoteService {
    *
    * @param note Note to be edited
    */
-  editNote(note: Note): Observable<any> {
-    const headers = new Headers({ authorization: localStorage.getItem('authToken') });
+  editNote(note: Note): Observable<string> | Observable<{}> {
+    const headers = new HttpHeaders({ authorization: localStorage.getItem('authToken') });
 
     const { id, title, content } = note;
     const url = `${apiBaseUrl}/notes/${id}`;
 
-    return this.http.put(url, { title, content }, { headers })
-      .map(this.updateEditedNote.bind(this))
-      .catch(this.handleCreateError.bind(this));
+    return this.http.put<NoteResponse>(url,
+        { title, content },
+        { headers, observe: 'response' }
+      ).pipe(
+      map(this.updateEditedNote.bind(this)),
+      catchError(this.handleCreateError.bind(this)),);
   }
 
   /**
@@ -135,8 +143,8 @@ export class NoteService {
    *
    * @returns string
    */
-  updateEditedNote(response: Response) {
-    const editedNote = response.json().note;
+  updateEditedNote(response: HttpResponse<NoteResponse>) {
+    const editedNote = response.body.note;
     const indexOfNote = this.notes
       .findIndex((currentNote) => currentNote.id === editedNote.id);
     this.notes.splice(indexOfNote, 1);
@@ -172,28 +180,27 @@ export class NoteService {
    * @returns {Observable<any>} observable of notes array
    */
   searchNotesByTitle(searchTerms: string): Observable<any> {
-    const headers = new Headers({ authorization: localStorage.getItem('authToken') });
+    const headers = new HttpHeaders({ authorization: localStorage.getItem('authToken') });
     const url = `${apiBaseUrl}/notes/search?query=${searchTerms}`;
     if (!searchTerms) {
       return this.fetchNotes();
     }
-    return this.http.get(url, { headers })
-      .map((response: Response) => {
-        this.notes = response.json().notes;
+    return this.http.get(url, { headers }).pipe(
+      map((response: any) => {
+        this.notes = response.notes;
 
         return this.notes;
-      })
-      .catch((response) => {
+      }),
+      catchError((response) => {
         switch (response.status) {
           case 404:
-            return Observable.throw(response.json().message);
+            return observableThrowError(response.json().message);
           case 401:
-            return Observable.throw('your session has expired. Please login again');
+            return observableThrowError('your session has expired. Please login again');
           default:
-            return Observable
-              .throw('Oops :( . Something went wrong. Please try again later');
+            return observableThrowError('Oops :( . Something went wrong. Please try again later');
         }
-      });
+      }),);
   }
 
   /**
@@ -203,19 +210,18 @@ export class NoteService {
    *
    * @returns {Observable<any>} Observable of success or error message
    */
-  removeNote(id: number): Observable<any> {
-    const headers = new Headers({ authorization: localStorage.getItem('authToken') });
+  removeNote(id: number): Observable<string> {
+    const headers = new HttpHeaders({ authorization: localStorage.getItem('authToken') });
     const url = `${apiBaseUrl}/notes/${id}`;
 
-    return this.http.delete(url, { headers })
-      .map(() => {
+    return this.http.delete(url, { headers }).pipe(
+      map(() => {
         const noteIndex = this.notes.findIndex(note => note.id === id);
         this.notes.splice(noteIndex, 1);
 
         return 'Note Deleted Successfully';
-      })
-      .catch(() =>
-        Observable.
-          throw('An Error Occured while trying to delete this note. You may reload and try again'));
+      }),
+      catchError(() =>
+        observableThrowError('An Error Occured while trying to delete this note. You may reload and try again')),);
   }
 }

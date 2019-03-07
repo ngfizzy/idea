@@ -1,13 +1,16 @@
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
+
+import {map, catchError} from 'rxjs/operators';
+
+
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Rx';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 
 
 import { apiBaseUrl } from '../../env';
-import { Tag } from '../models';
+import { Tag} from '../models';
+import { PlainTagsResponse, TagsResponse } from '../models/server-responses/tags-response.interface';
 
 @Injectable()
 export class TagService {
@@ -18,10 +21,10 @@ export class TagService {
      *
      * @returns {Observable<string[]| string>} observable of tags or error message
      */
-    getAll(): Observable<string[] | string> {
-        return this.http.get(`${apiBaseUrl}/tags`)
-            .map((response: Response) => response.json().notes)
-            .catch(this.handleError.bind(this));
+    getAll(): any {
+        return this.http.get(`${apiBaseUrl}/tags`,{observe: 'response'}).pipe(
+            map((response: HttpResponse<any>) => response.body.notes),
+            catchError(this.handleError.bind(this)),);
     }
 
     /**
@@ -30,13 +33,16 @@ export class TagService {
      * @param {string} tag
      * @param {number} noteId Id of the note i want to send
      *
-     * @return {Observable<any[] |  string}
+     * @return {Observable<Tag[] | {} | string} Observable of Array of Tags, empty object or error message
      */
-    tagNote(tag: string, noteId: number): Observable<string[] | string> {
+    tagNote(tag: string, noteId: number): Observable<Tag[] |{}| string> {
+        const url = `${apiBaseUrl}/notes/tags/${noteId}`;
         return this.http
-            .put(`${apiBaseUrl}/notes/tags/${noteId}`, { tag })
-            .map((response: any) => response.tags)
-            .catch(this.handleError.bind(this));
+            .put<TagsResponse>(url, { tag }, {observe: 'response'}).pipe(
+            map((response: HttpResponse<TagsResponse>) => {
+               return  response.body.tags;
+            }),
+            catchError(this.handleError.bind(this)),);
     }
 
     /**
@@ -48,9 +54,9 @@ export class TagService {
      * @return {Observable<any>}
      */
     removeTagFromNote(noteId: number, tagId: number): Observable<any> {
-        return this.http.delete(`${apiBaseUrl}/notes/${noteId}/tags/${tagId}`)
-            .map((response: any) => response.tags)
-            .catch(this.handleError.bind(this));
+        return this.http.delete(`${apiBaseUrl}/notes/${noteId}/tags/${tagId}`).pipe(
+            map((response: any) => response.tags),
+            catchError(this.handleError.bind(this)),);
     }
 
     /**
@@ -61,14 +67,17 @@ export class TagService {
      *
      * @returns {Observable<string[]|string} tags or error message
      */
-    fetchNoteTags(noteId: number) {
-        return this.http.get(`${apiBaseUrl}/notes/tags/${noteId}`)
-            .map((response: Response) =>
-                response.json().tags)
-            .catch(this.handleError.bind(this));
+    fetchNoteTags(noteId: number):
+     Observable<Tag[] | {}  | string> {
+        const url = `${apiBaseUrl}/notes/tags/${noteId}`;
+
+        return this.http.get<TagsResponse>(url, {observe: 'response'}).pipe(
+            map((response: HttpResponse<TagsResponse>) =>
+                response.body.tags),
+            catchError(this.handleError.bind(this)),);
     }
 
-    private handleError(response: Response) {
+    private handleError(response: HttpResponse<any>): Observable<string> {
 
         switch (response.status) {
             case 404:
@@ -78,16 +87,16 @@ export class TagService {
         }
     }
 
-    private handleNotFoundError(response: Response) {
+    private handleNotFoundError(response: HttpResponse<any>): Observable<string> {
         const contentType = response.headers
             .get('content-type')
             .toLocaleLowerCase();
 
         if (contentType !== 'application\\json') {
-            return Observable.throw('Not Found');
+            return observableThrowError('Not Found');
         }
 
-        return Observable.throw(response.json().message);
+        return observableThrowError(response.body.message);
     }
 
     /**
@@ -110,16 +119,18 @@ export class TagService {
      * @returns {Observable<string | string[]>} an array of tags belonging to
      * the current user or an error message
      */
-    search(tag: string) {
-        return this.http.get(`${apiBaseUrl}/tags/search?query=${tag}`)
-            .map((response: any) => response.tags)
-            .catch(this.handleError);
+    search(tag: string): Observable<Tag[] | string> {
+        const url = `${apiBaseUrl}/tags/search?query=${tag}`;
+
+        return this.http.get<TagsResponse>(url, { observe: 'response'}).pipe(
+            map((response: HttpResponse<TagsResponse>) => response.body.tags as Tag[]),
+            catchError(this.handleError),);
     }
 
     /**
      * @returns {Observable<string>}
      */
     private handleServerError(): Observable<string> {
-        return Observable.throw('an error occurred while trying to carry out his operation');
+        return observableThrowError('an error occurred while trying to carry out his operation');
     }
 }

@@ -1,7 +1,7 @@
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 
-import { Observable } from 'rxjs/Rx';
+import {of as observableOf,  Observable } from 'rxjs';
+
+import {catchError, map} from 'rxjs/operators';
 
 
 import { Injectable } from '@angular/core';
@@ -19,9 +19,9 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.userService.getCurrentUser()
-      .map(this.handleSuccess)
-      .catch(this.handleFailure);
+    return this.userService.getCurrentUser().pipe(
+      map(this.handleSuccess),
+      catchError(this.handleFailure),);
 
   }
 
@@ -44,6 +44,6 @@ export class AuthGuard implements CanActivate {
   handleFailure() {
     this.router.navigateByUrl('/auth');
 
-    return Observable.of(false);
+    return observableOf(false);
   }
 }
