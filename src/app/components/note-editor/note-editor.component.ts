@@ -1,7 +1,7 @@
 
-import {distinctUntilChanged, debounceTime} from 'rxjs/operators';
+import {distinctUntilChanged, debounceTime, map} from 'rxjs/operators';
 import { Component, Input, Output, EventEmitter, OnChanges, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { Subscription,  fromEvent } from 'rxjs';
+import { Subscription,  fromEvent, Observable } from 'rxjs';
 
 import { Note, Tag } from '../../models';
 import { NoteService } from '../../services/note.service';
@@ -22,6 +22,7 @@ export class NoteEditorComponent implements OnInit, OnChanges {
   @Output() updateTags = new EventEmitter<any[]>();
 
   @ViewChild('tagInput', { read: ElementRef }) tagInput: ElementRef;
+  @ViewChild('noteBody', {read: ElementRef}) noteBody: ElementRef;
 
   error: boolean;
   status = 'saved';
@@ -32,12 +33,26 @@ export class NoteEditorComponent implements OnInit, OnChanges {
   shouldOpenTagsDropup = false;
   tagActionText = '+';
   tagSearchListener: Subscription;
+
+  editorListener: Subscription;
+
   constructor(private noteService: NoteService,
     private tagService: TagService) { }
 
   ngOnInit(): void {
     if (this.note.tags) {
       this.note.tags = this.note.tags.reverse()
+    }
+
+    if (!this.isEditing) {
+      this.editorListener = fromEvent(this.noteBody.nativeElement, 'keyup')
+      .pipe(
+        map((evt: any) => evt.target.value),
+        debounceTime(500),
+        distinctUntilChanged(),)
+        .subscribe(
+          (evt: KeyboardEvent) => this.submitNote()
+        );
     }
   }
 
@@ -131,11 +146,13 @@ export class NoteEditorComponent implements OnInit, OnChanges {
    * @returns {Subscription}
    */
   private tagNote(): Subscription {
+    const tagsLength = (this.note.tags || []).length;
+
     return this.tagService
       .tagNote(this.tag, this.note.id)
       .subscribe(
         (tags: Tag[]) => {
-          if (tags && tags.length > this.note.tags.length) {
+          if (tags && tags.length > tagsLength) {
             this.note.tags = tags.reverse();
           }
         },
