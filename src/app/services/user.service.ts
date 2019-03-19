@@ -15,7 +15,8 @@ export class UserService {
   protected headers;
 
   constructor(private http: HttpClient, private route: Router) {
-    const authToken = localStorage.getItem('authToken');
+    // passing undefined as an header causes error. hence we pass empty string.
+    const authToken = localStorage.getItem('authToken') || '';
     this.headers = new HttpHeaders({'authorization': authToken});
   }
 
@@ -70,7 +71,7 @@ export class UserService {
   /**
    * Get logged in user from database
    *
-   * @return {object} user object
+   * @return {User} user object
    */
   getCurrentUserFromLocalStorage(): User {
     return JSON.parse(localStorage.getItem('user'));
@@ -130,9 +131,9 @@ export class UserService {
    * @param name Name of the header to be added
    * @param value Value of the header to be added
    *
-   * @returns {Headers} http headers
+   * @returns {HttpHeaders} http headers
    */
-  private appendToHeaders(name: string, value: any): Headers {
+  private appendToHeaders(name: string, value: any): HttpHeaders {
     this.headers.set(name, value);
 
     return this.headers;
@@ -153,7 +154,7 @@ export class UserService {
   }
 
   /**
-   * It user out
+   * It logs user out
    *
    * @returns {void}
    */

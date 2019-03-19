@@ -19,8 +19,7 @@
   display: flex;
   flex-direction:row;
   justify-content: space-between;
-  padding: 5px 0;
-  margin-bottom: 5%;
+  padding: 5px 2px;
   text-align: center;
   height: 3em;
   width: 100%;
@@ -30,10 +29,10 @@
 }
 
 .dashboard > .main-header > h4 {
-  align-self: center;
-  min-width: 20em;
-  margin-left: auto;
-  margin-right: auto;
+  align-self: left;
+  width: fit-content;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .main-header > .profile {
@@ -43,22 +42,26 @@
   text-align: center;
   width: fit-content;
   height: fit-content;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .main-header .user-icon {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .main-header  .user-icon > img {
-  width: 3em;
-  height: 3em;
+  width: 2em;
+  height: 2em;
   border-radius: 100%;
 }
 
 .main-header .user-icon > h5 {
   margin-top: auto;
   margin-bottom: auto;
+  padding-left: 3px;
   height: fit-content;
 }
 
@@ -78,33 +81,37 @@
 }
 .user-options > li:hover {
   background-color: rgba(84,66,107, 0.2);
-
 }
 
 .main {
   display: flex;
   flex-direction: column;
-  margin: 10em 20px;
+  margin: 8em 20px;
 }
 
 .controls {
-  position: sticky;
-  top: 2.5em;
+  position: fixed;
+  background-color: white;
+  border: 1px solid gray;
+  top: 4em;
+  padding: 1em 0;
+  height: fit-content;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 80%;
 }
 
 .add {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: space-around;  
-  width: 2.5em;
-  height:2.5em;
-  margin: 20px;
+  width: 2em;
+  height: 2em;
+  margin: 0 6px;
   border-radius: 100%;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1em;
   font-weight: bold;
   color: white;
   background-color: #54426B;
@@ -118,14 +125,16 @@ input[type="search"] {
   align-self: right;
   border: 0;
   border: 1px solid rgba(0,0,0, .6);
-  border-radius: 5em;
+  border-radius: .25em;
   padding: 5px 10px;
   display: inline-block;  
-  width: 40%;
-  height: 3em;
+  width: 75%;
+  height: 2em;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 6px;
   z-index: 1000;
-  font-size: 1.2em;
-  margin: auto 20px;
+  font-size: 1em;
   color: rgba(84, 66, 107, .9);
 }
 
@@ -149,6 +158,46 @@ input[type="search"]:focus {
 .notes-container {
   display: flex;
   flex-direction: row;
+  margin-top: 8%;
   justify-content: space-around;
   flex-wrap: wrap;
+}
+
+@media  only screen and (min-width: 1000px) {
+  .main {
+    width: 80%;
+    margin-top: 3em;
+    align-self: center;
+  }
+  
+}
+
+@media only screen and (min-height: 700px) {
+  .controls {
+    padding: .5em 0;
+  }
+
+  .main {
+    margin-top: 6em;
+  }
+}
+
+@media only screen and (max-height: 450px) {
+  .dashboard > .main-header {
+    height: 1.9em;
+    margin-bottom: .5em;
+  }
+
+  .main-header > h4 {
+    font-size: 90%;
+  }
+
+  .controls {
+    top: 3em;
+    padding: .5em 0;
+  }
+
+  .main {
+    margin-top: 5em;
+  }
 }

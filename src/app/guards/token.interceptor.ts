@@ -7,7 +7,8 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 export class TokenInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      const authToken = localStorage.getItem('authToken');
+      const authToken = localStorage.getItem('authToken') || '';
+      
       request = request.clone({
         setHeaders: {
           Authorization: authToken,

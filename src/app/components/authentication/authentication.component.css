@@ -1,6 +1,5 @@
 .auth {
   display: flex;
-  position: relative;
   flex-direction: column;
   align-content: center;
   justify-content: space-around;
@@ -14,12 +13,12 @@
   box-sizing: border-box;
 }
 
-.headings  h1{
-  font-size: 150px;
+.headings  h1 {
+  font-size: 6.3em;
 }
 
 .headings h3 {
-  font-size: 90%;
+  font-size: 1.2em;
 }
 
 .buttons-container {
@@ -36,7 +35,9 @@
   width: 15em;
   height: 4em;
   margin: .6em;
-  color: #E9F1F7;
+  color: rgb(104, 97, 97);
+  font-weight: bold;
+  font-size: 1em;
 }
 
 .buttons-container  .btn-signup {
@@ -49,4 +50,49 @@
 
 .copyright {
   font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+@media only screen and (max-height: 440px) {
+  .auth {
+    padding-top: 3%;
+  }
+  .headings  h1 {
+    font-size: 3em;
+  }
+
+  .headings h3 {
+    font-size: .8em;
+  }
+
+  .buttons-container {
+    flex-direction: row;
+    align-self: center;
+    width: 40%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+
+  .buttons-container button {
+    align-self: center;
+    width: 15em;
+    height: 3em;
+    margin: .6em;
+  }
+
+  .copyright {
+    font-size: .5em;
+  }
+}
+
+@media only screen and (min-width: 1300px) {
+  .buttons-container {
+    align-self: center;
+  }
+
+  .buttons-container button {
+    align-self: center;
+    margin: .6em;
+  }
+
 }
