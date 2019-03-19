@@ -1,8 +1,19 @@
 <div [hidden]="isClose" class="wrapper" (click)="cancel($event)">
   <div class="note-editor">
     <form autocomplete="off" (ngSubmit)="submitNote()">
-      <input type="text" class="title" [(ngModel)]="note.title" name="note.title" placeholder="title" required />
-      <textarea #noteBody name="note.content" [(ngModel)]="note.content" class="content" required></textarea>
+      <input
+        type="text"
+        class="title"
+        [(ngModel)]="note.title"
+        name="note.title"
+        placeholder="title"
+        required />
+      <textarea
+        #noteBody
+        name="note.content"
+        [(ngModel)]="note.content"
+        class="content"
+        required></textarea>
       <div class="tags-container">
         <span class="tag" *ngFor="let tag of note.tags; trackBy: trackTagsById">{{tag.name}}
           <i class="delete" (click)="removeTag($event)">x</i>
@@ -11,7 +22,9 @@
       <div class="footer">
         <span class="status">{{status}}</span>
         <form class="tag-form" autocomplete="off" (ngSubmit)="addTag()">
-            <span class="tag-dropdown-container" *ngIf="shouldOpenTagsDropup">
+            <span
+              class="tag-dropdown-container"
+              *ngIf="shouldOpenTagsDropup">
                 <ul class="dropup-items">
                   <li *ngFor="let tag of foundTags" (click)="selectSuggestedTag(tag.name)">{{tag.name}}</li>
                 </ul>

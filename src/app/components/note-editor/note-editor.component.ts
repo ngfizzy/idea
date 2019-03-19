@@ -1,7 +1,7 @@
 
 import {distinctUntilChanged, debounceTime} from 'rxjs/operators';
 import { Component, Input, Output, EventEmitter, OnChanges, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { Subscription, Subject ,  fromEvent } from 'rxjs';
+import { Subscription,  fromEvent } from 'rxjs';
 
 import { Note, Tag } from '../../models';
 import { NoteService } from '../../services/note.service';
@@ -59,9 +59,9 @@ export class NoteEditorComponent implements OnInit, OnChanges {
   submitNote(): Subscription {
     if (this.isEditing) {
       return this.submitEditedNote();
-    } else {
-      return this.createNewNote();
     }
+
+    return this.createNewNote();
   }
 
   /**
@@ -75,6 +75,7 @@ export class NoteEditorComponent implements OnInit, OnChanges {
         (noteId) => {
           this.note.id = noteId;
           this.isEditing = true;
+  
           this.updateNoteSavedStatus();
         },
         this.updateNoteErrorStatus.bind(this)
@@ -223,7 +224,6 @@ export class NoteEditorComponent implements OnInit, OnChanges {
       );
   }
 
-
   /**
    * Submit edited note.
    *
@@ -269,6 +269,7 @@ export class NoteEditorComponent implements OnInit, OnChanges {
     const { className } = event.target;
     if (className === 'wrapper' || className === 'cancel') {
       this.close.emit();
+      this.isEditing = false;
     }
   }
 }
