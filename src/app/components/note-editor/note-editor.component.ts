@@ -29,6 +29,7 @@ export class NoteEditorComponent implements OnInit, OnChanges {
   tag = ''; // new tag to add
   tags = [];
   foundTags: Tag[] = []; // results while/ searching for tags
+  shouldOpenTagsDropup = false;
   tagActionText = '+';
   tagSearchListener: Subscription;
   constructor(private noteService: NoteService,
@@ -39,6 +40,7 @@ export class NoteEditorComponent implements OnInit, OnChanges {
       this.note.tags = this.note.tags.reverse()
     }
   }
+
   ngOnChanges() {
     const body = document.querySelector('body');
 
@@ -175,6 +177,7 @@ export class NoteEditorComponent implements OnInit, OnChanges {
         .subscribe(
           (found) => {
             this.foundTags = found as Tag[];
+            this.shouldOpenTagsDropup = this.foundTags.length > 0;
           },
           () => {
             this.foundTags = [];
@@ -195,6 +198,10 @@ export class NoteEditorComponent implements OnInit, OnChanges {
     this.addTag();
 
     this.tagInput.nativeElement.focus();
+  }
+
+  closeTagsDropup() {
+    this.shouldOpenTagsDropup = false;
   }
 
   /**

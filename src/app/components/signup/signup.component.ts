@@ -23,7 +23,6 @@ export class SignupComponent implements OnInit {
     password: '',
   };
 
-
   constructor(
     private userService: UserService,
     private alert: AlertService) {

@@ -16,20 +16,19 @@
 
 .note-editor {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5em;
+  margin-top: 4em;
   height: 30em;
-  min-width: 50%;
-  max-width: 75%;
+  width: 90%;
+  min-height: 60%;
+  max-height: 80%;
   background-color: rgba(255, 255, 245, 1);
   padding: 0;
   font-size: 120%;
-  border-top-right-radius: 2em;
-  border-bottom-left-radius: 2em;
   box-shadow: 0px 0 5px 1px rgba(0, 0, 0, 0.7);
 }
 
@@ -39,17 +38,15 @@
   height: 100% !important;
   flex-direction: column;
   padding: 0;
-  border-top-right-radius: inherit;
-  border-bottom-left-radius: inherit;
 }
 
 .note-editor>form>.title {
   height: 8%;
-  font-size: 120%;
+  font-size: 1.2em;
   outline: none;
   border: none;
   padding: 1px 5px;
-  background-color: #54426B;
+  background-color: #34E4EA;
   text-align: center;
   color: #fff;
   border-top-right-radius: inherit;
@@ -60,152 +57,214 @@
   outline: none;
   padding: .5em .5em 0;
   height: 78%;
-  background-color: #E9F1F7;
+  background-color: white;
   font-size: 1em;
   color: rgba(0, 0, 0, 0.8);
 }
 
-.note-editor form button {
+.note-editor form button,
+.note-editor .footer .tag-form button {
   cursor: pointer;
   display: inline-block;
-  background-color: #54426B;
-  color: white;
-  padding: 0 10px;
-  max-width: 25%;
-  align-self: flex-end;
-  height: 100%;
-  margin: 0 .2em;
-  outline: none;
-  border: 1px solid black;
-}
-
-.note-editor form  button:hover {
-  box-shadow: 0 0 5px 2px #fff;
-}
-
-.note-editor form button.cancel {
-  background-color: #fff;
+  background-color: white;
   color: #54426B;
+  font-size: .5em;
+  font-weight: bold;
+  padding: 2px;
+  align-self: flex-end;
+  height: fit-content;
+  width: fit-content;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: .5em;
+  outline: none;
+  border-radius: 15%;
+  border: 1px solid rgba(0, 0, 0, .2);
+  box-shadow: 0 0 1px 1px #fff;
 }
 
 .tags-container {
+  position: relative;
+  padding: .2em;
   display: flex;
-  justify-content: center;
-  justify-items: center;
   flex-direction: row;
-  align-items: center;
-  align-content: center;
-  height: 5%;
-}
-
-.note-tag-wrapper {
-  width: 65%;
-  height: 100%;
+  flex-wrap: wrap;
   overflow-x: hidden;
   overflow-y: auto;
-  margin: 2px 0;
-
+  background-color: rgba(0, 0, 0, .4);
+  height: 5%;
 }
-
-.tags-container .add-tag {
-  display: flex;
-  flex-direction: column;
-  align-self: flex-end;
-  max-width: 40%;
-  margin-left: auto;
-}
-
-.add-tag input[type="text"] {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-style: none;
-}
-
-.add-tag ul {
-  list-style: none;
-  max-height: 15em;
-  overflow-y: auto;
-  background-color: rgba(255, 255, 255, 0.4);
-}
-
-.add-tag li {
-  max-width: 10em;
-  height: 1.2em;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  padding-left: 5px;
-  background-color: rgba(196, 147, 176, 0.2);
-  color: #363020;
-}
-
-.add-tag li:nth-child(odd) {
-  background-color: rgba(196, 147, 176, 0.4);
-
-}
-
-.add-tag li:hover {
-  cursor: pointer;
-  background-color: #54426B;
-  color: #f1f1f1;
-
+.tags-container:hover {
+  height: fit-content;
 }
 
 .tags-container .tag {
-  font-size: .7em;
+  position: relative;
+  z-index: 1000;
+  display: inline-block;
+  font-size: .5em;
   font-style: italic;
-  font-weight: 90%;
-  margin-left: 10px;
-  border-radius: 10%;
-  background-color: #EEF0F2;
-  color: #363020;
-}
-
-.tag button {
-  display: inline-flex;
-  padding: 1px;
-  width: 1.2em !important;
-  height: 1.2em !important;
-  padding: 0 !important;
-  align-items: center;
-  justify-items: center;
-  text-align: center;
-  border-radius: 100%;
-  font-family: fixed;
-  font-size: 1em;
-  font-style: bold;
-  background-color: rgba(0, 0, 0, 0.2) !important ;
-  color: #363020;
-  border: none !important;
-}
-
-.add-tag li button {
-  display: block;
-  background-color: rgba(255, 255, 255, 0);
-  color: black;
-  border: none;
-}
-
-.add-tag  input.add {
-  display: inline-flex;
-  width: 1.5em;
-  height: 1.5em !important;
-  border: none;
-  margin-right: 2px;
-  border-radius: 100%;
-  text-align: center;
-  font-size: .8em;
-  justify-content: center !important;
-  -webkit-appearance: none;
   font-weight: bold;
+  margin-right: .5em;
+  margin-bottom: .5em;
+  height: fit-content;
+  padding: .2em;
+  border: 1px solid transparent;
+  background-color: rgba(238, 240, 24, .4);
+  color: rgb(31, 27, 27);
+}
+
+.tag .delete {
+  padding: 0 .2em !important;
+  font-weight: bold !important;
+  margin-top:auto !important;
+  margin-bottom: auto !important;
+  color:rgba(0,0,0, .4) !important; 
 }
 
 .footer {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  flex-wrap: hidden;
   height: 8%;
   box-sizing: content-box;
   z-index: 1;
-  background-color: #54426B;
+  background-color: rgba(52, 228, 234, .2);
   border-bottom-left-radius: inherit;
 }
+
+.footer .status {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: .3em;
+  color: white;
+  margin-right: auto;
+  padding-left: .6em;
+  padding-right: .6em;;
+  background-color: rgba(0, 0, 0, .5)
+}
+
+.footer  > button[type="submit"] {
+  background-color: whitesmoke;
+}
+
+.footer form.tag-form {
+  position: relative;
+  box-sizing: content-box;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  max-width: 60%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.footer .tag-form .form-inputs {
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.footer .tag-form button {
+  width: fit-content;
+  height: fit-content;
+  margin-left: auto;
+  font-size: .5em;
+}
+
+.footer .tag-form input[type="text"] {
+  padding-left: 4px;
+  padding-right: 4px;
+  width: 90%;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-style: none;
+  margin-right: .1em;
+}
+
+.footer .tag-form .tag-dropdown-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  z-index: 2000;
+  bottom: 100%;
+  margin-right: 1em;
+  width: 90%;
+}
+
+.tag-dropdown-container ul {
+  list-style: none;
+  max-width: 100%;
+  max-height: 15em;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.tag-dropdown-container li {
+  display: flex;
+  justify-content: flex-start;
+  height: 1em;
+  overflow: hidden;
+  font-size: .7em;
+  font-weight: bold;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 2px 0;
+  padding-left: 5px;
+  background-color: rgba(196, 147, 176, 0.6);
+  color: rgb(200, 255, 255);
+}
+
+.tag-dropdown-container li:nth-child(odd) {
+  background-color: rgba(196, 147, 176, .8);
+  color: rgb(255, 255, 255);
+}
+
+.tag-dropdown-container li:hover {
+  cursor: pointer;
+  background-color: #54426B;
+  color: #f1f1f1;
+}
+
+@media only screen and (min-width: 550px) {
+  .note-editor {
+    max-width: 70%;
+    height: 25em;
+    margin-top: 3em;
+  }
+}
+
+@media  only screen and (min-width: 800px) {
+  .note-editor {
+    width: 40%;
+  }
+}
+@media  only screen and (min-width: 1000px) {
+  .note-editor {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-height: 450px) {
+  .note {
+    height: 13em;
+  }
+
+  .note > .note-title {
+    font-size: .8em;
+  }
+
+  .note > .body {
+    font-size: .6em;
+  }
+
+  .footer > .tag-form > button {
+    box-shadow: none;
+    /* padding-top: .1em !important; */
+    /* margin-top: 0 !important; */
+  }
+}
+
