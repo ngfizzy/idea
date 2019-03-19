@@ -36,7 +36,7 @@
                 *ngIf="isTagInputOpen"
                 type="text" maxlength="70"
                 [(ngModel)]="tag"
-                (focusout)="closeTagsDropup()"
+                (input)="closeTagsDropup()"
                 name="tag" autofocus />
               <button type="button" [value]="this.isTagInputOpen ? 'x' : '+'" (click)="toggleTagInput()">
                 <span *ngIf="isTagInputOpen">X</span>
