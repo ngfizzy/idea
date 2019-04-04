@@ -16,8 +16,8 @@ import { TagService } from '../../services/tag.service';
 export class NoteEditorComponent implements OnInit, OnChanges {
 
   @Input() isClose = true;
-  @Input() note: Note;
-  @Input() isEditing;
+  @Input() note: Note = {} as Note;
+  @Input() isEditing: any;
   @Output() close = new EventEmitter<null>();
   @Output() updateTags = new EventEmitter<any[]>();
 
@@ -41,7 +41,7 @@ export class NoteEditorComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     if (this.note.tags) {
-      this.note.tags = this.note.tags.reverse()
+      this.note.tags = this.note.tags.reverse();
     }
 
     if (!this.isEditing) {
@@ -49,7 +49,7 @@ export class NoteEditorComponent implements OnInit, OnChanges {
       .pipe(
         map((evt: any) => evt.target.value),
         debounceTime(500),
-        distinctUntilChanged(),)
+        distinctUntilChanged())
         .subscribe(
           (evt: KeyboardEvent) => this.submitNote()
         );
@@ -90,7 +90,7 @@ export class NoteEditorComponent implements OnInit, OnChanges {
         (noteId) => {
           this.note.id = noteId;
           this.isEditing = true;
-  
+
           this.updateNoteSavedStatus();
         },
         this.updateNoteErrorStatus.bind(this)
@@ -147,14 +147,15 @@ export class NoteEditorComponent implements OnInit, OnChanges {
    */
   private tagNote(): Subscription {
     const tagsLength = (this.note.tags || []).length;
-
     return this.tagService
       .tagNote(this.tag, this.note.id)
       .subscribe(
-        (tags: Tag[]) => {
+        (tags: Tag[])  => {
+          console.log(tags, ' tags in  subscription...................')
           if (tags && tags.length > tagsLength) {
             this.note.tags = tags.reverse();
           }
+          console.log('got to the end of the block.............')
         },
         this.updateNoteErrorStatus.bind(this)
       );

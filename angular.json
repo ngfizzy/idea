@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ps-notes": {
+    "kaleci": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -48,23 +48,24 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ps-notes:build"
+            "browserTarget": "kaleci:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ps-notes:build:production"
+              "browserTarget": "kaleci:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ps-notes:build"
+            "browserTarget": "kaleci:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "codeCoverage": true,
             "main": "src/test.ts",
             "karmaConfig": "./karma.conf.js",
             "polyfills": "src/polyfills.ts",
@@ -93,7 +94,7 @@
         }
       }
     },
-    "ps-notes-e2e": {
+    "kaleci-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -102,7 +103,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "ps-notes:serve"
+            "devServerTarget": "kaleci:serve"
           }
         },
         "lint": {
@@ -119,7 +120,7 @@
       }
     }
   },
-  "defaultProject": "ps-notes",
+  "defaultProject": "kaleci",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

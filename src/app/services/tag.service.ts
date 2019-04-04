@@ -17,17 +17,6 @@ export class TagService {
     constructor(private http: HttpClient) { }
 
     /**
-     * Get all notes belonging to a user
-     *
-     * @returns {Observable<string[]| string>} observable of tags or error message
-     */
-    getAll(): any {
-        return this.http.get(`${apiBaseUrl}/tags`,{observe: 'response'}).pipe(
-            map((response: HttpResponse<any>) => response.body.notes),
-            catchError(this.handleError.bind(this)),);
-    }
-
-    /**
      * It adds a tag to a user's note
      *
      * @param {string} tag
@@ -53,7 +42,7 @@ export class TagService {
      *
      * @return {Observable<any>}
      */
-    removeTagFromNote(noteId: number, tagId: number): Observable<any> {
+    removeTagFromNote(noteId: number, tagId: number): Observable<Tag[]> {
         return this.http.delete(`${apiBaseUrl}/notes/${noteId}/tags/${tagId}`).pipe(
             map((response: any) => response.tags),
             catchError(this.handleError.bind(this)),);

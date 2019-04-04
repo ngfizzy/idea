@@ -10,7 +10,7 @@ import { slide } from '../authentication/animation';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
 
   @Output() showLogin: EventEmitter<null> = new EventEmitter();
   errorMessage: string;
@@ -29,9 +29,6 @@ export class SignupComponent implements OnInit {
     this.afterSignupSuccess = this.afterSignupSuccess.bind(this);
     this.handleSignupError = this.handleSignupError.bind(this);
     this.login = this.login.bind(this);
-  }
-
-  ngOnInit() {
   }
 
   /**
@@ -54,6 +51,7 @@ export class SignupComponent implements OnInit {
   afterSignupSuccess(user) {
     const message = 'signup successful';
     const callToAction = 'Continue To Login';
+
     this.alert.open(message, callToAction, this.login);
   }
 

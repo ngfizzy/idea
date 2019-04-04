@@ -1,6 +1,6 @@
 <div [hidden]="isClose" class="wrapper" (click)="cancel($event)">
   <div class="note-editor">
-    <form autocomplete="off" (ngSubmit)="submitNote()">
+    <form class="note-form" autocomplete="off" (ngSubmit)="submitNote()">
       <input
         type="text"
         class="title"
@@ -26,7 +26,7 @@
               class="tag-dropdown-container"
               *ngIf="shouldOpenTagsDropup">
                 <ul class="dropup-items">
-                  <li *ngFor="let tag of foundTags" (click)="selectSuggestedTag(tag.name)">{{tag.name}}</li>
+                  <li *ngFor="let tag of foundTags" (click)="selectSuggesteTag(tag.name)">{{tag.name}}</li>
                 </ul>
             </span>
             <span  class="form-inputs">
@@ -38,13 +38,17 @@
                 [(ngModel)]="tag"
                 (input)="closeTagsDropup()"
                 name="tag" autofocus />
-              <button type="button" [value]="this.isTagInputOpen ? 'x' : '+'" (click)="toggleTagInput()">
-                <span *ngIf="isTagInputOpen">X</span>
-                <span *ngIf="!isTagInputOpen">Tag</span>
+              <button
+                class="add-tag"
+                type="button"
+                [value]="isTagInputOpen ? 'x' : '+'" 
+                (click)="toggleTagInput()">
+                  <span *ngIf="isTagInputOpen">X</span>
+                  <span *ngIf="!isTagInputOpen">Tag</span>
               </button>
             </span> 
           </form>
-        <button type="button" (click)="cancel($event)" class="cancel">Close</button>
+        <button class="close" type="button" (click)="cancel($event)" class="cancel">Close</button>
         <button type="submit" class="submit">Save</button>
       </div>
     </form>

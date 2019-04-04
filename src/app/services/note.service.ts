@@ -70,7 +70,7 @@ export class NoteService {
    *
    * @returns {Observable<any>} It returns an observable of created note's id
    */
-  createNote(note: Note): Observable<any> {
+  createNote(note: Note): Observable<number> {
     const url = `${apiBaseUrl}/notes`;
     const headers = new HttpHeaders({ authorization: localStorage.
       getItem('authToken') });
@@ -128,7 +128,8 @@ export class NoteService {
     const { id, title, content } = note;
     const url = `${apiBaseUrl}/notes/${id}`;
 
-    return this.http.put<NoteResponse>(url,
+    return this.http.put<NoteResponse>(
+        url,
         { title, content },
         { headers, observe: 'response' }
       ).pipe(
@@ -154,7 +155,7 @@ export class NoteService {
   }
 
   /**
-   * Compare titles of note with user's search and becomes
+   * Compare titles of note with user's search andnote becomes
    * returns all best matched notes
    *
    * @param {string} searchTerms string typed in by user
