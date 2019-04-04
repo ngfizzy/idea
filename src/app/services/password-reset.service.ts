@@ -24,7 +24,7 @@ export class PasswordResetService {
 
     return this.http.get(url).pipe(
       map((response: any) => response.message),
-      catchError(this.passwordResetErrorHandler.bind(this)),);
+      catchError(this.passwordResetErrorHandler.bind(this)), );
   }
 
   /**
@@ -63,6 +63,6 @@ export class PasswordResetService {
     return this.http
       .put(url, { password, confirm }, { headers }).pipe(
         map((request: any) => request.message),
-        catchError(this.passwordResetErrorHandler.bind(this)),);
+        catchError(this.passwordResetErrorHandler.bind(this)), );
   }
 }

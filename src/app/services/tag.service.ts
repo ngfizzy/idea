@@ -31,7 +31,7 @@ export class TagService {
             map((response: HttpResponse<TagsResponse>) => {
                return  response.body.tags;
             }),
-            catchError(this.handleError.bind(this)),);
+            catchError(this.handleError.bind(this)), );
     }
 
     /**
@@ -45,7 +45,7 @@ export class TagService {
     removeTagFromNote(noteId: number, tagId: number): Observable<Tag[]> {
         return this.http.delete(`${apiBaseUrl}/notes/${noteId}/tags/${tagId}`).pipe(
             map((response: any) => response.tags),
-            catchError(this.handleError.bind(this)),);
+            catchError(this.handleError.bind(this)), );
     }
 
     /**
@@ -63,7 +63,7 @@ export class TagService {
         return this.http.get<TagsResponse>(url, {observe: 'response'}).pipe(
             map((response: HttpResponse<TagsResponse>) =>
                 response.body.tags),
-            catchError(this.handleError.bind(this)),);
+            catchError(this.handleError.bind(this)), );
     }
 
     private handleError(response: HttpResponse<any>): Observable<string> {
@@ -113,7 +113,7 @@ export class TagService {
 
         return this.http.get<TagsResponse>(url, { observe: 'response'}).pipe(
             map((response: HttpResponse<TagsResponse>) => response.body.tags as Tag[]),
-            catchError(this.handleError),);
+            catchError(this.handleError), );
     }
 
     /**

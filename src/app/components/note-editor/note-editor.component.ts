@@ -151,11 +151,9 @@ export class NoteEditorComponent implements OnInit, OnChanges {
       .tagNote(this.tag, this.note.id)
       .subscribe(
         (tags: Tag[])  => {
-          console.log(tags, ' tags in  subscription...................')
           if (tags && tags.length > tagsLength) {
             this.note.tags = tags.reverse();
           }
-          console.log('got to the end of the block.............')
         },
         this.updateNoteErrorStatus.bind(this)
       );
@@ -175,7 +173,7 @@ export class NoteEditorComponent implements OnInit, OnChanges {
 
     this.tagSearchListener = fromEvent(this.tagInput.nativeElement, 'keyup').pipe(
       debounceTime(500),
-      distinctUntilChanged(),)
+      distinctUntilChanged(), )
       .subscribe(
         (evt: KeyboardEvent) => this.performTagSearch(evt, this.tag)
       );

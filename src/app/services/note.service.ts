@@ -42,7 +42,7 @@ export class NoteService {
         this.status = response.status;
 
         return observableThrowError(this.status);
-      }),);
+      }), );
   }
 
   /**
@@ -84,7 +84,7 @@ export class NoteService {
 
         return this.notes[0].id;
       }),
-      catchError(this.handleCreateError.bind(this)),);
+      catchError(this.handleCreateError.bind(this)), );
   }
 
 
@@ -128,13 +128,9 @@ export class NoteService {
     const { id, title, content } = note;
     const url = `${apiBaseUrl}/notes/${id}`;
 
-    return this.http.put<NoteResponse>(
-        url,
-        { title, content },
-        { headers, observe: 'response' }
-      ).pipe(
+    return this.http.put<NoteResponse>(url, { title, content }, { headers, observe: 'response' }).pipe(
       map(this.updateEditedNote.bind(this)),
-      catchError(this.handleCreateError.bind(this)),);
+      catchError(this.handleCreateError.bind(this)), );
   }
 
   /**
@@ -201,7 +197,7 @@ export class NoteService {
           default:
             return observableThrowError('Oops :( . Something went wrong. Please try again later');
         }
-      }),);
+      }), );
   }
 
   /**
@@ -223,6 +219,6 @@ export class NoteService {
         return 'Note Deleted Successfully';
       }),
       catchError(() =>
-        observableThrowError('An Error Occured while trying to delete this note. You may reload and try again')),);
+        observableThrowError('An Error Occured while trying to delete this note. You may reload and try again')), );
   }
 }

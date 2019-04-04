@@ -37,7 +37,7 @@ describe('UserService', () => {
       username: 'jd',
     };
 
-    const signupResponse: UserResponse =  { user }
+    const signupResponse: UserResponse =  { user };
 
     userService.signUp(user)
       .subscribe((response) => {
@@ -80,7 +80,7 @@ describe('UserService', () => {
       username: 'jd',
     };
 
-    const expectedUserResponse: UserResponse = { user }
+    const expectedUserResponse: UserResponse = { user };
     userService.getCurrentUser()
       .subscribe((userResponse) => {
         expect(userResponse as User).toEqual(user);

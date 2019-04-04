@@ -8,6 +8,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
+    "test-headless": "ng test --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -54,7 +55,7 @@
     "rxjs-tslint": "^0.1.7",
     "ts-node": "~3.2.0",
     "tslint": "^5.13.1",
-    "typescript": "^3.1.6",
+    "typescript": "^3.4.1",
     "webpack": "^4.29.6"
   }
 }

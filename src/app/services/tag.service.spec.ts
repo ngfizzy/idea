@@ -62,7 +62,7 @@ describe('TagService', () => {
       const noteId = 1;
       const tagId =  2;
       const tags = [{name: 'tag1'}, {name: 'tag 2'}] as Tag[];
-      const tagsResponse: TagsResponse = { tags }
+      const tagsResponse: TagsResponse = { tags };
 
       tagService.removeTagFromNote(noteId, tagId)
         .subscribe((tagsLeft) => {
