@@ -36,7 +36,7 @@ describe('PasswordResetService', () => {
 
   it('can change password', async(() => {
       const password = 'pass';
-      const resetResponse = { message: 'password reset successful ' }
+      const resetResponse = { message: 'password reset successful ' };
 
       passwordResetService.resetPassword(password, password, 'auth token')
         .subscribe((message) => {

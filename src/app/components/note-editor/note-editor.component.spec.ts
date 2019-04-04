@@ -116,7 +116,7 @@ describe('NoteEditorComponent', () => {
   // test failed. to be fixed later
   xit('can add a tag to note', fakeAsync(() => {
     const componentInstance = fixture.componentInstance;
-    const tagService: TagService = fixture.componentRef.injector.get(TagService)
+    const tagService: TagService = fixture.componentRef.injector.get(TagService);
     const tagNote = spyOn(tagService, 'tagNote')
       .and
       .callFake(() => of([{name: 'tag'}]));

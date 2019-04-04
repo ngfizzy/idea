@@ -173,7 +173,7 @@ export class NoteEditorComponent implements OnInit, OnChanges {
 
     this.tagSearchListener = fromEvent(this.tagInput.nativeElement, 'keyup').pipe(
       debounceTime(500),
-      distinctUntilChanged(),)
+      distinctUntilChanged(), )
       .subscribe(
         (evt: KeyboardEvent) => this.performTagSearch(evt, this.tag)
       );

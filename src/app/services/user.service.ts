@@ -3,7 +3,7 @@ import {throwError as observableThrowError,  Observable } from 'rxjs';
 
 import {map, catchError} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 
 import { User } from '../models/user.interface';
 import { apiBaseUrl } from '../../env';
@@ -65,7 +65,7 @@ export class UserService {
     const url = `${apiBaseUrl}/users/current`;
     return this.http.get<UserResponse>(url, { headers: this.headers, observe: 'response' }).pipe(
       map(this.saveCurrentUser.bind(this)),
-      catchError(this.handleAuthenticationError.bind(this)),);
+      catchError(this.handleAuthenticationError.bind(this)), );
   }
 
   /**
@@ -120,7 +120,7 @@ export class UserService {
 
         return 'Welcome';
       }),
-      catchError(this.handleLoginError),);
+      catchError(this.handleLoginError), );
   }
 
 

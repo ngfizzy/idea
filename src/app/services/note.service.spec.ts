@@ -17,7 +17,7 @@ describe('NoteService', () => {
     });
 
     injector = getTestBed();
-    noteService = injector.get(NoteService);
+    noteService = TestBed.get(NoteService);
     httpMock = injector.get(HttpTestingController);
   }));
 
@@ -59,7 +59,7 @@ describe('NoteService', () => {
     noteService.createNote(note)
       .subscribe((noteId) => {
         expect(noteId).toEqual(note.id);
-        expect(noteService.getFetchedNotes()).toEqual([ note ])
+        expect(noteService.getFetchedNotes()).toEqual([ note ]);
       });
 
     const request = httpMock.expectOne(`${apiBaseUrl}/notes`);
@@ -85,6 +85,7 @@ describe('NoteService', () => {
       });
 
     const request = httpMock.expectOne(`${apiBaseUrl}/notes/${note.id}`);
+
     expect(request.request.method).toEqual('PUT');
     expect(request.request.responseType).toEqual('json');
     expect(request.request.body.content).toEqual(noteResponse.note.content);
