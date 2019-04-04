@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('ps-notes App', () => {
+describe('kaleci App', () => {
   let page: AppPage;
 
   beforeEach(() => {

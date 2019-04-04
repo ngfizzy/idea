@@ -20,7 +20,7 @@ import { TokenInterceptor } from './guards/token.interceptor';
 import { NoteService } from './services/note.service';
 import { NoteEditorComponent } from './components/note-editor/note-editor.component';
 
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, APP_BASE_HREF } from '@angular/common';
 import { PasswordResetFormComponent } from './components/password-reset-form/password-reset-form.component';
 import { PasswordResetRequestFormComponent } from './components/password-reset-request-form/password-reset-request-form.component';
 import { PasswordResetService } from './services/password-reset.service';

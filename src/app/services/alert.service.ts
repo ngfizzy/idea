@@ -52,4 +52,13 @@ export class AlertService {
       afterClose();
     }
   }
+
+  /**
+   * Get registered component
+   *
+   * @return {any}
+   */
+  getRegisteredComponent() {
+    return this.alert;
+  }
 }

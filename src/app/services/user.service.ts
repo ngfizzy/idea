@@ -32,7 +32,7 @@ export class UserService {
 
     return this.http.post(url, userInfo, {observe: 'response'}).pipe(
       map((response: HttpResponse<UserResponse>) => response.body),
-      catchError(this.handleSignupError),);
+      catchError(this.handleSignupError));
   }
 
   /**
@@ -109,7 +109,6 @@ export class UserService {
    */
   login(email: string, password: string): Observable<string> {
     const url = `${apiBaseUrl}/auth/login`;
-    const options: any = {observe: 'response'};
     const loginInfo = {email, password};
 
     return this.http.post(url, loginInfo, {observe: 'response'}).pipe(
@@ -138,6 +137,7 @@ export class UserService {
 
     return this.headers;
   }
+
   /**
    * Handles login error
    *

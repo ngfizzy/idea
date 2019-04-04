@@ -56,13 +56,13 @@ export class PasswordResetService {
    *
    * @returns {Observable<string>} observable of success or error message
     */
-  resetPassword(password: string, confirm: string, authToken: string) {
+  resetPassword(password: string, confirm: string, authToken: string): Observable<string> {
     const url = `${apiBaseUrl}/passwords/reset`;
     const headers = new HttpHeaders({ authorization: `Bearer ${authToken}` });
 
     return this.http
       .put(url, { password, confirm }, { headers }).pipe(
-      map((request: any) => request.message),
-      catchError(this.passwordResetErrorHandler.bind(this)),);
+        map((request: any) => request.message),
+        catchError(this.passwordResetErrorHandler.bind(this)),);
   }
 }

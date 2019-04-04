@@ -1,7 +1,7 @@
 {
   "rulesDirectory": [
     "node_modules/codelyzer",
-    // "node_modules/rxjs-tslint"
+    "node_modules/rxjs-tslint"
   ],
   "rules": {
     "arrow-return-shorthand": true,
@@ -85,10 +85,10 @@
       "single"
     ],
     "radix": true,
-    // "rxjs-collpse-imports": true,
-    // "rxjs-pipeable-operators-only": true,
-    // "rxjs-no-static-observable-methods": true,
-    // "rxjs-proper-imports": true,
+    "rxjs-collpse-imports": true,
+    "rxjs-pipeable-operators-only": true,
+    "rxjs-no-static-observable-methods": true,
+    "rxjs-proper-imports": true,
     "semicolon": [
       true,
       "always"

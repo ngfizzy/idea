@@ -8,7 +8,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   @Input() show: boolean;
   @Output() showSignup: EventEmitter<null> = new EventEmitter();
@@ -21,10 +21,6 @@ export class LoginComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {
     this.show = false;
   }
-
-  ngOnInit() {
-  }
-
 
   /**
    * Logs in user. Redirects user to dashboard if login is successful

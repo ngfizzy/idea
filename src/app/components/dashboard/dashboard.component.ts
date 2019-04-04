@@ -174,7 +174,7 @@ export class DashboardComponent implements OnInit {
           this.noNotes = false;
           this.notes = notes;
         },
-        (errorMessage) => {
+        () => {
           this.noNotes = true;
           this.notes = [];
         }
@@ -193,7 +193,7 @@ export class DashboardComponent implements OnInit {
    *
    * @returns {string} get user email
    */
-  private hashUserEmail(email: string): string {
+  public hashUserEmail(email: string): string {
     return md5(email);
   }
 
