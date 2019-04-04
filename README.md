@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/ngfizzy/kaleci.svg?branch=develop)](https://travis-ci.com/ngfizzy/kaleci)
 # Kaleci
 
 This project. It  consumes [Kaleci](https://github.com/ngfizzy/kaleci). Checkout demo [here](https://ngfizzy.github.io/kaleci) . This is meant to work with the application server. Check out the server [here]((https://github.com/ngfizzy/kaleci-server);
