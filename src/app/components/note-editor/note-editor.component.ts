@@ -72,7 +72,8 @@ export class NoteEditorComponent implements OnInit, OnChanges {
    * @returns {Subscription}
    */
   submitNote(): Subscription {
-    if (this.isEditing) {
+
+    if (this.isEditing || this.note.id) {
       return this.submitEditedNote();
     }
 
