@@ -23,6 +23,7 @@ export class NoteEditorComponent implements OnInit, OnChanges {
 
   @ViewChild('tagInput', { read: ElementRef }) tagInput: ElementRef;
   @ViewChild('noteBody', {read: ElementRef}) noteBody: ElementRef;
+  @ViewChild('noteTitle', { read: ElementRef }) noteTitle: ElementRef;
 
   error: boolean;
   status = 'saved';
@@ -33,8 +34,8 @@ export class NoteEditorComponent implements OnInit, OnChanges {
   shouldOpenTagsDropup = false;
   tagActionText = '+';
   tagSearchListener: Subscription;
-
   editorListener: Subscription;
+  titleListener: Subscription;
 
   constructor(private noteService: NoteService,
     private tagService: TagService) { }
@@ -50,9 +51,19 @@ export class NoteEditorComponent implements OnInit, OnChanges {
         map((evt: any) => evt.target.value),
         debounceTime(500),
         distinctUntilChanged())
-        .subscribe(
+      .subscribe(
           (evt: KeyboardEvent) => this.submitNote()
-        );
+      );
+
+        this.titleListener = fromEvent(this.noteTitle.nativeElement, 'keyup')
+          .pipe(
+            map((evt: any) => evt.target.value),
+            debounceTime(300),
+            distinctUntilChanged())
+          .subscribe((evt: KeyboardEvent) => {
+            this.submitNote();
+          });
+
     }
   }
 
@@ -66,18 +77,23 @@ export class NoteEditorComponent implements OnInit, OnChanges {
     }
   }
 
+
   /**
    * It submits a note using the note service
    *
    * @returns {Subscription}
    */
   submitNote(): Subscription {
-
-    if (this.isEditing || this.note.id) {
-      return this.submitEditedNote();
+    const { title, content} = this.note;
+    const canSubmit = (title && content) || content;
+    if (canSubmit) {
+      if (this.isEditing || this.note.id) {
+        return this.submitEditedNote();
+      }
+      return this.createNewNote();
+    } else {
+      this.updateNoteErrorStatus('You cannot save only a title, please provide a body');
     }
-
-    return this.createNewNote();
   }
 
   /**
@@ -287,6 +303,7 @@ export class NoteEditorComponent implements OnInit, OnChanges {
     if (className === 'wrapper' || className === 'cancel') {
       this.close.emit();
       this.isEditing = false;
+      this.note = {} as Note;
     }
   }
 }

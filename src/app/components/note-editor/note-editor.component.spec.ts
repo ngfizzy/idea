@@ -179,4 +179,23 @@ describe('NoteEditorComponent', () => {
 
       expect(noteService.editNote).toHaveBeenCalled();
   }));
+
+  it('it should when a title is provided without body', async(() => {
+    const componentInstance = fixture.componentInstance;
+    componentInstance.note = {} as Note;
+    fixture.detectChanges();
+    const debugElement =  fixture.debugElement;
+    const noteStatusDebugElement = debugElement
+      .query(By.css('.status'));
+    const titleInput: HTMLInputElement = debugElement
+      .query(By.css('.title'))
+      .nativeElement;
+
+    titleInput.value = 'the title';
+    fixture.detectChanges();
+    debugElement.query(By.css('.note-form')).triggerEventHandler('submit', null);
+    fixture.detectChanges();
+
+    expect(noteStatusDebugElement.nativeElement.textContent).toContain('provide a body');
+  }));
 });

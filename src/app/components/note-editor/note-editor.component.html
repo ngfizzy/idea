@@ -2,6 +2,7 @@
   <div class="note-editor">
     <form class="note-form" autocomplete="off" (ngSubmit)="submitNote()">
       <input
+      #noteTitle
         type="text"
         class="title"
         [(ngModel)]="note.title"
