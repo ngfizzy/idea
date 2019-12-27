@@ -25,7 +25,7 @@
     "@angular/platform-server": "^7.2.7",
     "@angular/router": "^7.2.7",
     "core-js": "^2.6.5",
-    "handlebars": "^4.1.2",
+    "handlebars": "^4.3.0",
     "md5": "^2.2.1",
     "rxjs": "^6.4.0",
     "similar": "^0.1.0",
