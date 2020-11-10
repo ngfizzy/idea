@@ -25,7 +25,6 @@ import { PasswordResetFormComponent } from './components/password-reset-form/pas
 import { PasswordResetRequestFormComponent } from './components/password-reset-request-form/password-reset-request-form.component';
 import { PasswordResetService } from './services/password-reset.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
 import { TagService } from './services/tag.service';
 
 @NgModule({
@@ -44,7 +43,6 @@ import { TagService } from './services/tag.service';
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
-    HttpModule,
     HttpClientModule,
     // still needed because some third party library still relies on it.
     FormsModule,
