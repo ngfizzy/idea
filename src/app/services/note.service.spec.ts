@@ -1,5 +1,5 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TestBed, getTestBed, async } from '@angular/core/testing';
+import { TestBed, getTestBed, async, waitForAsync } from '@angular/core/testing';
 
 import { NoteService } from './note.service';
 import { Note, NoteResponse, NotesResponse } from '../models';
@@ -10,22 +10,22 @@ describe('NoteService', () => {
   let injector: TestBed;
   let httpMock: HttpTestingController;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       providers: [NoteService],
       imports: [HttpClientTestingModule],
     });
 
     injector = getTestBed();
-    noteService = TestBed.get(NoteService);
+    noteService = TestBed.inject(NoteService);
     httpMock = injector.get(HttpTestingController);
   }));
 
-  afterEach(async(() => {
+  afterEach(waitForAsync(() => {
     httpMock.verify();
   }));
 
-  it('should fetch notes', async(() => {
+  it('should fetch notes', waitForAsync(() => {
     const notes: Note[] = [
       { title: 'first title', content: 'first content'},
       { title: 'second title', content: 'second content'},
@@ -47,7 +47,7 @@ describe('NoteService', () => {
     request.flush(notesResponse);
   }));
 
-  it('can create note', async(() => {
+  it('can create note', waitForAsync(() => {
 
     const note: Note =  {
       title: 'note title',
@@ -70,7 +70,7 @@ describe('NoteService', () => {
     request.flush(noteResponse);
   }));
 
-  it('can edit notes', async(() => {
+  it('can edit notes', waitForAsync(() => {
     const note: Note = {
       title: 'note title',
       content: 'note content',
@@ -94,7 +94,7 @@ describe('NoteService', () => {
     request.flush(noteResponse);
   }));
 
-  it('can delete a note', async(() => {
+  it('can delete a note', waitForAsync(() => {
     noteService.removeNote(1)
       .subscribe((message) => {
         expect(message.toLowerCase()).toContain('success');

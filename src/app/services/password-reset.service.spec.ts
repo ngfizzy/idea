@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, waitForAsync } from '@angular/core/testing';
 import { PasswordResetService } from './password-reset.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { apiBaseUrl } from '../../env';
@@ -7,21 +7,21 @@ describe('PasswordResetService', () => {
   let passwordResetService: PasswordResetService;
   let httpMock: HttpTestingController;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       providers: [PasswordResetService],
       imports: [HttpClientTestingModule]
     });
 
-    passwordResetService = TestBed.get(PasswordResetService);
-    httpMock = TestBed.get(HttpTestingController);
+    passwordResetService = TestBed.inject(PasswordResetService);
+    httpMock = TestBed.inject(HttpTestingController);
   }));
 
-  afterEach(async(() => {
+  afterEach(waitForAsync(() => {
     httpMock.verify();
   }));
 
-  it('can request for password reset link', async(() => {
+  it('can request for password reset link', waitForAsync(() => {
     const email = 'johndoe@gmail.com';
     const emailRequestResponse = { message: 'reset link has been sent to your email'};
 
@@ -34,7 +34,7 @@ describe('PasswordResetService', () => {
     request.flush(emailRequestResponse);
   }));
 
-  it('can change password', async(() => {
+  it('can change password', waitForAsync(() => {
       const password = 'pass';
       const resetResponse = { message: 'password reset successful ' };
 

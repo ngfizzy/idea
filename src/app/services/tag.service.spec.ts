@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, waitForAsync } from '@angular/core/testing';
 
 import { TagService } from './tag.service';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
@@ -9,21 +9,21 @@ describe('TagService', () => {
   let httpMock: HttpTestingController;
   let tagService: TagService;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       providers: [TagService],
       imports: [ HttpClientTestingModule ]
     });
 
-    tagService = TestBed.get(TagService);
-    httpMock = TestBed.get(HttpTestingController);
+    tagService = TestBed.inject(TagService);
+    httpMock = TestBed.inject(HttpTestingController);
   }));
 
-  afterEach(async(() => {
+  afterEach(waitForAsync(() => {
     httpMock.verify();
   }));
 
-  it('should return all tags related to a note when a new tag is added', async(() => {
+  it('should return all tags related to a note when a new tag is added', waitForAsync(() => {
     const tags = ['tag1', 'tag2'];
     const tagsResponse = { tags };
     const noteId = 1;
@@ -41,7 +41,7 @@ describe('TagService', () => {
     request.flush(tagsResponse);
   }));
 
-  it('can fetch all tags belonging to a note', async(() => {
+  it('can fetch all tags belonging to a note', waitForAsync(() => {
     const noteId = 1;
     const tags = ['tag1', 'tag2'];
     const tagsResponse = { tags };
@@ -58,7 +58,7 @@ describe('TagService', () => {
     request.flush(tagsResponse);
   }));
 
-  it('should return a list of note tags that is left after a tag is deleted from a note', async(() => {
+  it('should return a list of note tags that is left after a tag is deleted from a note', waitForAsync(() => {
       const noteId = 1;
       const tagId =  2;
       const tags = [{name: 'tag1'}, {name: 'tag 2'}] as Tag[];
@@ -90,7 +90,7 @@ describe('TagService', () => {
     expect(foundTag.id).toEqual(3);
   });
 
-  it('can search for a tag belonging to a user', async(() => {
+  it('can search for a tag belonging to a user', waitForAsync(() => {
     const tags: Tag[] = [
       { name: 'tag 1', id: 1},
       { name: 'tag 2', id: 2},

@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -11,7 +11,7 @@ import { APP_BASE_HREF } from '@angular/common';
 describe('PasswordResetRequestFormComponent', () => {
   let fixtures: ComponentFixture<PasswordResetRequestFormComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         PasswordResetRequestFormComponent,
@@ -39,19 +39,19 @@ describe('PasswordResetRequestFormComponent', () => {
     });
   }));
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     fixtures = TestBed.createComponent(PasswordResetRequestFormComponent);
   }));
 
-  it('should have an email field', async(() => {
+  it('should have an email field', waitForAsync(() => {
     const compiledElement: HTMLElement = fixtures.nativeElement;
 
     expect(compiledElement.querySelector('[type="email"]')).toBeTruthy();
   }));
 
-  it('should show a success alert if email is sent', async(() => {
+  it('should show a success alert if email is sent', waitForAsync(() => {
     const componentInstance = fixtures.componentInstance;
-    const alertService = TestBed.get(AlertService);
+    const alertService = TestBed.inject(AlertService);
     spyOn(alertService, 'open');
     componentInstance.email = 'fisiwizy@gmail.com';
     fixtures.detectChanges();
@@ -62,7 +62,7 @@ describe('PasswordResetRequestFormComponent', () => {
     expect(alertService.open).toHaveBeenCalled();
   }));
 
-  it('should show a success alert if email is sent', async(() => {
+  it('should show a success alert if email is sent', waitForAsync(() => {
     const componentInstance = fixtures.componentInstance;
     const compiledElement: HTMLElement = fixtures.nativeElement;
 

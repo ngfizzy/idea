@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, async, waitForAsync } from '@angular/core/testing';
 import { NoteComponent } from './note.component';
 import { AlertService } from '../../services/alert.service';
 import { NoteService } from '../../services/note.service';
@@ -11,7 +11,7 @@ import { APP_BASE_HREF } from '@angular/common';
 describe('NoteComponent', () => {
   let fixture: ComponentFixture<NoteComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         NoteComponent,
@@ -36,11 +36,11 @@ describe('NoteComponent', () => {
     }).compileComponents();
   }));
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     fixture = TestBed.createComponent(NoteComponent);
   }));
 
-  it('should have a title', async(() => {
+  it('should have a title', waitForAsync(() => {
     const componentInstace = fixture.componentInstance;
     const compiledComponent: HTMLElement = fixture.nativeElement;
 
@@ -51,7 +51,7 @@ describe('NoteComponent', () => {
       .toContain('note title');
   }));
 
-  it('should have a body', async(() => {
+  it('should have a body', waitForAsync(() => {
     const componentInstance = fixture.componentInstance;
     const compiledComponent: HTMLElement = fixture.nativeElement;
 
@@ -61,7 +61,7 @@ describe('NoteComponent', () => {
     expect(compiledComponent.querySelector('.body').textContent).toContain('note content');
   }));
 
-  it('should have a delete button', async(() => {
+  it('should have a delete button', waitForAsync(() => {
     const compiledComponent: HTMLElement = fixture.nativeElement;
 
     const deleteButton = compiledComponent.querySelector('.delete');
@@ -70,9 +70,9 @@ describe('NoteComponent', () => {
      expect(deleteButton).not.toBeUndefined();
   }));
 
-  it('can be deleted', async(() => {
+  it('can be deleted', waitForAsync(() => {
     const componentInstance = fixture.componentInstance;
-    const noteService: NoteService = TestBed.get(NoteService);
+    const noteService: NoteService = TestBed.inject(NoteService);
     spyOn(noteService, 'removeNote').and.returnValue(of('Note Deleted Successfully'));
     componentInstance.note = {id: 1};
     fixture.detectChanges();
@@ -82,7 +82,7 @@ describe('NoteComponent', () => {
     expect(noteService.removeNote).toHaveBeenCalledTimes(1);
   }));
 
-  it('should trigger an error alert when delete fails', async(() => {
+  it('should trigger an error alert when delete fails', waitForAsync(() => {
     const alertComponentFixture = TestBed.createComponent(AlertComponent);
     const alertComponentInstance = alertComponentFixture.componentInstance;
     const noteComponentInstance = fixture.componentInstance;

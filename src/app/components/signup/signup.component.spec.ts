@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { SignupComponent } from './signup.component';
 import { AlertComponent } from '../alert/alert.component';
 import { AlertService } from '../../services/alert.service';
@@ -13,7 +13,7 @@ import { APP_BASE_HREF } from '@angular/common';
 describe('SignupComponent', () => {
   let fixtures: ComponentFixture<SignupComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         SignupComponent,
@@ -46,11 +46,11 @@ describe('SignupComponent', () => {
     });
   }));
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     fixtures = TestBed.createComponent(SignupComponent);
   }));
 
-  it('should have names, emails email and passwords fields', async(() => {
+  it('should have names, emails email and passwords fields', waitForAsync(() => {
     const signupComponent: HTMLElement = fixtures.nativeElement;
 
     expect(signupComponent.querySelector('input[name="user.firstname"]')).toBeTruthy();
@@ -60,13 +60,13 @@ describe('SignupComponent', () => {
     expect(signupComponent.querySelectorAll('input[type="password"]').length).toEqual(2);
   }));
 
-  it('should have a signup button', async(() => {
+  it('should have a signup button', waitForAsync(() => {
     const signupComponent: HTMLElement = fixtures.nativeElement;
 
     expect(signupComponent.querySelector('[type="submit"]')).toBeTruthy();
   }));
 
-  it('should show a dialog signup successful dialog box when user successfully signup', async(() => {
+  it('should show a dialog signup successful dialog box when user successfully signup', waitForAsync(() => {
     const signupComponentInstance = fixtures.componentInstance;
     spyOn(signupComponentInstance, 'afterSignupSuccess');
     const user: User = {
@@ -85,7 +85,7 @@ describe('SignupComponent', () => {
     expect(signupComponentInstance.afterSignupSuccess).toHaveBeenCalledTimes(1);
   }));
 
-  it('should show error when signup is not successful', async(() => {
+  it('should show error when signup is not successful', waitForAsync(() => {
     const signupComponent: HTMLElement = fixtures.nativeElement;
     const signupComponentInstance = fixtures.componentInstance;
     signupComponent.querySelectorAll('input')

@@ -1,4 +1,4 @@
-import { async, TestBed, ComponentFixture, tick, fakeAsync } from '@angular/core/testing';
+import { async, TestBed, ComponentFixture, tick, fakeAsync, waitForAsync } from '@angular/core/testing';
 import { NoteEditorComponent } from './note-editor.component';
 import { NoteService } from '../../services/note.service';
 import { TagService } from '../../services/tag.service';
@@ -13,7 +13,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 describe('NoteEditorComponent', () => {
   let fixture: ComponentFixture<NoteEditorComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         NoteEditorComponent,
@@ -30,7 +30,7 @@ describe('NoteEditorComponent', () => {
     }).compileComponents();
   }));
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     fixture = TestBed.createComponent(NoteEditorComponent);
   }));
 
@@ -42,18 +42,18 @@ describe('NoteEditorComponent', () => {
     expect(title).toBeTruthy();
   });
 
-  it('should have a body', async(() => {
+  it('should have a body', waitForAsync(() => {
     const body = fixture.debugElement.query(By.css('.content'))
       .nativeElement;
 
     expect(body).toBeTruthy();
   }));
 
-  it('can save a note', async(() => {
+  it('can save a note', waitForAsync(() => {
     const noteEditor = fixture.debugElement;
     const componentInstance = fixture.componentInstance;
     const saveButton = noteEditor.query(By.css('button.submit'));
-    const noteService: NoteService = TestBed.get(NoteService);
+    const noteService: NoteService = TestBed.inject(NoteService);
     const createNote = spyOn(noteService, 'createNote').
       and.callFake((note: Note) => of(1));
     componentInstance.note = {
@@ -68,7 +68,7 @@ describe('NoteEditorComponent', () => {
     expect(componentInstance.note.id).toEqual(1);
   }));
 
-  it('should have a close button', async(() => {
+  it('should have a close button', waitForAsync(() => {
     const noteEditorDebugElement = fixture.debugElement;
     const componentInstance = fixture.componentInstance;
     const closeButtton: HTMLButtonElement = noteEditorDebugElement
@@ -83,7 +83,7 @@ describe('NoteEditorComponent', () => {
     expect(componentInstance.isEditing).toBe(false);
   }));
 
-  it('should have a tag button that opens an input box', async(() => {
+  it('should have a tag button that opens an input box', waitForAsync(() => {
     const componentInstance = fixture.componentInstance;
     componentInstance.note = { tags: [] } as Note;
     fixture.detectChanges();
@@ -98,7 +98,7 @@ describe('NoteEditorComponent', () => {
     expect(tagInputBox).toBeTruthy();
   }));
 
-  it('should have a tag button that closes tag input when clicked twice', async(() => {
+  it('should have a tag button that closes tag input when clicked twice', waitForAsync(() => {
     const componentInstance = fixture.componentInstance;
     componentInstance.note = { tags: []} as Note;
     fixture.detectChanges();
@@ -138,8 +138,8 @@ describe('NoteEditorComponent', () => {
         expect(tagNote).toHaveBeenCalled();
   }));
 
-  it('can delete tag', async(() => {
-    const tagService: TagService = TestBed.get(TagService);
+  it('can delete tag', waitForAsync(() => {
+    const tagService: TagService = TestBed.inject(TagService);
     spyOn(tagService, 'removeTagFromNote').and.returnValue(of([]));
     const tagsContainer = fixture.debugElement.query(By.css('.tags-container'));
     const componentInstance = fixture.componentInstance;
@@ -161,8 +161,8 @@ describe('NoteEditorComponent', () => {
     expect(tagService.removeTagFromNote).toHaveBeenCalledTimes(1);
   }));
 
-  it('can edit an existing note ', async(() => {
-      const noteService: NoteService = TestBed.get(NoteService);
+  it('can edit an existing note ', waitForAsync(() => {
+      const noteService: NoteService = TestBed.inject(NoteService);
       spyOn(noteService, 'editNote').and.returnValue(of({}));
       const componentInstance = fixture.componentInstance;
       const note: Note = {
@@ -180,7 +180,7 @@ describe('NoteEditorComponent', () => {
       expect(noteService.editNote).toHaveBeenCalled();
   }));
 
-  it('it should when a title is provided without body', async(() => {
+  it('it should when a title is provided without body', waitForAsync(() => {
     const componentInstance = fixture.componentInstance;
     componentInstance.note = {} as Note;
     fixture.detectChanges();

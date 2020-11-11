@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { AlertComponent } from './alert.component';
 import { AlertService } from '../../services/alert.service';
 import { APP_BASE_HREF } from '@angular/common';
@@ -6,7 +6,7 @@ import { APP_BASE_HREF } from '@angular/common';
 describe('AlertComponent', () => {
   let fixture: ComponentFixture<AlertComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         AlertComponent
@@ -18,12 +18,12 @@ describe('AlertComponent', () => {
     });
   }));
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     fixture = TestBed.createComponent(AlertComponent);
   }));
 
-  it('can open through AlertService', async(() => {
-    const alertService: AlertService = TestBed.get(AlertService);
+  it('can open through AlertService', waitForAsync(() => {
+    const alertService: AlertService = TestBed.inject(AlertService);
     const compiledComponent: HTMLElement = fixture.nativeElement;
 
     alertService.open('this is opened');
@@ -33,8 +33,8 @@ describe('AlertComponent', () => {
     expect(compiledComponent.textContent.toLowerCase()).toContain('this is opened');
   }));
 
-  it('can close through alert service', async(() => {
-    const alertService: AlertService = TestBed.get(AlertService);
+  it('can close through alert service', waitForAsync(() => {
+    const alertService: AlertService = TestBed.inject(AlertService);
     const compiledComponent: HTMLElement = fixture.nativeElement;
     alertService.open();
     fixture.detectChanges();

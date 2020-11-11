@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, waitForAsync } from '@angular/core/testing';
 import { LoginComponent } from './login.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,7 +14,7 @@ import { NoteService } from '../../services/note.service';
 import { APP_BASE_HREF } from '@angular/common';
 
 describe('LoginComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         LoginComponent,
@@ -49,21 +49,21 @@ describe('LoginComponent', () => {
     });
   }));
 
-  it('should have an email field', async(() => {
+  it('should have an email field', waitForAsync(() => {
     const fixtures = TestBed.createComponent(LoginComponent);
     const loginComponent: HTMLElement = fixtures.nativeElement;
 
     expect(loginComponent.querySelector('input[name="email"]')).toBeTruthy();
   }));
 
-  it('should have a password field', async(() => {
+  it('should have a password field', waitForAsync(() => {
     const fixtures = TestBed.createComponent(LoginComponent);
     const loginComponent: HTMLElement = fixtures.nativeElement;
 
     expect(loginComponent.querySelector('input[name="password"]')).toBeTruthy();
   }));
 
-  it('should have a login button', async(() => {
+  it('should have a login button', waitForAsync(() => {
     const fixtures = TestBed.createComponent(LoginComponent);
     const loginComponent: HTMLElement = fixtures.nativeElement;
 
@@ -71,7 +71,7 @@ describe('LoginComponent', () => {
       .toContain('login');
   }));
 
-  it('should have a reset password link', async(() => {
+  it('should have a reset password link', waitForAsync(() => {
     const fixtures = TestBed.createComponent(LoginComponent);
     const loginComponent: HTMLElement = fixtures.nativeElement;
 
@@ -82,7 +82,7 @@ describe('LoginComponent', () => {
       .toContain('forgot password');
   }));
 
-  it('should go to dashboard after successful login', async(() => {
+  it('should go to dashboard after successful login', waitForAsync(() => {
     const fixtures = TestBed.createComponent(LoginComponent);
     const loginComponentInstance = fixtures.componentInstance;
     spyOn(loginComponentInstance, 'gotoDashboard');
@@ -94,7 +94,7 @@ describe('LoginComponent', () => {
     expect(loginComponentInstance.gotoDashboard).toHaveBeenCalledTimes(1);
   }));
 
-  it('should display error message when login is not successful', async(() => {
+  it('should display error message when login is not successful', waitForAsync(() => {
     const fixtures = TestBed.createComponent(LoginComponent);
     const loginComponentInstance = fixtures.componentInstance;
     const loginComponent: HTMLElement = fixtures.nativeElement;

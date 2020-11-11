@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   min-width: 85%;
-  height: 15em;
+  /* height: 15em; */
   justify-content: space-between;
   margin-bottom: 1em;
   background-color: #fff;
@@ -15,6 +15,8 @@
   cursor: pointer;
   border-top-left-radius: .5em;
   border-top-right-radius: .5em;
+  min-height: 2rem;
+  max-height: 15rem;
 }
 
 @keyframes hoverNote {
@@ -134,7 +136,7 @@
 
 @media only screen and (max-height: 450px) {
   .note {
-    height: 13em;
+    /* height: 13em; */
   }
   .note > .note-title {
     font-size: .8em;

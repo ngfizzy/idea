@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, waitForAsync } from '@angular/core/testing';
 import { AuthenticationComponent } from './authentication.component';
 import { LoginComponent } from '../login/login.component';
 import { SignupComponent } from '../signup/signup.component';
@@ -12,7 +12,7 @@ import { AlertService } from '../../services/alert.service';
 import { APP_BASE_HREF } from '@angular/common';
 
 describe('AuthenticationComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         AuthenticationComponent,
@@ -34,7 +34,7 @@ describe('AuthenticationComponent', () => {
     }).compileComponents();
   }));
 
-  it('should contain a main header and a subheading', async(() => {
+  it('should contain a main header and a subheading', waitForAsync(() => {
     const fixtures = TestBed.createComponent(AuthenticationComponent);
     const authComponent: HTMLElement = fixtures.nativeElement;
 
@@ -44,7 +44,7 @@ describe('AuthenticationComponent', () => {
     expect(authComponent.querySelector('.subheading').textContent).toBeTruthy();
   }));
 
-  it('should contain a login button and signup', async(() => {
+  it('should contain a login button and signup', waitForAsync(() => {
     const fixtures = TestBed.createComponent(AuthenticationComponent);
     const authComponent: HTMLElement = fixtures.nativeElement;
 
@@ -54,7 +54,7 @@ describe('AuthenticationComponent', () => {
     expect(authComponent.querySelector('.btn-login').textContent.toLowerCase()).toContain('login');
   }));
 
-  it('should should show login form when login button is clicked', async(() => {
+  it('should should show login form when login button is clicked', waitForAsync(() => {
     const fixtures = TestBed.createComponent(AuthenticationComponent);
     const authComponent: HTMLElement = fixtures.nativeElement;
     const componentInstance = fixtures.componentInstance;
@@ -65,7 +65,7 @@ describe('AuthenticationComponent', () => {
     expect(authComponent.querySelector('app-login')).toBeTruthy();
   }));
 
-  it('should show signup form when signup button is clicked', async(() => {
+  it('should show signup form when signup button is clicked', waitForAsync(() => {
     const fixtures = TestBed.createComponent(AuthenticationComponent);
     const componentInstance = fixtures.componentInstance;
     const authComponent: HTMLElement = fixtures.nativeElement;

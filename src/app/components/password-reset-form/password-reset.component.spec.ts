@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { PasswordResetFormComponent } from './password-reset-form.component';
 import { PasswordResetService } from '../../services/password-reset.service';
 import { AlertComponent } from '../alert/alert.component';
@@ -13,7 +13,7 @@ describe('PasswordResetComponent', () => {
 
   let fixtures: ComponentFixture<PasswordResetFormComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         PasswordResetFormComponent,
@@ -43,7 +43,7 @@ describe('PasswordResetComponent', () => {
     });
   }));
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     fixtures = TestBed.createComponent(PasswordResetFormComponent);
   }));
 
@@ -56,7 +56,7 @@ describe('PasswordResetComponent', () => {
   });
 
   it('should pop up a success alert when password reset is successful', () => {
-    const alertService = TestBed.get(AlertService);
+    const alertService = TestBed.inject(AlertService);
     const open = spyOn(alertService, 'open');
     const componentInstance = fixtures.componentInstance;
     componentInstance.password = 'pass';

@@ -1,6 +1,6 @@
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { async, TestBed, ComponentFixture } from '@angular/core/testing';
+import { async, TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,7 +23,7 @@ describe('DashbardComponent', () => {
   let userService: UserService;
   let componentInstance: DashboardComponent;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         DashboardComponent,
@@ -47,9 +47,9 @@ describe('DashbardComponent', () => {
     }).compileComponents();
   }));
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     fixture = TestBed.createComponent(DashboardComponent);
-    userService = TestBed.get(UserService);
+    userService = TestBed.inject(UserService);
     componentInstance   = fixture.componentInstance;
     spyOn(componentInstance, 'hashUserEmail');
     spyOn(userService, 'getCurrentUserFromLocalStorage').and.callFake(() => ({} as User));
@@ -74,8 +74,8 @@ describe('DashbardComponent', () => {
       expect(noteEditor.parent.properties.hidden).toBe(false);
   });
 
-  it('should render available notes', async(() => {
-      const noteService: NoteService = TestBed.get(NoteService);
+  it('should render available notes', waitForAsync(() => {
+      const noteService: NoteService = TestBed.inject(NoteService);
       const notes: Note[] = [
         { title: 'first note', content: 'first content', id: 1},
         { title: 'second  note', content: 'second content', id: 2 },
@@ -89,8 +89,8 @@ describe('DashbardComponent', () => {
       expect(debugElement.queryAll(By.css('.note')).length).toEqual(notes.length);
   }));
 
-  it('can edit a an existing note when the note is clicked', async(() => {
-    const noteService: NoteService = TestBed.get(NoteService);
+  it('can edit a an existing note when the note is clicked', waitForAsync(() => {
+    const noteService: NoteService = TestBed.inject(NoteService);
     const notes: Note[] = [
       { title: 'first note', content: 'first content', id: 1, tags: []},
     ];

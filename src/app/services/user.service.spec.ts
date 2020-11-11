@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, waitForAsync } from '@angular/core/testing';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -11,7 +11,7 @@ describe('UserService', () => {
   let userService: UserService;
   let httpMock: HttpTestingController;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       providers: [UserService],
       imports: [
@@ -20,15 +20,15 @@ describe('UserService', () => {
       ],
     });
 
-    userService = TestBed.get(UserService);
-    httpMock = TestBed.get(HttpTestingController);
+    userService = TestBed.inject(UserService);
+    httpMock = TestBed.inject(HttpTestingController);
   }));
 
-  afterEach(async(() => {
+  afterEach(waitForAsync(() => {
     httpMock.verify();
   }));
 
-  it('should respond with a success when signup is successful', async(() => {
+  it('should respond with a success when signup is successful', waitForAsync(() => {
     const user: User = {
       firstname: 'john',
       lastname: 'doe',
@@ -50,7 +50,7 @@ describe('UserService', () => {
     request.flush(signupResponse);
   }));
 
-  it('should save auth token to localstorage and return success message when login is successful', async(() => {
+  it('should save auth token to localstorage and return success message when login is successful', waitForAsync(() => {
     const email = 'johndoe@gmai.com';
     const password = 'password';
     spyOn(window.localStorage, 'setItem').and.callThrough();
@@ -71,7 +71,7 @@ describe('UserService', () => {
     request.flush(expectedResponse);
   }));
 
-  it('can get current user', async(() => {
+  it('can get current user', waitForAsync(() => {
 
     const user: User = {
       firstname: 'john',
@@ -94,7 +94,7 @@ describe('UserService', () => {
       request.flush(expectedUserResponse);
   }));
 
-  it('can get current user from localStorage', async(() => {
+  it('can get current user from localStorage', waitForAsync(() => {
     const user: User = {
       firstname: 'john',
       lastname: 'doe',
