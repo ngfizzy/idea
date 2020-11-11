@@ -15,7 +15,7 @@ import { AlertService } from '../../services/alert.service';
 import { NoteService } from '../../services/note.service';
 import { UserService } from '../../services/user.service';
 import { TagService } from '../../services/tag.service';
-import { Note } from '../../models';
+import { Note, User } from '../../models';
 import { of } from 'rxjs';
 
 describe('DashbardComponent', () => {
@@ -52,7 +52,7 @@ describe('DashbardComponent', () => {
     userService = TestBed.get(UserService);
     componentInstance   = fixture.componentInstance;
     spyOn(componentInstance, 'hashUserEmail');
-    spyOn(userService, 'getCurrentUserFromLocalStorage').and.callFake(() => ({}));
+    spyOn(userService, 'getCurrentUserFromLocalStorage').and.callFake(() => ({} as User));
 
   }));
 
@@ -95,7 +95,7 @@ describe('DashbardComponent', () => {
       { title: 'first note', content: 'first content', id: 1, tags: []},
     ];
     spyOn(noteService, 'fetchNotes').and.returnValue(of(notes));
-    spyOn(noteService, 'removeNote').and.returnValue(of(true));
+    spyOn(noteService, 'removeNote').and.returnValue(of('Note Deleted Successfully'));
     fixture.detectChanges();
     const debugElement = fixture.debugElement;
     const renderedNote: HTMLElement = debugElement.nativeElement.querySelector('.body');

@@ -7,7 +7,6 @@ import { noteMoved } from './animations';
   selector: 'app-note',
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.css'],
-  animations: [noteMoved]
 })
 export class NoteComponent {
   @Input() note;

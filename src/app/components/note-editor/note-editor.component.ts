@@ -1,6 +1,6 @@
 
 import {distinctUntilChanged, debounceTime, map} from 'rxjs/operators';
-import { Component, Input, Output, EventEmitter, OnChanges, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, ViewChild, ElementRef, OnInit, AfterViewInit } from '@angular/core';
 import { Subscription,  fromEvent, Observable } from 'rxjs';
 
 import { Note, Tag } from '../../models';
@@ -13,7 +13,7 @@ import { TagService } from '../../services/tag.service';
   templateUrl: './note-editor.component.html',
   styleUrls: ['./note-editor.component.css'],
 })
-export class NoteEditorComponent implements OnInit, OnChanges {
+export class NoteEditorComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() isClose = true;
   @Input() note: Note = {} as Note;
@@ -41,30 +41,11 @@ export class NoteEditorComponent implements OnInit, OnChanges {
     private tagService: TagService) { }
 
   ngOnInit(): void {
+
     if (this.note.tags) {
       this.note.tags = this.note.tags.reverse();
     }
 
-    if (!this.isEditing) {
-      this.editorListener = fromEvent(this.noteBody.nativeElement, 'keyup')
-      .pipe(
-        map((evt: any) => evt.target.value),
-        debounceTime(500),
-        distinctUntilChanged())
-      .subscribe(
-          (evt: KeyboardEvent) => this.submitNote()
-      );
-
-        this.titleListener = fromEvent(this.noteTitle.nativeElement, 'keyup')
-          .pipe(
-            map((evt: any) => evt.target.value),
-            debounceTime(300),
-            distinctUntilChanged())
-          .subscribe((evt: KeyboardEvent) => {
-            this.submitNote();
-          });
-
-    }
   }
 
   ngOnChanges() {
@@ -305,5 +286,29 @@ export class NoteEditorComponent implements OnInit, OnChanges {
       this.isEditing = false;
       this.note = {} as Note;
     }
+  }
+
+  ngAfterViewInit(){
+    // if (!this.isEditing) {
+      this.editorListener = fromEvent(this.noteBody.nativeElement, 'keyup')
+      .pipe(
+        map((evt: any) => evt.target.value),
+        debounceTime(500),
+        distinctUntilChanged())
+      .subscribe(
+          (evt: KeyboardEvent) => this.submitNote()
+      );
+
+
+        this.titleListener = fromEvent(this.noteTitle.nativeElement, 'keyup')
+          .pipe(
+            map((evt: any) => evt.target.value),
+            debounceTime(300),
+            distinctUntilChanged())
+          .subscribe((evt: KeyboardEvent) => {
+            this.submitNote();
+          });
+
+    // }
   }
 }

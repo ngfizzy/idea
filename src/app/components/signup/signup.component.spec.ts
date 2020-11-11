@@ -8,7 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { User } from '../../models';
 import { of, throwError } from 'rxjs';
-import { isComponentInstance } from '@angular/core/src/render3/context_discovery';
 import { APP_BASE_HREF } from '@angular/common';
 
 describe('SignupComponent', () => {

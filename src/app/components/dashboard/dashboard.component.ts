@@ -11,7 +11,6 @@ import { noteInOut } from './animations';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  animations: [noteInOut],
 })
 export class DashboardComponent implements OnInit {
   currentUser: any;

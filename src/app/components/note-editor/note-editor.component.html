@@ -27,7 +27,7 @@
               class="tag-dropdown-container"
               *ngIf="shouldOpenTagsDropup">
                 <ul class="dropup-items">
-                  <li *ngFor="let tag of foundTags" (click)="selectSuggesteTag(tag.name)">{{tag.name}}</li>
+                  <li *ngFor="let tag of foundTags" (click)="selectSuggestedTag(tag.name)">{{tag.name}}</li>
                 </ul>
             </span>
             <span  class="form-inputs">
@@ -42,12 +42,12 @@
               <button
                 class="add-tag"
                 type="button"
-                [value]="isTagInputOpen ? 'x' : '+'" 
+                [value]="isTagInputOpen ? 'x' : '+'"
                 (click)="toggleTagInput()">
                   <span *ngIf="isTagInputOpen">X</span>
                   <span *ngIf="!isTagInputOpen">Tag</span>
               </button>
-            </span> 
+            </span>
           </form>
         <button class="close" type="button" (click)="cancel($event)" class="cancel">Close</button>
         <button type="submit" class="submit">Save</button>

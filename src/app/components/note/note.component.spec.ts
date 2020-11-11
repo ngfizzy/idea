@@ -73,7 +73,7 @@ describe('NoteComponent', () => {
   it('can be deleted', async(() => {
     const componentInstance = fixture.componentInstance;
     const noteService: NoteService = TestBed.get(NoteService);
-    spyOn(noteService, 'removeNote').and.returnValue(of(true));
+    spyOn(noteService, 'removeNote').and.returnValue(of('Note Deleted Successfully'));
     componentInstance.note = {id: 1};
     fixture.detectChanges();
 
