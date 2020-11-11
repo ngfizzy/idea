@@ -3,10 +3,10 @@
 }
 
 .note {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   min-width: 85%;
-  /* height: 15em; */
+  height: 15em;
   justify-content: space-between;
   margin-bottom: 1em;
   background-color: #fff;
@@ -16,7 +16,14 @@
   border-top-left-radius: .5em;
   border-top-right-radius: .5em;
   min-height: 2rem;
-  max-height: 15rem;
+  max-height: 15rem; */
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px #ccc;
+  padding: 10px;
+  width: 240px;
+  margin: 16px;
+  float: left;
 }
 
 @keyframes hoverNote {
