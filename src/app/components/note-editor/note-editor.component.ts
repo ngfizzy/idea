@@ -14,7 +14,6 @@ import { TagService } from '../../services/tag.service';
   styleUrls: ['./note-editor.component.css'],
 })
 export class NoteEditorComponent implements OnInit, AfterViewInit, OnChanges {
-
   @Input() isClose = true;
   @Input() note: Note = {} as Note;
   @Input() isEditing: any;
@@ -284,7 +283,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit, OnChanges {
     if (className === 'wrapper' || className === 'cancel') {
       this.close.emit();
       this.isEditing = false;
-      this.note = {} as Note;
+      // this.note = {} as Note;
     }
   }
 

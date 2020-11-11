@@ -5,7 +5,6 @@ import { UserService } from '../../services/user.service';
 import { Note, User } from '../../models';
 import { NoteService } from '../../services/note.service';
 import { AlertService } from '../../services/alert.service';
-import { noteInOut } from './animations';
 
 @Component({
   selector: 'app-dashboard',
@@ -131,8 +130,10 @@ export class DashboardComponent implements OnInit {
    */
   addNewNote(): void {
     this.isEditorOpen = true;
-    this.note.title = '';
-    this.note.content = '';
+    // this.note.title = '';
+    // this.note.content = '';
+    // this.note.id = null;
+    this.note = {} as Note;
     this.isEditorCreating = true;
   }
 
