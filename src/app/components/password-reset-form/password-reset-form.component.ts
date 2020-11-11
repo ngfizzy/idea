@@ -38,10 +38,10 @@ export class PasswordResetFormComponent implements OnInit {
     if (this.isPasswordsMatch()) {
       this.passwordResetService
         .resetPassword(this.password, this.confirm, this.token)
-        .subscribe(
-          this.showSuccessAlert.bind(this),
-          (errorMessage) => this.error = errorMessage
-        );
+        .subscribe({
+          next: this.showSuccessAlert.bind(this),
+          error: (errorMessage) => this.error = errorMessage
+        });
     }
   }
 

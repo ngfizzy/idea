@@ -69,10 +69,10 @@ export class DashboardComponent implements OnInit {
     this.notes = this.noteService.getFetchedNotes();
     if (!this.notes.length) {
       this.noteService.fetchNotes()
-        .subscribe(
-          this.renderNotes.bind(this),
-          this.handleNotesFetchingError.bind(this),
-      );
+        .subscribe({
+          next: (notes) => this.renderNotes(notes),
+          error: () => this.handleNotesFetchingError(),
+        });
     }
   }
 

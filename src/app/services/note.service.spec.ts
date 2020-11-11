@@ -18,7 +18,7 @@ describe('NoteService', () => {
 
     injector = getTestBed();
     noteService = TestBed.inject(NoteService);
-    httpMock = injector.get(HttpTestingController);
+    httpMock = injector.inject(HttpTestingController);
   }));
 
   afterEach(waitForAsync(() => {

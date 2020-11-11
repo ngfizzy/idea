@@ -244,10 +244,10 @@ export class NoteEditorComponent implements OnInit, AfterViewInit, OnChanges {
    */
   submitEditedNote(): Subscription {
     return this.noteService.editNote(this.note)
-      .subscribe(
-        this.updateNoteSavedStatus.bind(this),
-        this.updateNoteErrorStatus.bind(this)
-      );
+      .subscribe({
+        next: this.updateNoteSavedStatus.bind(this),
+        error: this.updateNoteErrorStatus.bind(this)
+      });
   }
 
   /**

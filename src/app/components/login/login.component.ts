@@ -27,10 +27,10 @@ export class LoginComponent {
    */
   login() {
     this.userService.login(this.email, this.password)
-      .subscribe(
-        this.gotoDashboard.bind(this),
-        this.handleError.bind(this),
-    );
+      .subscribe({
+        next: this.gotoDashboard.bind(this),
+        error: (error) => this.handleError(error),
+      });
   }
 
   /**
