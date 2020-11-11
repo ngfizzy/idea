@@ -287,7 +287,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     // if (!this.isEditing) {
       this.editorListener = fromEvent(this.noteBody.nativeElement, 'keyup')
       .pipe(
