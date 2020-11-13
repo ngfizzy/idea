@@ -6,7 +6,7 @@ import { AlertService } from '../../services/alert.service';
 @Component({
   selector: 'app-name',
   templateUrl: './password-reset-request-form.component.html',
-  styleUrls: ['./password-reset-request-form.component.css']
+  styleUrls: ['./password-reset-request-form.component.scss']
 })
 export class PasswordResetRequestFormComponent implements OnInit {
   error: string;

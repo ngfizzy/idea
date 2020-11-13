@@ -9,7 +9,7 @@ import { PasswordResetService } from '../../services/password-reset.service';
 @Component({
   selector: 'app-name',
   templateUrl: './password-reset-form.component.html',
-  styleUrls: ['./password-reset-form.component.css']
+  styleUrls: ['./password-reset-form.component.scss']
 })
 export class PasswordResetFormComponent implements OnInit {
   error: string;

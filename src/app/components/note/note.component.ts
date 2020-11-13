@@ -1,12 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NoteService } from '../../services/note.service';
 import { AlertService } from '../../services/alert.service';
-import { noteMoved } from './animations';
 
 @Component({
   selector: 'app-note',
   templateUrl: './note.component.html',
-  styleUrls: ['./note.component.css'],
+  styleUrls: ['./note.component.scss'],
 })
 export class NoteComponent {
   @Input() note;

@@ -1,6 +1,6 @@
 
-export { User } from './user.interface';
-export { Note } from './note.interface';
-export { Tag } from './tag.interface';
+export * from './user.interface';
+export *  from './note.interface';
+export * from './tag.interface';
 
 export * from './server-responses';

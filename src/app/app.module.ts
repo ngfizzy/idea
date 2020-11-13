@@ -11,10 +11,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { NoteComponent } from './components/note/note.component';
+import { ToolsComponent } from './components/tools/tools.component';
 
 import { UserService } from './services/user.service';
 import { AlertService } from './services/alert.service';
-
 import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptor } from './guards/token.interceptor';
 import { NoteService } from './services/note.service';
@@ -38,13 +38,13 @@ import { TagService } from './services/tag.service';
     NoteComponent,
     NoteEditorComponent,
     PasswordResetFormComponent,
-    PasswordResetRequestFormComponent
+    PasswordResetRequestFormComponent,
+    ToolsComponent
   ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
-    // still needed because some third party library still relies on it.
     FormsModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

@@ -4,7 +4,7 @@ import { slide } from './animation';
 @Component({
     selector: 'app-authentication',
     templateUrl: './authentication.component.html',
-    styleUrls: ['./authentication.component.css'],
+    styleUrls: ['./authentication.component.scss'],
     animations: [slide]
 })
 export class AuthenticationComponent implements OnInit {

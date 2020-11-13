@@ -9,7 +9,7 @@ import { AlertService } from '../../services/alert.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
   currentUser: any;
@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
   notes: Array<any>;
   isUserOptionsVisible = false;
   noNotes = false;
+  isTitlesView = false;
 
   constructor(private userService: UserService,
     private noteService: NoteService,

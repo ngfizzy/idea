@@ -26,6 +26,19 @@
   background-color: #54426B;
   color: #E9F1F7;
   z-index: 1000;
+  .icon-wrapper {
+    width: 2rem;
+    height: 2rem;
+    margin-top: auto;
+    margin-top: 0.5rem;
+    margin-right: auto;
+    border-radius: 100%;
+    background-color: #c2c204;
+    img {
+      height: 100%;
+      border-radius: 100%;
+    }
+  }
 }
 
 .dashboard > .main-header > h4 {
@@ -89,36 +102,6 @@
   margin: 8em 20px;
 }
 
-.controls {
-  position: fixed;
-  background-color: white;
-  border: 1px solid gray;
-  top: 4em;
-  padding: 1em 0;
-  height: fit-content;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 80%;
-}
-
-.add {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 2em;
-  height: 2em;
-  margin: 0 6px;
-  border-radius: 100%;
-  text-align: center;
-  font-size: 1em;
-  font-weight: bold;
-  color: white;
-  background-color: #54426B;
-  opacity: 0.7;
-  box-shadow: 0 0 10px #847E89;
-  cursor: pointer;
-}
 
 input[type="search"] {
   -webkit-appearance: none;
@@ -132,7 +115,8 @@ input[type="search"] {
   height: 2em;
   margin-top: auto;
   margin-bottom: auto;
-  margin-right: 6px;
+  margin-left: auto;
+  margin-right: auto;
   z-index: 1000;
   font-size: 1em;
   color: rgba(84, 66, 107, .9);
@@ -150,26 +134,33 @@ input[type="search"]:focus {
   outline: 0;
 }
 
-.add:hover {
-  box-shadow: 0 0 20px #847E89;
-  opacity: 0.9;
-}
 
 .notes-container {
   display: flex;
   flex-direction: row;
-  margin-top: 8%;
+  margin-top: 1%;
   justify-content: space-around;
   flex-wrap: wrap;
 }
 
 @media  only screen and (min-width: 1000px) {
   .main {
-    width: 80%;
+    width: 60%;
     margin-top: 3em;
     align-self: center;
   }
 
+}
+
+.titles-view {
+  height: 3rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+}
+
+.note-wrapper {
+  width: 98%;
 }
 
 @media only screen and (min-height: 700px) {
@@ -201,3 +192,44 @@ input[type="search"]:focus {
     margin-top: 5em;
   }
 }
+
+.note-wrapper {
+  width: 98%;
+}
+
+@media only screen and (min-width: 550px) {
+  .note-wrapper {
+    width: 45%;
+  }
+}
+
+.tools-wrapper {
+  position: fixed;
+  top: 40rem;
+  right: 7%;
+  width: 3rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+
+@media  only screen and (min-width: 800px) {
+  .note-wrapper {
+    width: 30%;
+  }
+}
+
+
+@media  (max-width: 800px) {
+  .tools-wrapper {
+    right: 2%;
+  }
+}
+
+@media only screen and (max-height: 450px) {
+
+
+}
+
+

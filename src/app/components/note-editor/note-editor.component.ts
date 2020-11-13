@@ -11,7 +11,7 @@ import { TagService } from '../../services/tag.service';
 @Component({
   selector: 'app-note-editor',
   templateUrl: './note-editor.component.html',
-  styleUrls: ['./note-editor.component.css'],
+  styleUrls: ['./note-editor.component.scss'],
 })
 export class NoteEditorComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() isClose = true;

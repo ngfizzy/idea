@@ -1,6 +1,9 @@
 <div class="dashboard">
   <header class="main-header">
-    <h4>You're viewing {{pageContentDescription}}</h4>
+    <!-- <h4>You're viewing {{pageContentDescription}}</h4> -->
+    <div class="icon-wrapper"><img src="assets/idea.png"/></div>
+    <input class="search" maxLength="100" name="searchTerms" (keydown)="searchNotes()" [(ngModel)]="searchTerms" type="search" placeholder="search for  a note"
+    />
     <span class="profile" (mouseenter)="showUserOptions()" (mouseleave)="hideUserOptions()">
       <div class="user-icon">
         <img [src]="profilePictureUrl" />
@@ -13,17 +16,20 @@
     </span>
   </header>
   <div class="main">
-    <div class="controls">
-      <div class="add" (click)="addNewNote()">+</div>
 
-      <input maxLength="100" name="searchTerms" (keydown)="searchNotes()" [(ngModel)]="searchTerms" type="search" placeholder="search for  a note"
-      />
-
-    </div>
     <section class="notes-container">
-      <app-note (editNote)="editNote($event)" *ngFor="let fetchedNote of notes" [note]  ="fetchedNote"></app-note>
+        <div class="note-wrapper" [class.titles-view]="isTitlesView" *ngFor="let note of notes">
+          <app-note (editNote)="editNote($event)"  [note]="note"></app-note>
+
+        </div>
       <div class="not-found" *ngIf="noNotes">No Note Was Found</div>
     </section>
   </div>
 </div>
+
+<div class="tools-wrapper">
+  <app-tools (createNote)="addNewNote()"></app-tools>
+
+</div>
+
 <app-note-editor (close)="closeNoteEditor()" [isEditing]="!isEditorCreating" [note]="note" [isClose]="!isEditorOpen"></app-note-editor>
