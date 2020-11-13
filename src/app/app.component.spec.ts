@@ -17,7 +17,7 @@ describe('AppComponent', () => {
         { provide: APP_BASE_HREF, useValue : '/' },
       ],
       imports: [
-        RouterModule.forRoot([]),
+        RouterModule.forRoot([], { relativeLinkResolution: 'corrected' }),
       ]
     }).compileComponents();
   }));

@@ -28,7 +28,7 @@ describe('AuthenticationComponent', () => {
       imports: [
         FormsModule,
         HttpClientModule,
-        RouterModule.forRoot([]),
+        RouterModule.forRoot([], { relativeLinkResolution: 'corrected' }),
         BrowserAnimationsModule,
       ],
     }).compileComponents();

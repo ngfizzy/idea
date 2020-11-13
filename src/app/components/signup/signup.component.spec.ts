@@ -41,7 +41,7 @@ describe('SignupComponent', () => {
       imports: [
         FormsModule,
         HttpClientModule,
-        RouterModule.forRoot([]),
+        RouterModule.forRoot([], { relativeLinkResolution: 'corrected' }),
       ]
     });
   }));

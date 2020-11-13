@@ -1,6 +1,6 @@
 import { AlertService } from './alert.service';
 import { AlertComponent } from '../components/alert/alert.component';
-import { async } from '@angular/core/testing';
+
 describe('AlertService', () => {
   let alertService: AlertService;
   let alertComponent: AlertComponent;

@@ -47,12 +47,12 @@ import { TagService } from './services/tag.service';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'auth', component: AuthenticationComponent },
-      { path: 'passwords/reset', component: PasswordResetRequestFormComponent},
-      { path: 'passwords/reset/:token', component: PasswordResetFormComponent},
-      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-    ])
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    { path: 'auth', component: AuthenticationComponent },
+    { path: 'passwords/reset', component: PasswordResetRequestFormComponent },
+    { path: 'passwords/reset/:token', component: PasswordResetFormComponent },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+], { relativeLinkResolution: 'corrected' })
   ],
 
   providers: [

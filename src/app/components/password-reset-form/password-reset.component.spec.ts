@@ -38,7 +38,7 @@ describe('PasswordResetComponent', () => {
       imports: [
         FormsModule,
         HttpClientModule,
-        RouterModule.forRoot([]),
+        RouterModule.forRoot([], { relativeLinkResolution: 'corrected' }),
       ]
     });
   }));

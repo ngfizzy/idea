@@ -17,6 +17,7 @@ import { UserService } from '../../services/user.service';
 import { TagService } from '../../services/tag.service';
 import { Note, User } from '../../models';
 import { of } from 'rxjs';
+import { ToolsComponent } from '../tools/tools.component';
 
 describe('DashbardComponent', () => {
   let fixture: ComponentFixture<DashboardComponent>;
@@ -29,6 +30,7 @@ describe('DashbardComponent', () => {
         DashboardComponent,
         NoteComponent,
         NoteEditorComponent,
+        ToolsComponent,
         AlertComponent,
       ],
       providers: [
@@ -42,7 +44,7 @@ describe('DashbardComponent', () => {
         BrowserAnimationsModule,
         HttpClientModule,
         FormsModule,
-        RouterModule.forRoot([]),
+        RouterModule.forRoot([], { relativeLinkResolution: 'corrected' }),
       ],
     }).compileComponents();
   }));
@@ -64,7 +66,7 @@ describe('DashbardComponent', () => {
 
   it('can open note editor if add button is clicked', () => {
     fixture.detectChanges();
-    const addButton = fixture.debugElement.query(By.css('.add'));
+    const addButton = fixture.debugElement.query(By.css('.tools-host  .add'));
     const noteEditor = fixture.debugElement
       .query(By.css('.note-editor'));
 

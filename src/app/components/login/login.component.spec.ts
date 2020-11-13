@@ -26,8 +26,8 @@ describe('LoginComponent', () => {
       imports: [
         FormsModule,
         RouterModule.forRoot([
-          {path: 'dashboard', component: DashboardComponent},
-        ]),
+    { path: 'dashboard', component: DashboardComponent },
+], { relativeLinkResolution: 'corrected' }),
         HttpClientModule,
       ],
       providers: [
