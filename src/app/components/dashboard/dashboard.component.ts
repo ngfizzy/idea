@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit {
     private alert: AlertService) {
   }
 
+
   /**
    * Checks if notes are already loaded in memory
    *
@@ -48,7 +49,7 @@ export class DashboardComponent implements OnInit {
   }
 
   /**
-   * This method sets page headeer to search terms
+   * This method sets page header to search terms
    *
    * @returns {void}
    */
@@ -59,6 +60,10 @@ export class DashboardComponent implements OnInit {
       this.pageContentDescription =
         `all notes that best match your search terms: ${this.searchTerms}`;
     }
+  }
+
+  toggleView(isGrid: boolean) {
+    this.isTitlesView = isGrid;
   }
 
   /**

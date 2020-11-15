@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-tools',
@@ -58,7 +58,8 @@ export class ToolsComponent implements OnInit {
   @Output() createNote = new EventEmitter();
   @Output() toggleView = new EventEmitter<boolean>();
 
-  grid = true;
+  @Input() grid = true;
+
   viewIcon = 'assets/grid-view.png';
 
 
@@ -76,8 +77,6 @@ export class ToolsComponent implements OnInit {
   }
 
   toggleDashboardView() {
-    this.grid = !this.grid;
-
     this.viewIcon =
     this.grid ? 'assets/grid-view.png'
       : 'assets/labels-view.png';

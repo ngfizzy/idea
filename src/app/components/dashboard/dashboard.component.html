@@ -28,8 +28,18 @@
 </div>
 
 <div class="tools-wrapper">
-  <app-tools class="tools-host" (createNote)="addNewNote()"></app-tools>
+  <app-tools
+    class="tools-host"
+    (createNote)="addNewNote()"
+    (toggleView)="toggleView($event)"
+  >
+  </app-tools>
 
 </div>
 
-<app-note-editor (close)="closeNoteEditor()" [isEditing]="!isEditorCreating" [note]="note" [isClose]="!isEditorOpen"></app-note-editor>
+<app-note-editor
+  (close)="closeNoteEditor()"
+  [isEditing]="!isEditorCreating"
+  [note]="note"
+  [isClose]="!isEditorOpen">
+</app-note-editor>
