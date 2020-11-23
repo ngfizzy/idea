@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
   notes: Array<any>;
   isUserOptionsVisible = false;
   noNotes = false;
-  isTitlesView = false;
+  isGridView = true;
 
   constructor(private userService: UserService,
     private noteService: NoteService,
@@ -63,7 +63,7 @@ export class DashboardComponent implements OnInit {
   }
 
   toggleView(isGrid: boolean) {
-    this.isTitlesView = isGrid;
+    this.isGridView = isGrid;
   }
 
   /**
@@ -149,7 +149,7 @@ export class DashboardComponent implements OnInit {
    *
    * @param note
    */
-  editNote(note) {
+  editNote(note: Note) {
     this.isEditorOpen = true;
     this.note = note;
     this.isEditorCreating = false;

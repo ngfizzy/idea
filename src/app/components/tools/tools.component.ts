@@ -1,10 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-tools',
   template: `<div class="tools">
-    <div title="toggle layout" class="tool view-toggler" (click)="toggleDashboardView()"><img [src]="viewIcon" /></div>
-    <div title="add note" class="tool add" (click)="addNewNote()">+</div>
+    <div
+      title="toggle layout"
+      class="tool view-toggler"
+      (click)="toggleDashboardView()">
+        <img [src]="viewIcon" />
+      </div>
+    <div title="add note" class="tool add" (click)="addNewNote()">
+      +
+    </div>
 
   </div>`,
   styles: [`
@@ -52,24 +59,23 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
       border-radius: inherit
     }
 
-  `]
+  `],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ToolsComponent implements OnInit {
+export class ToolsComponent implements OnChanges {
   @Output() createNote = new EventEmitter();
   @Output() toggleView = new EventEmitter<boolean>();
 
   @Input() grid = true;
 
-  viewIcon = 'assets/grid-view.png';
+  viewIcon = 'assets/label-view.png';
 
 
 
   constructor() { }
 
-  ngOnInit() {
-    this.viewIcon =
-      this.grid ? 'assets/grid-view.png'
-        : 'assets/labels-view.png';
+  ngOnChanges() {
+    this.toggleLayoutIcon();
   }
 
   addNewNote() {
@@ -77,9 +83,11 @@ export class ToolsComponent implements OnInit {
   }
 
   toggleDashboardView() {
+    this.toggleView.emit(!this.grid);
+  }
+
+  private toggleLayoutIcon() {
     this.viewIcon =
-    this.grid ? 'assets/grid-view.png'
-      : 'assets/labels-view.png';
-      this.toggleView.emit(this.grid);
+    this.grid ? 'assets/labels-view.png' : 'assets/grid-view.png';
   }
 }

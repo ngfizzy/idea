@@ -18,9 +18,8 @@
   <div class="main">
 
     <section class="notes-container">
-        <div class="note-wrapper" [class.titles-view]="isTitlesView" *ngFor="let note of notes">
-          <app-note (editNote)="editNote($event)"  [note]="note"></app-note>
-
+        <div class="note-wrapper"*ngFor="let note of notes">
+          <app-note  [isTitleView]="!isGridView" (editNote)="editNote($event)"  [note]="note"></app-note>
         </div>
       <div class="not-found" *ngIf="noNotes">No Note Was Found</div>
     </section>
@@ -32,6 +31,7 @@
     class="tools-host"
     (createNote)="addNewNote()"
     (toggleView)="toggleView($event)"
+    [grid]="isGridView"
   >
   </app-tools>
 

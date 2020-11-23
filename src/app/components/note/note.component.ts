@@ -9,6 +9,7 @@ import { AlertService } from '../../services/alert.service';
 })
 export class NoteComponent {
   @Input() note;
+  @Input() isTitleView = false;
   @Output() editNote = new EventEmitter<object>();
 
   constructor(private noteService: NoteService, private alert: AlertService) { }

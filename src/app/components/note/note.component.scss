@@ -12,6 +12,23 @@
   border-top-left-radius: .5em;
   border-top-right-radius: .5em;
 
+
+  &.title-view {
+    height: 3rem;
+    border-radius: .3em;
+
+    .note-title {
+      margin-bottom: 0;
+      height: 3rem;
+      border-radius: inherit;
+    }
+
+    .body, footer {
+      display:  none;
+    }
+  }
+
+  transition: all .5s ease-in-out;
 }
 
 @keyframes hoverNote {
@@ -58,6 +75,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
 }
 
 .note>.body {
@@ -67,6 +85,9 @@
   font-size: .7em;
   color: rgb(118, 94, 94);
   overflow: hidden;
+  // &.title-view {
+  //   height: 0;
+  // }
 }
 
 .note>footer {
@@ -132,11 +153,11 @@
   }
 }
 
-@media only screen and (max-width: 449.98px) {
-  .note-title {
-    border-radius: 1rem;
-  }
-}
+// @media only screen and (max-width: 449.98px) {
+//   .note-title {
+//     border-radius: 1rem;
+//   }
+// }
 
 @media only screen and (max-height: 450px) {
   .note {

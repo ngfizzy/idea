@@ -152,13 +152,6 @@ input[type="search"]:focus {
 
 }
 
-.titles-view {
-  height: 3rem;
-  overflow: hidden;
-  margin-bottom: 1rem;
-  border-radius: 1rem;
-}
-
 .note-wrapper {
   width: 98%;
 }
@@ -205,7 +198,7 @@ input[type="search"]:focus {
 
 .tools-wrapper {
   position: fixed;
-  top: 40rem;
+  top: 80vh;
   right: 7%;
   width: 3rem;
   height: -webkit-fit-content;
