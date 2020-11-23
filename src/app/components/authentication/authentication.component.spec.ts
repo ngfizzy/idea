@@ -40,7 +40,7 @@ describe('AuthenticationComponent', () => {
 
     fixtures.detectChanges();
 
-    expect(authComponent.querySelector('.heading').textContent).toContain('Kaleci');
+    expect(authComponent.querySelector('.heading').textContent).toContain('Idea');
     expect(authComponent.querySelector('.subheading').textContent).toBeTruthy();
   }));
 
