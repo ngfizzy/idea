@@ -30,6 +30,7 @@
   padding: 0;
   font-size: 120%;
   box-shadow: 0px 0 5px 1px rgba(0, 0, 0, 0.7);
+  border-radius: .5rem;
 }
 
 .note-editor>form {
@@ -119,7 +120,7 @@
   font-weight: bold !important;
   margin-top:auto !important;
   margin-bottom: auto !important;
-  color:rgba(0,0,0, .4) !important; 
+  color:rgba(0,0,0, .4) !important;
 }
 
 .footer {
