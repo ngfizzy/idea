@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-tools',
+  selector: 'ida-tools',
   template: `<div class="tools">
     <div
       title="toggle layout"

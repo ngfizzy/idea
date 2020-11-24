@@ -5,43 +5,37 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { AlertComponent } from './components/alert/alert.component';
-import { AuthenticationComponent } from './components/authentication/authentication.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { LoginComponent } from './components/login/login.component';
-import { SignupComponent } from './components/signup/signup.component';
-import { NoteComponent } from './components/note/note.component';
-import { ToolsComponent } from './components/tools/tools.component';
+import { AlertComponent } from './shared/alert/alert.component';
+import { AuthenticationComponent } from './shared/authentication/authentication.component';
+import { LoginComponent } from './shared/login/login.component';
+import { SignupComponent } from './shared/signup/signup.component';
 
 import { UserService } from './services/user.service';
 import { AlertService } from './services/alert.service';
 import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptor } from './guards/token.interceptor';
 import { NoteService } from './services/note.service';
-import { NoteEditorComponent } from './components/note-editor/note-editor.component';
 
 import { HashLocationStrategy, LocationStrategy, APP_BASE_HREF } from '@angular/common';
-import { PasswordResetFormComponent } from './components/password-reset-form/password-reset-form.component';
-import { PasswordResetRequestFormComponent } from './components/password-reset-request-form/password-reset-request-form.component';
+import { PasswordResetFormComponent } from './shared/password-reset-form/password-reset-form.component';
+import { PasswordResetRequestFormComponent } from './shared/password-reset-request-form/password-reset-request-form.component';
 import { PasswordResetService } from './services/password-reset.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TagService } from './services/tag.service';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     AlertComponent,
     AuthenticationComponent,
-    DashboardComponent,
     LoginComponent,
     SignupComponent,
-    NoteComponent,
-    NoteEditorComponent,
     PasswordResetFormComponent,
     PasswordResetRequestFormComponent,
-    ToolsComponent
   ],
   imports: [
+    DashboardModule,
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
@@ -51,7 +45,11 @@ import { TagService } from './services/tag.service';
     { path: 'auth', component: AuthenticationComponent },
     { path: 'passwords/reset', component: PasswordResetRequestFormComponent },
     { path: 'passwords/reset/:token', component: PasswordResetFormComponent },
-    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+    { path: 'dashboard',
+      loadChildren: () =>
+      import('./dashboard/dashboard.module').then(module => module.DashboardModule),
+      canActivate: [AuthGuard] }
+      ,
 ], { relativeLinkResolution: 'corrected' })
   ],
 

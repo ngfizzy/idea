@@ -62,7 +62,7 @@ describe('AuthenticationComponent', () => {
     componentInstance.showLogin();
     fixtures.detectChanges();
 
-    expect(authComponent.querySelector('app-login')).toBeTruthy();
+    expect(authComponent.querySelector('ida-login')).toBeTruthy();
   }));
 
   it('should show signup form when signup button is clicked', waitForAsync(() => {
@@ -73,6 +73,6 @@ describe('AuthenticationComponent', () => {
     componentInstance.showSignup();
     fixtures.detectChanges();
 
-    expect(authComponent.querySelector('app-signup')).toBeTruthy();
+    expect(authComponent.querySelector('ida-signup')).toBeTruthy();
   }));
 });

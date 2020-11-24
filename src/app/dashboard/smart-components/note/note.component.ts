@@ -1,9 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NoteService } from '../../services/note.service';
-import { AlertService } from '../../services/alert.service';
+import { NoteService } from '../../../services/note.service';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
-  selector: 'app-note',
+  selector: 'ida-note',
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.scss'],
 })

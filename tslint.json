@@ -122,13 +122,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "ida",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "app",
+      "ida",
       "kebab-case"
     ],
     "no-inputs-metadata-property": true,

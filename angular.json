@@ -6,7 +6,8 @@
 		"idea": {
 			"root": "",
 			"sourceRoot": "src",
-			"projectType": "application",
+      "projectType": "application",
+      "prefix": "ida",
 			"architect": {
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
@@ -108,7 +109,8 @@
 		"idea-e2e": {
 			"root": "e2e",
 			"sourceRoot": "e2e",
-			"projectType": "application",
+      "projectType": "application",
+      "prefix": "ida",
 			"architect": {
 				"e2e": {
 					"builder": "@angular-devkit/build-angular:protractor",
@@ -134,11 +136,11 @@
 	"defaultProject": "idea",
 	"schematics": {
 		"@schematics/angular:component": {
-			"prefix": "app",
+			"prefix": "ida",
 			"style": "css"
 		},
 		"@schematics/angular:directive": {
-			"prefix": "app"
+			"prefix": "ida"
 		}
 	},
 	"cli": {

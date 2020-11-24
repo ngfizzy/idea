@@ -1,6 +1,5 @@
 <div class="dashboard">
   <header class="main-header">
-    <!-- <h4>You're viewing {{pageContentDescription}}</h4> -->
     <div class="icon-wrapper"><img src="assets/idea.png"/></div>
     <input class="search" maxLength="100" name="searchTerms" (keydown)="searchNotes()" [(ngModel)]="searchTerms" type="search" placeholder="search for  a note"
     />
@@ -19,7 +18,7 @@
 
     <section class="notes-container">
         <div class="note-wrapper"*ngFor="let note of notes">
-          <app-note  [isTitleView]="!isGridView" (editNote)="editNote($event)"  [note]="note"></app-note>
+          <ida-note  [isTitleView]="!isGridView" (editNote)="editNote($event)"  [note]="note"></ida-note>
         </div>
       <div class="not-found" *ngIf="noNotes">No Note Was Found</div>
     </section>
@@ -27,19 +26,19 @@
 </div>
 
 <div class="tools-wrapper">
-  <app-tools
+  <ida-tools
     class="tools-host"
     (createNote)="addNewNote()"
     (toggleView)="toggleView($event)"
     [grid]="isGridView"
   >
-  </app-tools>
+  </ida-tools>
 
 </div>
 
-<app-note-editor
+<ida-note-editor
   (close)="closeNoteEditor()"
   [isEditing]="!isEditorCreating"
   [note]="note"
   [isClose]="!isEditorOpen">
-</app-note-editor>
+</ida-note-editor>

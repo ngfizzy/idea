@@ -4,7 +4,7 @@ import { PasswordResetService } from '../../services/password-reset.service';
 import { AlertService } from '../../services/alert.service';
 
 @Component({
-  selector: 'app-name',
+  selector: 'ida-name',
   templateUrl: './password-reset-request-form.component.html',
   styleUrls: ['./password-reset-request-form.component.scss']
 })

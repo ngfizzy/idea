@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { slide } from './animation';
 
 @Component({
-    selector: 'app-authentication',
+    selector: 'ida-authentication',
     templateUrl: './authentication.component.html',
     styleUrls: ['./authentication.component.scss'],
     animations: [slide]

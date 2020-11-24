@@ -6,7 +6,7 @@ import { AlertService } from '../../services/alert.service';
 import { slide } from '../authentication/animation';
 
 @Component({
-  selector: 'app-signup',
+  selector: 'ida-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
 })

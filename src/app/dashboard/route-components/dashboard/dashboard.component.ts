@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import md5 from 'md5';
 
-import { UserService } from '../../services/user.service';
-import { Note, User } from '../../models';
-import { NoteService } from '../../services/note.service';
-import { AlertService } from '../../services/alert.service';
+import { UserService } from '../../../services/user.service';
+import { Note, User } from '../../../models';
+import { NoteService } from '../../../services/note.service';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'ida-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })

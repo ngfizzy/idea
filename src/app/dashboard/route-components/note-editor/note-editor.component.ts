@@ -3,13 +3,13 @@ import {distinctUntilChanged, debounceTime, map} from 'rxjs/operators';
 import { Component, Input, Output, EventEmitter, OnChanges, ViewChild, ElementRef, OnInit, AfterViewInit } from '@angular/core';
 import { Subscription,  fromEvent, Observable } from 'rxjs';
 
-import { Note, Tag } from '../../models';
-import { NoteService } from '../../services/note.service';
-import { TagService } from '../../services/tag.service';
+import { Note, Tag } from '../../../models';
+import { NoteService } from '../../../services/note.service';
+import { TagService } from '../../../services/tag.service';
 
 
 @Component({
-  selector: 'app-note-editor',
+  selector: 'ida-note-editor',
   templateUrl: './note-editor.component.html',
   styleUrls: ['./note-editor.component.scss'],
 })
