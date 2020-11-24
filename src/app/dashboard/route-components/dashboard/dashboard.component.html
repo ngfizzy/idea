@@ -6,7 +6,7 @@
     <span class="profile" (mouseenter)="showUserOptions()" (mouseleave)="hideUserOptions()">
       <div class="user-icon">
         <img [src]="profilePictureUrl" />
-        <h5>{{currentUser.username}}</h5>
+        <h5>{{currentUser?.username}}</h5>
       </div>
       <ul class="user-options" [hidden]="!isUserOptionsVisible">
         <li class="option" (click)="showProfile()">Profile</li>

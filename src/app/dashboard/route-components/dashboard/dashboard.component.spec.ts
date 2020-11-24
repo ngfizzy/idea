@@ -7,17 +7,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
-import { NoteComponent } from '../note/note.component';
 import { NoteEditorComponent } from '../note-editor/note-editor.component';
-import { AlertComponent } from '../alert/alert.component';
 
-import { AlertService } from '../../services/alert.service';
-import { NoteService } from '../../services/note.service';
-import { UserService } from '../../services/user.service';
-import { TagService } from '../../services/tag.service';
-import { Note, User } from '../../models';
 import { of } from 'rxjs';
-import { ToolsComponent } from '../tools/tools.component';
+import { User, Note } from '../../../models';
+import { AlertService } from '../../../services/alert.service';
+import { NoteService } from '../../../services/note.service';
+import { TagService } from '../../../services/tag.service';
+import { UserService } from '../../../services/user.service';
+import { AlertComponent } from '../../../shared/components/alert/alert.component';
+import { ToolsComponent } from '../../presentation-components/tools/tools.component';
+import { NoteComponent } from '../../smart-components/note/note.component';
 
 describe('DashbardComponent', () => {
   let fixture: ComponentFixture<DashboardComponent>;

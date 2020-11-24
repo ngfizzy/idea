@@ -2,16 +2,17 @@ import { TestBed, async, waitForAsync } from '@angular/core/testing';
 import { LoginComponent } from './login.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { UserService } from '../../services/user.service';
 import { RouterModule } from '@angular/router';
 import { of, throwError } from 'rxjs';
-import { DashboardComponent } from '../dashboard/dashboard.component';
-import { NoteEditorComponent } from '../note-editor/note-editor.component';
-import { AlertComponent } from '../alert/alert.component';
-import { AlertService } from '../../services/alert.service';
-import { NoteComponent } from '../note/note.component';
-import { NoteService } from '../../services/note.service';
+
 import { APP_BASE_HREF } from '@angular/common';
+import { DashboardComponent } from '../../../dashboard/route-components/dashboard/dashboard.component';
+import { NoteEditorComponent } from '../../../dashboard/route-components/note-editor/note-editor.component';
+import { NoteComponent } from '../../../dashboard/smart-components/note/note.component';
+import { AlertService } from '../../../services/alert.service';
+import { NoteService } from '../../../services/note.service';
+import { UserService } from '../../../services/user.service';
+import { AlertComponent } from '../../../shared/components/alert/alert.component';
 
 describe('LoginComponent', () => {
   beforeEach(waitForAsync(() => {

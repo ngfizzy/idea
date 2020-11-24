@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'ida-login',

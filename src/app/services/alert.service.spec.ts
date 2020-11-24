@@ -1,5 +1,5 @@
+import { AlertComponent } from '../shared/components/alert/alert.component';
 import { AlertService } from './alert.service';
-import { AlertComponent } from '../components/alert/alert.component';
 
 describe('AlertService', () => {
   let alertService: AlertService;

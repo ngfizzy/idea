@@ -1,6 +1,6 @@
 import { TestBed, async, waitForAsync } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { AlertComponent } from './components/alert/alert.component';
+import { AlertComponent } from './shared/components/alert/alert.component';
 import { RouterModule } from '@angular/router';
 import { AlertService } from './services/alert.service';
 import { APP_BASE_HREF } from '@angular/common';

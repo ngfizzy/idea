@@ -4,21 +4,23 @@ import { NoteEditorComponent } from './route-components/note-editor/note-editor.
 
 import { DashboardComponent } from './route-components/dashboard/dashboard.component';
 import { CommonModule } from '@angular/common';
+import { AuthGuard } from '../guards/auth.guard';
 
 @NgModule({
   imports: [
-    CommonModule,
     RouterModule.forChild([
     {
       path: '',
+      pathMatch: 'full',
       component: DashboardComponent,
-      children: [
-        {
-          path: 'note/:id/edit',
-          pathMatch: 'full',
-          component: NoteEditorComponent
-        }
-      ]
+      // canActivate: [AuthGuard],
+      // children: [
+      //   {
+      //     path: 'note/:id/edit',
+      //     pathMatch: 'full',
+      //     component: NoteEditorComponent
+      //   }
+      // ]
     }
   ])],
   exports: [RouterModule],

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-
-
-import { AlertService } from '../../services/alert.service';
-import { PasswordResetService } from '../../services/password-reset.service';
+import { AlertService } from '../../../services/alert.service';
+import { PasswordResetService } from '../../../services/password-reset.service';
 
 @Component({
   selector: 'ida-name',

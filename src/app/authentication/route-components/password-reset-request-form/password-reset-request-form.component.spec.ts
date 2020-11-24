@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { PasswordResetRequestFormComponent } from './password-reset-request-form.component';
-import { PasswordResetService } from '../../services/password-reset.service';
-import { AlertService } from '../../services/alert.service';
+
 import { of, throwError } from 'rxjs';
 import { APP_BASE_HREF } from '@angular/common';
+import { AlertService } from '../../../services/alert.service';
+import { PasswordResetService } from '../../../services/password-reset.service';
 
 describe('PasswordResetRequestFormComponent', () => {
   let fixtures: ComponentFixture<PasswordResetRequestFormComponent>;

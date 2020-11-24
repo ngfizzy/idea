@@ -1,6 +1,6 @@
 import { TestBed, async, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { AlertComponent } from './alert.component';
-import { AlertService } from '../../services/alert.service';
+import { AlertService } from '../../../services/alert.service';
 import { APP_BASE_HREF } from '@angular/common';
 
 describe('AlertComponent', () => {

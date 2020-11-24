@@ -1,14 +1,15 @@
 import { async, TestBed, ComponentFixture, tick, fakeAsync, waitForAsync } from '@angular/core/testing';
 import { NoteEditorComponent } from './note-editor.component';
-import { NoteService } from '../../services/note.service';
-import { TagService } from '../../services/tag.service';
-import { Note, Tag } from '../../models';
+
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { of } from 'rxjs';
 import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Note } from '../../../models';
+import { NoteService } from '../../../services/note.service';
+import { TagService } from '../../../services/tag.service';
 
 describe('NoteEditorComponent', () => {
   let fixture: ComponentFixture<NoteEditorComponent>;

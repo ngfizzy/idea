@@ -5,10 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { AlertComponent } from './shared/alert/alert.component';
-import { AuthenticationComponent } from './shared/authentication/authentication.component';
-import { LoginComponent } from './shared/login/login.component';
-import { SignupComponent } from './shared/signup/signup.component';
+
 
 import { UserService } from './services/user.service';
 import { AlertService } from './services/alert.service';
@@ -17,40 +14,39 @@ import { TokenInterceptor } from './guards/token.interceptor';
 import { NoteService } from './services/note.service';
 
 import { HashLocationStrategy, LocationStrategy, APP_BASE_HREF } from '@angular/common';
-import { PasswordResetFormComponent } from './shared/password-reset-form/password-reset-form.component';
-import { PasswordResetRequestFormComponent } from './shared/password-reset-request-form/password-reset-request-form.component';
+
 import { PasswordResetService } from './services/password-reset.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TagService } from './services/tag.service';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AlertComponent,
-    AuthenticationComponent,
-    LoginComponent,
-    SignupComponent,
-    PasswordResetFormComponent,
-    PasswordResetRequestFormComponent,
   ],
   imports: [
+    SharedModule,
     DashboardModule,
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-    { path: 'auth', component: AuthenticationComponent },
-    { path: 'passwords/reset', component: PasswordResetRequestFormComponent },
-    { path: 'passwords/reset/:token', component: PasswordResetFormComponent },
-    { path: 'dashboard',
+      { path: 'auth',  loadChildren: () =>
+      import('./authentication/authentication.module').then(module => module.AuthenticationModule)
+    },
+      { path: 'dashboard',
       loadChildren: () =>
       import('./dashboard/dashboard.module').then(module => module.DashboardModule),
-      canActivate: [AuthGuard] }
-      ,
-], { relativeLinkResolution: 'corrected' })
+      canActivate: [AuthGuard]
+    },
+    {
+      path: '',
+      pathMatch: 'full',
+      redirectTo: 'dashboard'
+    }
+  ])
   ],
 
   providers: [

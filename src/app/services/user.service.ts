@@ -160,6 +160,6 @@ export class UserService {
    */
   logout(): void {
     localStorage.removeItem('authToken');
-    location.reload();
+    this.route.navigate(['/auth']);
   }
 }

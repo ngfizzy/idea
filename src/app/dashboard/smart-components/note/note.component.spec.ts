@@ -1,12 +1,13 @@
 import { TestBed, ComponentFixture, async, waitForAsync } from '@angular/core/testing';
 import { NoteComponent } from './note.component';
-import { AlertService } from '../../services/alert.service';
-import { NoteService } from '../../services/note.service';
+
 import { of, throwError } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { AlertComponent } from '../alert/alert.component';
 import { APP_BASE_HREF } from '@angular/common';
+import { AlertService } from '../../../services/alert.service';
+import { NoteService } from '../../../services/note.service';
+import { AlertComponent } from '../../../shared/components/alert/alert.component';
 
 describe('NoteComponent', () => {
   let fixture: ComponentFixture<NoteComponent>;

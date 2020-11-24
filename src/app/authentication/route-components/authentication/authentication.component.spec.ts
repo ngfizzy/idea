@@ -1,15 +1,17 @@
 import { TestBed, async, waitForAsync } from '@angular/core/testing';
 import { AuthenticationComponent } from './authentication.component';
-import { LoginComponent } from '../login/login.component';
-import { SignupComponent } from '../signup/signup.component';
-import { UserService } from '../../services/user.service';
+
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AlertComponent } from '../alert/alert.component';
-import { AlertService } from '../../services/alert.service';
+
 import { APP_BASE_HREF } from '@angular/common';
+import { LoginComponent } from '../../smart-components/login/login.component';
+import { AlertService } from '../../../services/alert.service';
+import { UserService } from '../../../services/user.service';
+import { AlertComponent } from '../../../shared/components/alert/alert.component';
+import { SignupComponent } from '../../smart-components/signup/signup.component';
 
 describe('AuthenticationComponent', () => {
   beforeEach(waitForAsync(() => {

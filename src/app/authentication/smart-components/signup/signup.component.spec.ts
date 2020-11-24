@@ -1,14 +1,14 @@
 import { TestBed, async, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { SignupComponent } from './signup.component';
-import { AlertComponent } from '../alert/alert.component';
-import { AlertService } from '../../services/alert.service';
-import { UserService } from '../../services/user.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { User } from '../../models';
 import { of, throwError } from 'rxjs';
 import { APP_BASE_HREF } from '@angular/common';
+import { User } from '../../../models';
+import { AlertService } from '../../../services/alert.service';
+import { UserService } from '../../../services/user.service';
+import { AlertComponent } from '../../../shared/components/alert/alert.component';
 
 describe('SignupComponent', () => {
   let fixtures: ComponentFixture<SignupComponent>;

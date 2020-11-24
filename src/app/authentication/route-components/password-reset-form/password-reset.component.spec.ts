@@ -1,13 +1,14 @@
 import { TestBed, async, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { PasswordResetFormComponent } from './password-reset-form.component';
-import { PasswordResetService } from '../../services/password-reset.service';
-import { AlertComponent } from '../alert/alert.component';
+
 import { FormsModule } from '@angular/forms';
-import { AlertService } from '../../services/alert.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { APP_BASE_HREF } from '@angular/common';
+import { AlertService } from '../../../services/alert.service';
+import { PasswordResetService } from '../../../services/password-reset.service';
+import { AlertComponent } from '../../../shared/components/alert/alert.component';
 
 describe('PasswordResetComponent', () => {
 

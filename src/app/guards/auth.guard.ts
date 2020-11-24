@@ -42,7 +42,9 @@ export class AuthGuard implements CanActivate {
    * @returns {Observable<boolean>}
    */
   handleFailure() {
-    this.router.navigateByUrl('/auth');
+
+    console.log('router.navigate>>>>>>>>>>>>>>>>>>>>>>>>>>> ;handle failure');
+    this.router.navigate(['auth/auth']);
 
     return observableOf(false);
   }
