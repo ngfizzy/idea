@@ -19,7 +19,7 @@ import { AlertComponent } from '../../../shared/components/alert/alert.component
 import { ToolsComponent } from '../../presentation-components/tools/tools.component';
 import { NoteComponent } from '../../smart-components/note/note.component';
 
-describe('DashbardComponent', () => {
+describe('DashboardComponent', () => {
   let fixture: ComponentFixture<DashboardComponent>;
   let userService: UserService;
   let componentInstance: DashboardComponent;

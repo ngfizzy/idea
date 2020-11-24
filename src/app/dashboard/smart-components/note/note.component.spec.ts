@@ -42,10 +42,10 @@ describe('NoteComponent', () => {
   }));
 
   it('should have a title', waitForAsync(() => {
-    const componentInstace = fixture.componentInstance;
+    const componentInstance = fixture.componentInstance;
     const compiledComponent: HTMLElement = fixture.nativeElement;
 
-    componentInstace.note = {title: 'note title'};
+    componentInstance.note = {title: 'note title'};
     fixture.detectChanges();
 
     expect(compiledComponent.querySelector('.note-title').textContent)
@@ -89,9 +89,9 @@ describe('NoteComponent', () => {
     const noteComponentInstance = fixture.componentInstance;
     noteComponentInstance.note = {};
     fixture.detectChanges();
-    const debugElemet: DebugElement =  fixture.debugElement;
+    const debugElement: DebugElement =  fixture.debugElement;
 
-    debugElemet.query(By.css('.delete')).triggerEventHandler('click', null);
+    debugElement.query(By.css('.delete')).triggerEventHandler('click', null);
     alertComponentFixture.detectChanges();
 
     expect(alertComponentInstance.message).toContain('could not delete note');

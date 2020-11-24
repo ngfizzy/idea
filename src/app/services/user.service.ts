@@ -55,7 +55,7 @@ export class UserService {
   }
 
   /**
-   * Fetches current user from database, saves it to localstorage
+   * Fetches current user from database, saves it to localStorage
    * as 'user'
    *
    * @returns {Observable<string| User>} observable of error message or user
@@ -147,7 +147,7 @@ export class UserService {
    */
   handleLoginError(response: any): Observable<string> {
     if (response.status === 500) {
-      return observableThrowError('An error occured while trying to log you in. Please try again');
+      return observableThrowError('An error occurred while trying to log you in. Please try again');
     }
 
     return observableThrowError('wrong username or password');

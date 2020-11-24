@@ -3,7 +3,6 @@ import { NoteEditorComponent } from './note-editor.component';
 
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 import { of } from 'rxjs';
 import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -72,13 +71,13 @@ describe('NoteEditorComponent', () => {
   it('should have a close button', waitForAsync(() => {
     const noteEditorDebugElement = fixture.debugElement;
     const componentInstance = fixture.componentInstance;
-    const closeButtton: HTMLButtonElement = noteEditorDebugElement
+    const closeButton: HTMLButtonElement = noteEditorDebugElement
       .query(By.css('.cancel')).nativeElement;
     componentInstance.isEditing = true;
     componentInstance.note = {} as Note;
     fixture.detectChanges();
 
-    closeButtton.click();
+    closeButton.click();
     fixture.detectChanges();
 
     expect(componentInstance.isEditing).toBe(false);
