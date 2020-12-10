@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  frontend:
+    image: frontend
+    ports:
+      - "4200:4200"
+    stdin_open: true
+  backend:
+    image: tbd
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:8.0.22
+    ports:
+      - "3306:3306"
+networks:
+  idea:
+    driver: bridge
+volumes: 
+  idea-data:
+    driver: local
