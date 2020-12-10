@@ -126,6 +126,7 @@ export class NoteService {
     const headers = new HttpHeaders({ authorization: localStorage.getItem('authToken') });
 
     const { id, title, content } = note;
+    console.log('id>>>>>>>>>>>>>>>>>>', id)
     const url = `${apiBaseUrl}/notes/${id}`;
 
     return this.http.put<NoteResponse>(url, { title, content }, { headers, observe: 'response' }).pipe(

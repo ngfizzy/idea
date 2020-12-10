@@ -243,6 +243,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit, OnChanges {
    * @returns {Subscription}
    */
   submitEditedNote(): Subscription {
+    console.log('>>>>>>>>>>>> this note', this.note)
     return this.noteService.editNote(this.note)
       .subscribe({
         next: this.updateNoteSavedStatus.bind(this),
