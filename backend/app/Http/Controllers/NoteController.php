@@ -111,14 +111,14 @@ class NoteController extends Controller
     /**
      * It responds with all a note
      *
-     * @param int $noteId id of the note to be returned
+     * @param int $id id of the note to be returned
      *
      * @return Illuminate\Http\Response JSON response
      */
-    public function getNote($noteId)
+    public function getNote($id)
     {
         $currentUserId = JWTAuth::parseToken()->toUser()->id;
-        $note = Note::find($noteId);
+        $note = Note::find($id);
 
         if (!$note) {
             return response()->json(
@@ -206,10 +206,10 @@ class NoteController extends Controller
      *
      * @return Illuminate\Http\Response JSON response
      */
-    public function update(Request $request, $noteId)
+    public function update(Request $request, $id)
     {
         $currentUserId = JWTAuth::parseToken()->toUser()->id;
-        $note = Note::find($noteId);
+        $note = Note::find($id);
 
         if ($currentUserId !== $note->user_id) {
             return response()->json(
@@ -242,14 +242,14 @@ class NoteController extends Controller
     /**
      * It deletes a note that belongs to the currently logged in user
      *
-     * @param int $noteId Id of the note to be deleted
+     * @param int $id Id of the note to be deleted
      *
      * @return Illuminate\Http\Response Http response of success message or error
      */
-    public function delete($noteId)
+    public function delete($id)
     {
         $currentUserId = JWTAuth::parseToken()->toUser()->id;
-        $note = $this->note->find($noteId);
+        $note = $this->note->find($id);
 
         if ($currentUserId !== $note->user_id) {
             return response()
