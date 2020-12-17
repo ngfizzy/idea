@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import md5 from 'md5';
 
 import { UserService } from '../../../services/user.service';
-import { Note, User } from '../../../models';
+import { Note, Tag, User } from '../../../models';
 import { NoteService } from '../../../services/note.service';
 import { AlertService } from '../../../services/alert.service';
 
@@ -28,11 +28,20 @@ export class DashboardComponent implements OnInit {
   noNotes = false;
   isGridView = true;
   isLargeDevice: boolean;
+  filteredNotes:  Note[];
 
   constructor(private userService: UserService,
     private noteService: NoteService,
-    private alert: AlertService) {
+    private alert: AlertService) {}
+
+
+  filterByTag(tag: Tag) {
+    this.noteService.findNotesByTag(tag.id)
+      .subscribe((notes) => {
+        this.filteredNotes = notes as Note[];
+      });
   }
+
 
   setIsLargeDevice() {
     this.isLargeDevice = window.innerWidth >= 992;

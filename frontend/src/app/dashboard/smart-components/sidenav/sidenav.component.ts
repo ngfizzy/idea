@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TagService } from '../../../services/tag.service';
 import { Tag } from '../../../models';
 import { Observable } from 'rxjs';
@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class SidenavComponent implements OnInit {
   @Input() isLargeDevice: boolean;
+  @Output() tagSelected = new EventEmitter<Tag>();
 
   tags$: Observable<Tag[]>;
 
@@ -24,6 +25,7 @@ export class SidenavComponent implements OnInit {
 
   setSelectedTag(tag: Tag) {
     this.selectedTag = tag;
+    this.tagSelected.emit(this.selectedTag);
   }
 
 }

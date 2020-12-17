@@ -16,14 +16,20 @@
   </header>
   <ida-sidenav
     [isLargeDevice]="isLargeDevice"
+    (tagSelected)="filterByTag($event)"
   >
   </ida-sidenav>
   <div class="main">
     <section class="notes-container">
-        <div class="note-wrapper"*ngFor="let note of notes">
-          <ida-note  [isTitleView]="!isGridView" (editNote)="editNote($event)"  [note]="note"></ida-note>
+        <div class="note-wrapper"*ngFor="let note of filteredNotes || notes">
+          <ida-note
+            [isTitleView]="!isGridView"
+            (editNote)="editNote($event)"
+            [note]="note">
+          </ida-note>
         </div>
-      <div class="not-found" *ngIf="noNotes">No Note Was Found</div>
+      <div
+        class="not-found" *ngIf="noNotes">No Note Was Found</div>
     </section>
   </div>
 </div>

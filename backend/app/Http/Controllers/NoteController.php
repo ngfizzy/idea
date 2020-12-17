@@ -393,6 +393,26 @@ class NoteController extends Controller
     }
 
 
+    public function filterNotesByTag($tagId) {
+       $tag = $this->user->tags()
+       ->with('notes')
+            ->where('tag_id', '=', $tagId)
+            ->first();
+        
+        if(!$tag) {
+            return response()->json([
+                'error' => true,
+                'message' => 'note not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'error' => false,
+            'message' => 'notes filtered successfully',
+            'notes' => $tag->notes
+        ]);
+    }
+
     /**
      * It removes a tag from a note
      * 

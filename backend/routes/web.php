@@ -62,6 +62,14 @@ $router->group(
             ]
         );
 
+
+        $router->get(
+            '/tags/{tagId}/notes',
+            [
+                'middleware' => 'auth',
+                'uses' => 'NoteController@filterNotesByTag'
+            ], 
+        );
         $router->get(
             '/notes/pages',
             [

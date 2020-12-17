@@ -9,7 +9,7 @@ import stringSimilarity from 'string-similarity';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 
 import { apiBaseUrl } from '../../env';
-import { Note, NoteResponse, NotesResponse } from '../models';
+import { Note, NoteResponse, NotesResponse, Tag } from '../models';
 
 @Injectable()
 export class NoteService {
@@ -43,6 +43,26 @@ export class NoteService {
 
         return observableThrowError(this.status);
       }), );
+  }
+
+
+  findNotesByTag(tagId: number) {
+    const url = `${apiBaseUrl}/tags/${tagId}/notes`;
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({ authorization: `Bearer ${token}`})
+
+
+
+    return this.http.get<NotesResponse>(url, { headers, observe: 'response' })
+      .pipe(
+        map(response => response.body.notes),
+        catchError(response => {
+          this.status = response.status;
+
+
+          return observableThrowError(this.status)
+        })
+      );
   }
 
   /**
@@ -124,9 +144,7 @@ export class NoteService {
    */
   editNote(note: Note): Observable<string> | Observable<{}> {
     const headers = new HttpHeaders({ authorization: localStorage.getItem('authToken') });
-
     const { id, title, content } = note;
-    console.log('id>>>>>>>>>>>>>>>>>>', id)
     const url = `${apiBaseUrl}/notes/${id}`;
 
     return this.http.put<NoteResponse>(url, { title, content }, { headers, observe: 'response' }).pipe(
