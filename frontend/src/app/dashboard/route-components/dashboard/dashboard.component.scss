@@ -103,6 +103,8 @@ $sidenav-width: 340px;
   display: flex;
   flex-direction: column;
   margin: 8em 20px;
+  width: 85%;
+  margin-left: auto;
 }
 
 
@@ -144,6 +146,12 @@ input[type="search"]:focus {
   margin-top: 1%;
   justify-content: space-around;
   flex-wrap: wrap;
+}
+
+@media only screen and (max-width: calc(#{$large-devices} - 1px)) {
+  .main {
+    width: 76%;
+  }
 }
 
 @media  only screen and (min-width: $large-devices) {

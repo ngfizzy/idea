@@ -1,11 +1,12 @@
 @import '../../../../_variables';
 
 .sidenav {
-  width: 60px;
+  width: 40px;
   height: 100vh;
   background: #54426bf8;
   position: fixed;
   padding-right: .5rem;
+  transition: all .2s ease-in-out;
 
   &.expanded {
     width: 340px;
