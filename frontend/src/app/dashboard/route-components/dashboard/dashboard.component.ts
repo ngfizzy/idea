@@ -27,12 +27,16 @@ export class DashboardComponent implements OnInit {
   isUserOptionsVisible = false;
   noNotes = false;
   isGridView = true;
+  isLargeDevice: boolean;
 
   constructor(private userService: UserService,
     private noteService: NoteService,
     private alert: AlertService) {
   }
 
+  setIsLargeDevice() {
+    this.isLargeDevice = window.innerWidth >= 992;
+  }
 
   /**
    * Checks if notes are already loaded in memory
@@ -40,6 +44,7 @@ export class DashboardComponent implements OnInit {
    * @returns {void}
    */
   ngOnInit(): void {
+    this.setIsLargeDevice()
     this.fetchNotes();
     this.setPageContentDescription();
     this.currentUser = this.userService.getCurrentUserFromLocalStorage();
@@ -130,7 +135,7 @@ export class DashboardComponent implements OnInit {
   }
 
   /**
-   * It opens note editor by seeting the isEditingOption variable totrue
+   * It opens note editor by setting the isEditingOption variable to true
    *
    * @returns {void}
    */

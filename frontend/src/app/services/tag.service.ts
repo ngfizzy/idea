@@ -1,7 +1,7 @@
 
 import {throwError as observableThrowError,  Observable } from 'rxjs';
 
-import {map, catchError} from 'rxjs/operators';
+import {map, catchError, tap} from 'rxjs/operators';
 
 
 import { Injectable } from '@angular/core';
@@ -10,7 +10,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 
 import { apiBaseUrl } from '../../env';
 import { Tag} from '../models';
-import { PlainTagsResponse, TagsResponse } from '../models/server-responses/tags-response.interface';
+import { TagsResponse } from '../models/server-responses/tags-response.interface';
 
 @Injectable()
 export class TagService {
@@ -46,6 +46,13 @@ export class TagService {
         return this.http.delete(`${apiBaseUrl}/notes/${noteId}/tags/${tagId}`).pipe(
             map((response: any) => response.tags),
             catchError(this.handleError.bind(this)), );
+    }
+
+    getUserTags() {
+      return this.http.get<{tags: Tag[]}>(`${apiBaseUrl}/tags`).pipe(
+        map((response) => response.tags),
+        catchError(this.handleError.bind(this))
+      )
     }
 
     /**

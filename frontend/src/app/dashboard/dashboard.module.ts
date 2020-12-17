@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ToolsComponent } from './presentation-components/tools/tools.component';
 import { NoteComponent } from './smart-components/note/note.component';
+import { SidenavComponent } from './smart-components/sidenav/sidenav.component';
 
 
 @NgModule({
@@ -12,7 +12,8 @@ import { NoteComponent } from './smart-components/note/note.component';
   declarations: [
     ...DashboardRoutingModule.routeComponents,
     ToolsComponent,
-    NoteComponent
+    NoteComponent,
+    SidenavComponent,
   ],
   providers: [],
 })

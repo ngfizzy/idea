@@ -54,7 +54,7 @@ class TagController extends Controller
      */
     public function getAll()
     {
-        $tags = $this->user->tags()
+        $tags = $this->currentUser->tags()
             ->get();
 
         if (!$tags) {

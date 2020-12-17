@@ -1,5 +1,8 @@
+@import 'src/_variables.scss';
 
-.user-icon-container {
+$sidenav-width: 340px;
+
+.scss.user-icon-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -143,11 +146,12 @@ input[type="search"]:focus {
   flex-wrap: wrap;
 }
 
-@media  only screen and (min-width: 1000px) {
+@media  only screen and (min-width: $large-devices) {
   .main {
-    width: 60%;
+    width:  calc(100% - (#{$sidenav-width} + 20px));
     margin-top: 3em;
     align-self: center;
+    margin-left: 360px;
   }
 
 }

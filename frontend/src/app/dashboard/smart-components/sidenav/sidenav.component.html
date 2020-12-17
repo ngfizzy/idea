@@ -1,0 +1,19 @@
+<nav
+  class="sidenav"
+  (mouseenter)="isExpanded = true"
+  (mouseleave)="isExpanded = false"
+  [class.expanded]="isExpanded || isLargeDevice"
+>
+  <div class="wrapper">
+    <ul *ngIf="tags$ | async as tags">
+      <li *ngFor="let tag of tags">
+        <ida-tag
+          (selected)="setSelectedTag($event)"
+          [tag]="tag"
+          [showName]="isExpanded || isLargeDevice"
+          [isSelected]="tag.id ===  selectedTag?.id"
+        >
+        </ida-tag>
+    </ul>
+  </div>
+</nav>

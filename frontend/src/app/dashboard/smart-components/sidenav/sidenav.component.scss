@@ -1,0 +1,21 @@
+@import '../../../../_variables';
+
+.sidenav {
+  width: 60px;
+  height: 100vh;
+  background: #54426bf8;
+  position: fixed;
+  padding-right: .5rem;
+
+  &.expanded {
+    width: 340px;
+  }
+
+  .wrapper {
+    margin-top: 5rem;
+  }
+
+  li {
+    margin-bottom: .3rem;
+  };
+}

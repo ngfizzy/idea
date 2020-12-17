@@ -1,4 +1,4 @@
-<div class="dashboard">
+<div class="dashboard" (window:resize)="setIsLargeDevice()">
   <header class="main-header">
     <div class="icon-wrapper"><img src="assets/idea.png"/></div>
     <input class="search" maxLength="100" name="searchTerms" (keydown)="searchNotes()" [(ngModel)]="searchTerms" type="search" placeholder="search for  a note"
@@ -14,8 +14,11 @@
       </ul>
     </span>
   </header>
+  <ida-sidenav
+    [isLargeDevice]="isLargeDevice"
+  >
+  </ida-sidenav>
   <div class="main">
-
     <section class="notes-container">
         <div class="note-wrapper"*ngFor="let note of notes">
           <ida-note  [isTitleView]="!isGridView" (editNote)="editNote($event)"  [note]="note"></ida-note>
@@ -35,7 +38,6 @@
   </ida-tools>
 
 </div>
-
 <ida-note-editor
   (close)="closeNoteEditor()"
   [isEditing]="!isEditorCreating"
