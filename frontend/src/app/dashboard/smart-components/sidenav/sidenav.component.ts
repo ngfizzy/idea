@@ -24,7 +24,7 @@ export class SidenavComponent implements OnInit {
   ngOnInit() {}
 
   setSelectedTag(tag: Tag) {
-    this.selectedTag = tag;
+    this.selectedTag = this.selectedTag?.id === tag.id ? null : tag;
     this.tagSelected.emit(this.selectedTag);
   }
 

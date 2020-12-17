@@ -5,6 +5,7 @@ import { UserService } from '../../../services/user.service';
 import { Note, Tag, User } from '../../../models';
 import { NoteService } from '../../../services/note.service';
 import { AlertService } from '../../../services/alert.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'ida-dashboard',
@@ -36,10 +37,15 @@ export class DashboardComponent implements OnInit {
 
 
   filterByTag(tag: Tag) {
-    this.noteService.findNotesByTag(tag.id)
-      .subscribe((notes) => {
-        this.filteredNotes = notes as Note[];
-      });
+    if(tag) {
+      this.noteService.findNotesByTag(tag.id)
+        .pipe(take(1))
+        .subscribe((notes) => {
+          this.filteredNotes = notes as Note[];
+        });
+    } else {
+      this.filteredNotes = null;
+    }
   }
 
 
