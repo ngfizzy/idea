@@ -93,6 +93,7 @@ export class DashboardComponent implements OnInit {
    */
   fetchNotes(): void {
     this.notes = this.noteService.getFetchedNotes();
+
     if (!this.notes.length) {
       this.noteService.fetchNotes()
         .subscribe({

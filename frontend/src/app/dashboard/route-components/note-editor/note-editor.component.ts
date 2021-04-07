@@ -224,7 +224,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit, OnChanges {
    * @param {MouseEvent} event click event
    */
   removeTag(event: MouseEvent) {
-    const tag = (event.target as HTMLElement)
+    const tag =( event.target as  HTMLElement )
       .parentElement
       .childNodes[0]
       .nodeValue;
