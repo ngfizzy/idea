@@ -18,7 +18,7 @@ export class SidenavComponent implements OnInit {
   selectedTag: Tag;
 
   constructor(private tagService: TagService) {
-    this.tags$ = this.tagService.getUserTags();
+    this.tags$ = this.tagService.tags$
    }
 
   ngOnInit() {}
