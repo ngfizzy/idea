@@ -6,7 +6,7 @@ import { Tag } from '../../../models';
   template: `
   <div
     class="pointer tag"
-    [ngClass]="overrideClass? !!overrideClass : ''"
+    [ngClass]="overrideClass? overrideClass : ''"
     [class.selected]="isSelected"
     (click)="selectTag()"
   >
