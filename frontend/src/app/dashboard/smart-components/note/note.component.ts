@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NoteService } from '../../../services/note.service';
 import { AlertService } from '../../../services/alert.service';
+import { Note } from '../../../models/note.interface';
 
 @Component({
   selector: 'ida-note',
@@ -10,7 +11,7 @@ import { AlertService } from '../../../services/alert.service';
 export class NoteComponent {
   @Input() note;
   @Input() isTitleView = false;
-  @Output() editNote = new EventEmitter<object>();
+  @Output() editNote = new EventEmitter<Note>();
 
   constructor(private noteService: NoteService, private alert: AlertService) { }
 
