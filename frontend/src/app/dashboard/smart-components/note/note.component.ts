@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NoteService } from '../../../services/note.service';
 import { AlertService } from '../../../services/alert.service';
-import { Note } from '../../../models/note.interface';
+import { Note } from '../../../models';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'ida-note',
@@ -30,11 +31,28 @@ export class NoteComponent {
    * @returns {void}
    */
   removeNote(): void {
-    this.noteService.removeNote(this.note.id)
-      .subscribe(
-        () => {},
-        (message) => this.alert.open(message, 'Okay'),
-      );
+    const labels =       {
+      alert: 'You are about to delete a note. Are you sure you want to continue?',
+      confirm: 'Yes',
+      dismiss: 'No'
+    };
+
+    const actions = {
+      afterConfirm: () => {
+        this.noteService.removeNote(this.note.id)
+          .pipe(take(1))
+          .subscribe(
+            () => {},
+            (message) => this.alert.open(message, 'Okay'),
+          );
+      },
+      afterClose:() => {}
+    }
+
+    this.alert.openConfirm(
+      labels,
+      actions
+    );
   }
 }
 

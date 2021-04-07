@@ -26,10 +26,9 @@ export class AlertComponent {
    * @returns {void}
    */
   open(message: string, dismissText: string): void {
-    this.isOpen = true,
-      this.message = message;
+    this.isOpen = true;
+    this.message = message;
     this.dismissText = dismissText;
-    this.afterClose();
   }
 
   /**
@@ -39,13 +38,9 @@ export class AlertComponent {
    *
    * @returns {void}
    */
-  close(event) {
-    const { className } = event.target;
-    if (className === 'alert'  || !className) {
-      return null;
-    }
+  close(event): void {
+    this.isOpen = this.alertService.isAlertClicked(event);
 
-    this.isOpen = false;
-    this.afterClose();
+    !this.isOpen && this.afterClose();
   }
 }
