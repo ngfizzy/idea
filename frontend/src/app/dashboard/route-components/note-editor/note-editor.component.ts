@@ -243,7 +243,6 @@ export class NoteEditorComponent implements OnInit, AfterViewInit, OnChanges {
    * @returns {Subscription}
    */
   submitEditedNote(): Subscription {
-    console.log('>>>>>>>>>>>> this note', this.note)
     return this.noteService.editNote(this.note)
       .subscribe({
         next: this.updateNoteSavedStatus.bind(this),
@@ -281,6 +280,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit, OnChanges {
    */
   cancel(event): void {
     const { className } = event.target;
+
     if (className === 'wrapper' || className === 'cancel') {
       this.close.emit();
       this.isEditing = false;
@@ -289,26 +289,24 @@ export class NoteEditorComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngAfterViewInit() {
-    // if (!this.isEditing) {
-      this.editorListener = fromEvent(this.noteBody.nativeElement, 'keyup')
-      .pipe(
-        map((evt: any) => evt.target.value),
-        debounceTime(500),
-        distinctUntilChanged())
-      .subscribe(
-          (evt: KeyboardEvent) => this.submitNote()
-      );
+    this.editorListener = fromEvent(this.noteBody.nativeElement, 'keyup')
+    .pipe(
+      map((evt: any) => evt.target.value),
+      debounceTime(500),
+      distinctUntilChanged())
+    .subscribe(
+        (evt: KeyboardEvent) => this.submitNote()
+    );
 
 
-        this.titleListener = fromEvent(this.noteTitle.nativeElement, 'keyup')
-          .pipe(
-            map((evt: any) => evt.target.value),
-            debounceTime(300),
-            distinctUntilChanged())
-          .subscribe((evt: KeyboardEvent) => {
-            this.submitNote();
-          });
+  this.titleListener = fromEvent(this.noteTitle.nativeElement, 'keyup')
+    .pipe(
+      map((evt: any) => evt.target.value),
+      debounceTime(300),
+      distinctUntilChanged())
+    .subscribe((evt: KeyboardEvent) => {
+      this.submitNote();
+    });
 
-    // }
   }
 }

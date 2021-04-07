@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit {
   }
 
   /**
-   * Checks if notes are already loaded in memory
+   * Checks if notes ar-e already loaded in memory
    *
    * @returns {void}
    */
