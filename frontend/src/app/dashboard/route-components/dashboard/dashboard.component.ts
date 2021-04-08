@@ -147,7 +147,23 @@ export class DashboardComponent implements OnInit {
    * @returns {void}
    */
   logout(): void {
-    this.userService.logout();
+    const labels =       {
+      alert: 'You are about to logout. Are you sure?',
+      confirm: 'Logout',
+      dismiss: 'Stay'
+    };
+
+    const actions = {
+      afterConfirm: () => {
+        this.userService.logout();
+      },
+      afterClose:() => {}
+    }
+
+    this.alert.openConfirm(
+      labels,
+      actions
+    );
   }
 
   /**
